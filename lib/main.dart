@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp_project/routes/Home.dart';
+import 'package:gp_project/routes/faillogindata.dart';
+import 'package:gp_project/routes/signup_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home:Home(),
     );
   }
 }    
