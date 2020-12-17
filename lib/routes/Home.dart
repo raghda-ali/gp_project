@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gp_project/routes/myproducts_screen.dart';
-
+import 'package:gp_project/routes/login_screen.dart';
+import 'package:gp_project/routes/myproducts_screen.dart' as pro;
+import 'package:gp_project/routes/myservices_screen.dart' as serv;
+import 'package:firebase_auth/firebase_auth.dart';
 import '../constance.dart';
+final _auth=FirebaseAuth.instance;
 class Home extends StatefulWidget{
           // int _currentIndex = 0,
           static String id='Home';
-          final _auth=FirebaseAuth.instance;
+          
           User loggedinuser = FirebaseAuth.instance.currentUser;
           //FirebaseUser loggedinuser;
 
@@ -67,6 +70,11 @@ class _HomeState extends State<Home>{
                           ListTile(
                             leading: Icon(Icons.home),
                             title: Text('Home page'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new Home()));
+                            },
                           ),
                           ListTile(
                             leading: Icon(Icons.person),
@@ -74,11 +82,16 @@ class _HomeState extends State<Home>{
                           ),
                           ListTile(
                             leading: Icon(Icons.work),
-                            title: Text('Jobs'),
+                            title: Text('My Jobs'),
                           ),
                           ListTile(
                             leading: Icon(Icons.support),
-                            title: Text('Services'),
+                            title: Text('My Services'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.MyProducts()));
+                            },
                           ),
                           ListTile(
                             leading: Icon(Icons.shopping_cart),
@@ -86,7 +99,7 @@ class _HomeState extends State<Home>{
                             onTap: ()
                             {
                               Navigator.pop(context);
-                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyProducts()));
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new pro.MyProducts()));
                             },
                           ),
                          /* ListTile(
@@ -104,6 +117,10 @@ class _HomeState extends State<Home>{
                           ListTile(
                             leading: Icon(Icons.exit_to_app),
                             title: Text('Log out'),
+                            onTap: (){
+                              _auth.signOut();
+                              Navigator.pushNamed(context, LoginScreen.id);
+                            },
                           )
                         ],
                       ),

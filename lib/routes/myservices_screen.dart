@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/login_screen.dart';
-import 'package:gp_project/routes/signup_screen.dart' ;
-import 'package:gp_project/widgets/Custom_TextField.dart';
+//import 'package:gp_project/routes/login_screen.dart';
+//import 'package:gp_project/routes/signup_screen.dart';
+//import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
 
 
 class MyProducts extends StatelessWidget {
-  static String id='MyProducts';
+  static String id='Myservices';
   final _auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class MyProducts extends StatelessWidget {
         backgroundColor: Colors.white,
          appBar: AppBar(
                     elevation: 0,
-                    title:Text('My Products',
+                    title:Text('My Services',
                     style: TextStyle(
                       fontSize: 25,
                     )),
@@ -122,7 +123,7 @@ class MyProducts extends StatelessWidget {
                  Positioned(
                   // bottom: 0,
 
-                 child: Text('My Products list is Empty',
+                 child: Text('My Services list is Empty',
                      style: TextStyle(
                      fontSize: 30,
                       color: Colors.blueGrey)
