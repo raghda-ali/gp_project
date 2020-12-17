@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gp_project/routes/myproducts_screen.dart';
 
 import '../constance.dart';
 class Home extends StatefulWidget{
@@ -62,6 +63,11 @@ class _HomeState extends State<Home>{
                           ListTile(
                             leading: Icon(Icons.shopping_cart),
                             title: Text('My Product'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyProducts()));
+                            },
                           ),
                           ListTile(
                             leading: Icon(Icons.local_offer_sharp),
