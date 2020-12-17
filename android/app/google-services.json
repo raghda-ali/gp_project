@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "697988627209",
-    "firebase_url": "https://succour-71c40.firebaseio.com",
-    "project_id": "succour-71c40",
-    "storage_bucket": "succour-71c40.appspot.com"
+    "project_number": "261350242969",
+    "project_id": "succor-53d61",
+    "storage_bucket": "succor-53d61.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:697988627209:android:9c80609002c4807f3771d8",
+        "mobilesdk_app_id": "1:261350242969:android:43aee11a7316ae53ef5608",
         "android_client_info": {
           "package_name": "com.example.gp_project"
         }
       },
       "oauth_client": [
         {
-          "client_id": "697988627209-cq4ovs23jbr3q6ksrlq9ghrb0j6q571m.apps.googleusercontent.com",
+          "client_id": "261350242969-toco53as52qa9guumkuvhucc1t37mg53.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDQikhQKKwHbju9ADpj4mUgGDmrHgqjv_0"
+          "current_key": "AIzaSyA5AH7reFnSX0cyhIg5SDK8xq5e7tF9JrA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "697988627209-cq4ovs23jbr3q6ksrlq9ghrb0j6q571m.apps.googleusercontent.com",
+              "client_id": "261350242969-toco53as52qa9guumkuvhucc1t37mg53.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

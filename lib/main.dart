@@ -1,10 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/faillogindata.dart';
 import 'package:gp_project/routes/signup_screen.dart';
 
+import 'routes/login_screen.dart';
+import 'routes/login_screen.dart';
+import 'routes/signup_screen.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+
 void main() {
   runApp(MyApp());
+  Firebase.initializeApp();
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:Home(),
+      initialRoute: LoginScreen.id,
+      routes: {
+        LoginScreen.id:(context)=>LoginScreen(),
+        signup_screen.id:(context)=>signup_screen(),
+        Home.id:(context)=>Home(),
+      },
+      //home:Home(),
     );
   }
 }    

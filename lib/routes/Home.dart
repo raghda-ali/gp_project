@@ -1,11 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../constance.dart';
 class Home extends StatefulWidget{
           // int _currentIndex = 0,
+          static String id='Home';
+          final _auth=FirebaseAuth.instance;
+          User loggedinuser = FirebaseAuth.instance.currentUser;
+          //FirebaseUser loggedinuser;
+
+          
+          void getcurrentUser() async
+          {
+            try{
+              final user=await _auth.currentUser;
+            if(user != null){
+              loggedinuser=user;
+              print(loggedinuser.email);
+            }
+            }catch(e){print(e); }
+            
+          }
   @override
-  _HomeState createState() => _HomeState();
+  _HomeState createState() =>_HomeState();
+   // getcurrentUser();
+
 } 
 class _HomeState extends State<Home>{
   Widget build(BuildContext context){
@@ -52,29 +72,29 @@ class _HomeState extends State<Home>{
                             title: Text('Profile'),
                           ),
                           ListTile(
-                            leading: Icon(Icons.attach_money_outlined),
-                            title: Text('My Donation'),
+                            leading: Icon(Icons.work),
+                            title: Text('Jobs'),
                           ),
                           ListTile(
                             leading: Icon(Icons.support),
-                            title: Text('My Services'),
+                            title: Text('Services'),
                           ),
                           ListTile(
                             leading: Icon(Icons.shopping_cart),
-                            title: Text('My Product'),
+                            title: Text('Products'),
                           ),
-                          ListTile(
+                         /* ListTile(
                             leading: Icon(Icons.local_offer_sharp),
                             title: Text('Offers'),
                           ),
                           ListTile(
                             leading: Icon(Icons.chat_bubble),
-                            title: Text('My Personal Experience'),
+                            title: Text('Personal Experience'),
                           ),
                           ListTile(
                             leading: Icon(Icons.chat),
                             title: Text('Chating'),
-                          ),
+                          ),*/
                           ListTile(
                             leading: Icon(Icons.exit_to_app),
                             title: Text('Log out'),
@@ -165,6 +185,7 @@ class _HomeState extends State<Home>{
 
                         child: Row(
                         children: <Widget>[
+              
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                           ),
@@ -187,10 +208,10 @@ class _HomeState extends State<Home>{
                              height:50,
                              width:50,
                                   ),
-                           Icon(Icons.attach_money_outlined,
+                           Icon(Icons.work,
                                  color: Colors.teal,
                                  size: 30,),
-                           Text('Donations',
+                           Text('Jobs',
                                  style: TextStyle(
                                    fontSize: 20.0,
                                    color: Colors.teal.shade900
@@ -252,14 +273,22 @@ class _HomeState extends State<Home>{
                   icon: Icon(Icons.medical_services_outlined),
                   title: Text('Services'),
                 ),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart),
+                  title: Text('Products'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.work),
+                  title: Text('Jobs'),
+                ),
+                 /*BottomNavigationBarItem(
                   icon: Icon(Icons.local_offer),
                   title: Text('Offer'),
                 ),
                  BottomNavigationBarItem(
                   icon: Icon(Icons.forum),
                   title: Text('Personal Experience'),
-                )
+                )*/
             ],
             onTap: (index){
               setState((){

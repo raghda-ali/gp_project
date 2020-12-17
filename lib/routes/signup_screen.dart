@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
-
 import 'login_screen.dart';
+import 'package:gp_project/routes/Home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 
 class signup_screen extends StatelessWidget {
   final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   static String id='signupScreen';
+  final _auth=FirebaseAuth.instance;
+  String email,password;  
   @override
   Widget build(BuildContext context) {
     double height=MediaQuery.of(context).size.height;
@@ -17,6 +21,7 @@ class signup_screen extends StatelessWidget {
       body: Form(
         key: _globalkey,
         child: ListView(
+          
           children:<Widget>[
             SizedBox(
               height: height*.02,
@@ -43,8 +48,12 @@ class signup_screen extends StatelessWidget {
               height: height*.02,
             ),
             CustomTextField(
+              
               hint: 'Enter your email',
               icon: Icons.email,
+              onclick: (value){
+                email=value;
+              },
             ),
             SizedBox(
               height: height*.02,
@@ -52,24 +61,38 @@ class signup_screen extends StatelessWidget {
             CustomTextField(
               icon: Icons.lock,
               hint: 'Enter your password',
+              
+              onclick: (value){
+                password=value;
+              },
             ),
 
-            RadioGroup(),
-            SizedBox(
-              height: height*.03,
-            ),
+           // RadioGroup(),
+            //SizedBox(
+            //  height: height*.03,
+            //),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120,vertical:0),
               child: FlatButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)
                 ),
-                onPressed: ()
+                onPressed: ()async
                 {
-                 if(_globalkey.currentState.validate())
+                  //print(email);
+                  //print(password);
+                 /*if(_globalkey.currentState.validate())
                  {
                    //do something
-                 }
+                 }*/
+                 try
+                 {
+                   final newuser = await _auth.createUserWithEmailAndPassword
+                   (email: email, password: password); 
+                   if (newuser !=null){
+                     Navigator.pushNamed(context,Home.id);
+                   }
+                 }catch(e){print(e);}
                 },
                 color: Colors.black,
                 child: Text(
@@ -111,7 +134,7 @@ class signup_screen extends StatelessWidget {
     );
   }
 }
-class RadioGroup extends StatefulWidget {
+/*class RadioGroup extends StatefulWidget {
   @override
   RadioGroupWidget createState() => RadioGroupWidget();
 }
@@ -215,4 +238,4 @@ class RadioGroupWidget extends State {
       ],
     );
   }
-}
+}*/
