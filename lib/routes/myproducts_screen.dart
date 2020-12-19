@@ -70,7 +70,7 @@ class MyProducts extends StatelessWidget {
                             onTap: ()
                             {
                               Navigator.pop(context);
-                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.MyProducts()));
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.myservices()));
                             },
                           ),
                           

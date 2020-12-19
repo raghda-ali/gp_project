@@ -90,7 +90,7 @@ class _HomeState extends State<Home>{
                             onTap: ()
                             {
                               Navigator.pop(context);
-                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.MyProducts()));
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.myservices()));
                             },
                           ),
                           ListTile(

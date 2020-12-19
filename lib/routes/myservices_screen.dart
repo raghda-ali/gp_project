@@ -12,7 +12,7 @@ import 'package:gp_project/routes/myservices_screen.dart' as serv;
 
 
 
-class MyProducts extends StatelessWidget {
+class myservices extends StatelessWidget {
   static String id='Myservices';
   final _auth=FirebaseAuth.instance;
   @override
@@ -72,7 +72,7 @@ class MyProducts extends StatelessWidget {
                             onTap: ()
                             {
                               Navigator.pop(context);
-                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.MyProducts()));
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.myservices()));
                             },
                           ),
                           
@@ -242,8 +242,7 @@ class MyProducts extends StatelessWidget {
                     onPressed: () {},
                     shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: EdgeInsets.all(0.0),
-                    //const EdgeInsets.all(0.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: Ink(
                       decoration: const BoxDecoration(
                         gradient: purpleGradient,
