@@ -17,6 +17,11 @@ const KServiceCategory = 'ServiceCategory';
 const KServicecontact_Phone = 'Servicecontact_Phone';
 const KServicecontact_Email = 'Servicecontact_Email';
 
+const kProductCollection = 'Products';
+const KProductTitle = 'ProductTitle';
+const KProductDescription = 'ProductDescription';
+const KProductPrice = 'ProductPrice';
+const KProductcontact_Phone = 'Productcontact_Phone';
 
 const redGradient = LinearGradient(
   colors: <Color>[darkRedColor, lightRedColor],
