@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/routes/Home.dart';
+import 'package:gp_project/routes/addmyproducts.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/signup_screen.dart' ;
 import 'package:gp_project/widgets/Custom_TextField.dart';
@@ -136,7 +137,7 @@ class MyProducts extends StatelessWidget {
    floatingActionButton: FloatingActionButton(
         onPressed: (){
 Navigator.push(context,
-MaterialPageRoute(builder: (context)=>Home()));
+MaterialPageRoute(builder: (context)=>addmyproducts()));
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

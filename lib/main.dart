@@ -19,13 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LoginScreen.id,
+    /*  initialRoute: LoginScreen.id,
       routes: {
         LoginScreen.id:(context)=>LoginScreen(),
         signup_screen.id:(context)=>signup_screen(),
         Home.id:(context)=>Home(),
-      },
-      //home:Home(),
+      },*/
+      home:Home(),
     );
   }
 }    
