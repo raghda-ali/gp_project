@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
+import 'package:gp_project/routes/myservices_screen.dart';
 
 import 'routes/login_screen.dart';
 import 'routes/login_screen.dart';
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.id:(context)=>LoginScreen(),
         signup_screen.id:(context)=>signup_screen(),
         Home.id:(context)=>Home(),
+        myservices.id:(context)=>myservices(),
       },
       //home:Home(),
     );

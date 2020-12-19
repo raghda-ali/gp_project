@@ -10,6 +10,12 @@ const midColor = Color(0xFF522349);
 const lightColor = Color(0xFFAB47BC);
 const darkRedColor = Color(0xFFFA695C);
 const lightRedColor = Color(0xFFFD685A);
+const kServicesCollection = 'Services';
+const KServiceTitle = 'ServiceTitle';
+const KServiceDescription = 'ServiceDescription';
+const KServiceCategory = 'ServiceCategory';
+const KServicecontact_Phone = 'Servicecontact_Phone';
+const KServicecontact_Email = 'Servicecontact_Email';
 
 
 const redGradient = LinearGradient(
