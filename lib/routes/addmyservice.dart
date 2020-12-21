@@ -12,7 +12,7 @@ import 'package:gp_project/routes/myservices_screen.dart';
 class addmyservice extends StatelessWidget {
   static String id ='addservice';
   final _store = store();
-  final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
+ final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   String title;
   String category;
   String description;
