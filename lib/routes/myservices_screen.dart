@@ -25,7 +25,6 @@ class myservices extends StatelessWidget {
   Widget build(BuildContext context) {
        double height = MediaQuery.of(context).size.height;
         return Scaffold(
-          resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
          appBar: AppBar(
                     elevation: 0,

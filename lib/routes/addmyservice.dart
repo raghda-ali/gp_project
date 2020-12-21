@@ -22,7 +22,7 @@ class addmyservice extends StatelessWidget {
   Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
-      maxLength: 10,
+      //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
           return 'Title is required';
@@ -39,7 +39,7 @@ class addmyservice extends StatelessWidget {
   Widget _buildCategory(){
     return  TextFormField(
       decoration: InputDecoration(labelText: 'Category'),
-      maxLength: 10,
+      //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
           return 'Category is required';
@@ -69,7 +69,7 @@ class addmyservice extends StatelessWidget {
   Widget _buildContact_Phone(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Contact us by Phone'),
-      maxLength: 10,
+      //maxLength: 10,
       cursorColor: KMainColor,
       validator: (String value){
         if(value.isEmpty){
