@@ -3,10 +3,11 @@ class product {
   String pDescription;
   String pPrice;
   String pContact_phone;
-
+  String pId;
 
   product(
-  { this.pTitle,
+  {     this.pId,
+        this.pTitle,
         this.pDescription,
         this.pPrice,
         this.pContact_phone});

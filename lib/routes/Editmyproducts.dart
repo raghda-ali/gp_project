@@ -7,8 +7,8 @@ import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 
 
-class addmyproducts extends StatelessWidget {
-  static String id ='addproduct';
+class Editmyproducts extends StatelessWidget {
+  static String id ='Editproduct';
   final _store = store();
   final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   String title;
@@ -61,7 +61,7 @@ class addmyproducts extends StatelessWidget {
         return null;
       },
       onSaved: (String value){
-       price =value;
+        price =value;
       },
     );
   }
@@ -113,7 +113,7 @@ class addmyproducts extends StatelessWidget {
                     );
                   }
 
-                  Navigator.pushNamed(context, addmyproducts.id);
+                  Navigator.pushNamed(context, Editmyproducts.id);
                   _formkey.currentState.save();
                   print(title);
                 },
@@ -131,7 +131,7 @@ class addmyproducts extends StatelessWidget {
                         minHeight: 36.0), // min sizes for Material buttons
                     alignment: Alignment.center,
                     child:const Text(
-                      'add product',
+                      'Edit product',
                       style: TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 13,

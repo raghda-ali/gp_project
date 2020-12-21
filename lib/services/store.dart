@@ -55,14 +55,23 @@ class store
     return _firestore.collection(kServicesCollection).snapshots();
   }
 
-  /*editservices(data, documentId) {
+  Stream<QuerySnapshot> loadproducts(){
+    return _firestore.collection(kProductCollection).snapshots();
+  }
+
+/*editservices(data, documentId) {
     _firestore
         .collection(kServicesCollection)
         .doc(documentId)
         .update(data);
   }*/
 
-
+  editProduct(data, documentId) {
+    _firestore
+        .collection(kProductCollection)
+        .doc(documentId)
+        .update(data);
+  }
 
 
 }
