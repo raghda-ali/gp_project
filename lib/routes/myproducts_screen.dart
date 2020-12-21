@@ -134,7 +134,7 @@ class MyProducts extends StatelessWidget {
                 )
                 );
               }
-              return ListView.builder(itemBuilder:
+              return ListView.builder(itemCount: products.length,itemBuilder:
                   (context,index)=> Container(
 
                 padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
