@@ -32,7 +32,9 @@ class store
 
 
 
- 
+ deleteservice(documentId) {
+    _firestore.collection(kServicesCollection).doc(documentId).delete();
+  }
 
   /*Future <List<service>>loadServices() async
   {

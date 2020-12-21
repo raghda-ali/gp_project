@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
-
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
 import 'package:gp_project/routes/Home.dart';
@@ -33,6 +32,9 @@ class MyApp extends StatelessWidget {
         myservices.id:(context)=>myservices(),
         //Editmyservices.id:(context)=>Editmyservices(),
       },
+      /*theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),*/
       //home:Home(),
     );
   }
