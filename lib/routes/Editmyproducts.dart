@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
@@ -17,6 +20,7 @@ class Editmyproducts extends StatelessWidget {
   String contact_phone;
 
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
+
   Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
@@ -84,7 +88,9 @@ class Editmyproducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   // FieldPath.documentId;
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       body: Container(
         margin: EdgeInsets.all(24),
@@ -102,15 +108,8 @@ class Editmyproducts extends StatelessWidget {
                 onPressed: () {
                   if(_formkey.currentState.validate()){
                     _formkey.currentState.save();
-                    _store.addproducts(product(
-                      pTitle:  title,
-                      pDescription:  description,
-                      pPrice:  price,
-                      pContact_phone:  contact_phone,
-
-
-                    )
-                    );
+                   _store.Editmyproducts(title
+                       , product().pId);
                   }
 
                   Navigator.pushNamed(context, Editmyproducts.id);

@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
@@ -22,6 +24,7 @@ class MyProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
           elevation: 0,
@@ -210,6 +213,7 @@ class MyProducts extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context)=>Editmyproducts()));
+
                                     },
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(80.0)),
