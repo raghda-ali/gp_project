@@ -26,6 +26,8 @@ class Editmyservices extends StatelessWidget{
     //service service = odalRoute.of(context).settings.arguments;
     // TODO: implement build
     return Scaffold(
+     resizeToAvoidBottomPadding: false,
+
       body: StreamBuilder<QuerySnapshot>(
         stream: _store.loadservices(),
         builder: (context,Snapshot){

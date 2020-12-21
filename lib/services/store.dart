@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/models/services.dart';
+import 'package:gp_project/routes/Editmyproducts.dart';
 
 class store
 {
@@ -61,19 +62,13 @@ class store
     return _firestore.collection(kProductCollection).snapshots();
   }
 
-/*editservices(data, documentId) {
-    _firestore
-        .collection(kServicesCollection)
-        .doc(documentId)
-        .update(data);
-  }*/
-
-  editProduct(data, documentId) {
+  Editmyproducts(data, documentId) {
     _firestore
         .collection(kProductCollection)
         .doc(documentId)
         .update(data);
   }
+
 
 
 }

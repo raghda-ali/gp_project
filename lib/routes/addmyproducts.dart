@@ -85,6 +85,7 @@ class addmyproducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       body: Container(
         margin: EdgeInsets.all(24),
