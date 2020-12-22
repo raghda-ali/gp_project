@@ -37,6 +37,10 @@ class store
     _firestore.collection(kServicesCollection).doc(documentId).delete();
   }
 
+  deleteproduct(documentId) {
+    _firestore.collection(kProductCollection).doc(documentId).delete();
+  }
+
   /*Future <List<service>>loadServices() async
   {
     var snapshot = await _firestore.collection(kServicesCollection).get();
