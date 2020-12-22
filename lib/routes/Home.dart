@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
+import 'package:gp_project/routes/myjobs_screen.dart' as jo;
 import 'package:firebase_auth/firebase_auth.dart';
 import '../constance.dart';
 final _auth=FirebaseAuth.instance;
@@ -51,22 +52,22 @@ class _HomeState extends State<Home>{
                         padding: EdgeInsets.zero,
                         children: <Widget>[
                           DrawerHeader(
-                            decoration: BoxDecoration(
-                              color: KMainColor
-                            ),
-                            child: Column(
-                              children : <Widget>[
-                                Icon(Icons.account_circle,
-                                size: 100,
-                                color: Colors.white,),
-                             Text(
-                              'User Name',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
+                              decoration: BoxDecoration(
+                                  color: KMainColor
                               ),
-                            ),
-                              ])),
+                              child: Column(
+                                  children : <Widget>[
+                                    Icon(Icons.account_circle,
+                                      size: 100,
+                                      color: Colors.white,),
+                                    Text(
+                                      'User Name',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ])),
                           ListTile(
                             leading: Icon(Icons.home),
                             title: Text('Home page'),
@@ -81,8 +82,8 @@ class _HomeState extends State<Home>{
                             title: Text('Profile'),
                           ),
                           ListTile(
-                            leading: Icon(Icons.work),
-                            title: Text('My Jobs'),
+                            leading: Icon(Icons.attach_money_outlined),
+                            title: Text('My Donation'),
                           ),
                           ListTile(
                             leading: Icon(Icons.support),
@@ -93,6 +94,8 @@ class _HomeState extends State<Home>{
                               Navigator.push(context, new MaterialPageRoute(builder: (context)=>new serv.myservices()));
                             },
                           ),
+
+
                           ListTile(
                             leading: Icon(Icons.shopping_cart),
                             title: Text('My Product'),
@@ -102,18 +105,28 @@ class _HomeState extends State<Home>{
                               Navigator.push(context, new MaterialPageRoute(builder: (context)=>new pro.MyProducts()));
                             },
                           ),
-                         /* ListTile(
+
+                          ListTile(
+                            leading: Icon(Icons.work),
+                            title: Text('My Jobs'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new jo.MyJobs()));
+                            },
+                          ),
+                          ListTile(
                             leading: Icon(Icons.local_offer_sharp),
                             title: Text('Offers'),
                           ),
                           ListTile(
                             leading: Icon(Icons.chat_bubble),
-                            title: Text('Personal Experience'),
+                            title: Text('My Personal Experience'),
                           ),
                           ListTile(
                             leading: Icon(Icons.chat),
                             title: Text('Chating'),
-                          ),*/
+                          ),
                           ListTile(
                             leading: Icon(Icons.exit_to_app),
                             title: Text('Log out'),

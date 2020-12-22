@@ -2,24 +2,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
-import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/services.dart';
-import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
-import 'package:gp_project/models/product.dart';
-import 'package:gp_project/routes/addmyproducts.dart';
+import 'package:gp_project/models/Jobs.dart';
+import 'package:gp_project/routes/addmyjobs.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/signup_screen.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/routes/myjobs_screen.dart' as jo;
 import 'package:gp_project/services/store.dart';
 //import 'dart:html';
 
-class MyProducts extends StatelessWidget {
-  static String id = 'MyProducts';
+class MyJobs extends StatelessWidget {
+  static String id = 'MyJobs';
   final store _store = store();
   final _auth = FirebaseAuth.instance;
   @override
@@ -42,7 +39,7 @@ class MyProducts extends StatelessWidget {
       backgroundColor: mainBgColor,
       appBar: AppBar(
           elevation: 0,
-          title: Text('My Products',
+          title: Text('My Jobs',
               style: TextStyle(
                 fontSize: 25,
               )),
@@ -107,15 +104,6 @@ class MyProducts extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.work),
-              title: Text('My Jobs'),
-              onTap: ()
-              {
-                Navigator.pop(context);
-                Navigator.push(context, new MaterialPageRoute(builder: (context)=>new jo.MyJobs()));
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.local_offer_sharp),
               title: Text('Offers'),
             ),
@@ -139,25 +127,26 @@ class MyProducts extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: _store.loadproducts(),
+          stream: _store.loadjobs(),
           builder: (context, Snapshot) {
             if (!Snapshot.hasData) {
               return Center(
-                child: Text('My products list is empty'),
+                child: Text('My Jobs is empty'),
               );
             } else {
-              List<product> products = [];
+              List<job> jobs = [];
               for (var doc in Snapshot.data.docs) {
                 //var data=doc.data();
-                products.add(product(
-                   pId: doc.id,
-                    pTitle: doc.data()[KProductTitle],
-                    pDescription: doc.data()[KProductDescription],
-                    pPrice: doc.data()[KProductPrice],
-                    pContact_phone: doc.data()[KProductcontact_Phone]));
+                jobs.add(job(
+                    pId: doc.id,
+                    pTitle: doc.data()[KJobTitle],
+                    pDescription: doc.data()[KJobDescription],
+                    pContact_Email: doc.data()[KJobcontact_Email],
+                    pContact_phone: doc.data()[KJobcontact_Phone]));
+
               }
               return ListView.builder(
-                  itemCount: products.length,
+                  itemCount: jobs.length,
                   itemBuilder: (context, index) => SingleChildScrollView(
                       child:Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -229,7 +218,7 @@ class MyProducts extends StatelessWidget {
                                                             ),
                                                             children: <TextSpan>[
                                                               TextSpan(
-                                                                text: '${products[index].pTitle}',
+                                                                text: '${jobs[index].pTitle}',
                                                                 style: TextStyle(
                                                                   color: Colors.black,
                                                                   fontSize: 16,
@@ -238,7 +227,7 @@ class MyProducts extends StatelessWidget {
                                                               ),
                                                               TextSpan(
                                                                 text:
-                                                                '\n ${products[index].pDescription}',
+                                                                '\n ${jobs[index].pDescription}',
                                                                 style: TextStyle(
                                                                   color: Colors.black38,
                                                                   fontWeight: FontWeight.w400,
@@ -260,8 +249,9 @@ class MyProducts extends StatelessWidget {
                                                                   Navigator.push(
                                                                       context,
                                                                       MaterialPageRoute(
-                                                                          builder: (context) =>
-                                                                              Editmyproducts()));
+
+                                                                      )
+                                                                  );
                                                                 },
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:
@@ -297,13 +287,13 @@ class MyProducts extends StatelessWidget {
                                                                   Scaffold.of(context)
                                                                       .showSnackBar(SnackBar(backgroundColor: KMainColor,
                                                                     content: Text(
-                                                                        'Sure you want to delete this product?!'),
+                                                                        'Sure you want to delete this job?!'),
                                                                     action: SnackBarAction(
                                                                       label: 'Delete',
                                                                       textColor: Colors.white,
                                                                       onPressed: () {
-                                                                        _store.deleteproduct(
-                                                                            products[index].pId);
+                                                                        _store.deletejob(
+                                                                            jobs[index].pId);
                                                                         // Some code to undo the change.
                                                                       },
                                                                     ),
@@ -362,7 +352,7 @@ class MyProducts extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => addmyproducts()));
+              MaterialPageRoute(builder: (context) => addmyjobs()));
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
@@ -371,4 +361,3 @@ class MyProducts extends StatelessWidget {
     );
   }
 }
-
