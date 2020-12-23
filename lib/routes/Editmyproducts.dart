@@ -22,7 +22,7 @@ class Editmyproducts extends StatelessWidget {
 
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
-  Widget _buildTitle(){
+  /*Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
       maxLength: 10,
@@ -35,7 +35,6 @@ class Editmyproducts extends StatelessWidget {
       onSaved: (String value){
         title=value;
       },
-
 
     );
   }
@@ -85,7 +84,7 @@ class Editmyproducts extends StatelessWidget {
         contact_phone=value;
       },
     );;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +118,63 @@ class Editmyproducts extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildTitle(),
-                    _buildDescription(),
-                    _buildPrice(),
-                    _buildContact_Phone(),
+                    TextFormField(
+      decoration: InputDecoration(labelText: 'Title :  ${products[index].pTitle}',labelStyle: TextStyle(color:darkColor)),
+     // maxLength: 10,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Title is required';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        title=value;
+      },
+
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText: 'Description :  ${products[index].pDescription}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Description is required';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        description=value;
+      },
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText:'Price :  ${products[index].pPrice}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Price is required';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        price =value;
+      },
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText:'Contact us by phone :  ${products[index].pContact_phone}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      cursorColor: KMainColor,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Phone is required';}
+        return null;
+      },
+      onSaved: (String value){
+        contact_phone=value;
+      },
+    ),
+                   // _buildTitle(),
+                   // _buildDescription(),
+                   // _buildPrice(),
+                  //  _buildContact_Phone(),
                     SizedBox(height: 50),
                     RaisedButton(
                       onPressed: () {

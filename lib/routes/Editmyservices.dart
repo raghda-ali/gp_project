@@ -139,11 +139,78 @@ class Editmyservices extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildTitle(),
+                    TextFormField(
+      decoration: InputDecoration(labelText: 'Title :  ${services[index].servtitle}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Title is required';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        title=value;
+      },
+
+
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText: 'Description :  ${services[index].servdescription}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Description is required';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        description=value;
+      },
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText: 'Category :  ${services[index].servcategory}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Category is required';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        category =value;
+      },
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText: 'Contact us by Phone :  ${services[index].servcontact_phone}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      cursorColor: KMainColor,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Phone is required';}
+        return null;
+      },
+      onSaved: (String value){
+        contact_phone=value;
+      },
+    ),
+    TextFormField(
+      decoration: InputDecoration(labelText: 'Contact us by Email :  ${services[index].servcontact_email}',labelStyle: TextStyle(color:darkColor)),
+      //maxLength: 10,
+      cursorColor: KMainColor,
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Email is required';}
+        return null;
+      },
+      onSaved: (String value){
+        contact_email=value;
+      },
+    ),
+                    /*_buildTitle(),
                     _buildcategory(), 
                     _buildDescription(),
                   _buildContact_Phone(),
-                    _buildContact_email(),
+                    _buildContact_email(),*/
                     
                     SizedBox(height: 50),
                     RaisedButton(
