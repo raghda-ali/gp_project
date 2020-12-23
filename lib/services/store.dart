@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
@@ -31,6 +32,17 @@ class store
     });
   }
 
+  addjobs(job job)
+  {
+
+    _firestore.collection(kJobCollection).add({
+      KJobTitle : job.pTitle,
+      KJobDescription : job.pDescription,
+      KJobcontact_Email :job.pContact_Email,
+      KJobcontact_Phone : job.pContact_phone,
+    });
+  }
+
 
 
  deleteservice(documentId) {
@@ -46,6 +58,9 @@ class store
         .collection(kServicesCollection)
         .doc(documentId)
         .update(data);
+  }
+  deletejob(documentId) {
+    _firestore.collection(kJobCollection).doc(documentId).delete();
   }
 
   /*Future <List<service>>loadServices() async
@@ -80,12 +95,17 @@ class store
     return _firestore.collection(kProductCollection).snapshots();
   }
 
+  Stream<QuerySnapshot> loadjobs(){
+    return _firestore.collection(kJobCollection).snapshots();
+  }
+
   Editmyproducts(data, documentId) {
           _firestore
         .collection(kProductCollection)
         .doc(documentId)
         .update(data);
   }
+
 
 
 

@@ -1,6 +1,8 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
@@ -12,6 +14,7 @@ import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
+import 'package:gp_project/routes/myjobs_screen.dart' as jo;
 import 'package:gp_project/services/store.dart';
 //import 'dart:html';
 
@@ -22,17 +25,17 @@ class MyProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Container _backBgCover() {
-    return Container(
-      //height:0.0,
-      decoration: BoxDecoration(
-        gradient: purpleGradient,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(88),
-          bottomRight: Radius.circular(88),
+      return Container(
+        //height:0.0,
+        decoration: BoxDecoration(
+          gradient: purpleGradient,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(88),
+            bottomRight: Radius.circular(88),
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -104,6 +107,15 @@ class MyProducts extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: Icon(Icons.work),
+              title: Text('My Jobs'),
+              onTap: ()
+              {
+                Navigator.pop(context);
+                Navigator.push(context, new MaterialPageRoute(builder: (context)=>new jo.MyJobs()));
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.local_offer_sharp),
               title: Text('Offers'),
             ),
@@ -131,14 +143,14 @@ class MyProducts extends StatelessWidget {
           builder: (context, Snapshot) {
             if (!Snapshot.hasData) {
               return Center(
-                child: Text('My Products is empty'),
+                child: Text('My products list is empty'),
               );
             } else {
               List<product> products = [];
               for (var doc in Snapshot.data.docs) {
                 //var data=doc.data();
                 products.add(product(
-                    pId: doc.id,
+                   pId: doc.id,
                     pTitle: doc.data()[KProductTitle],
                     pDescription: doc.data()[KProductDescription],
                     pPrice: doc.data()[KProductPrice],
@@ -320,34 +332,40 @@ class MyProducts extends StatelessWidget {
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13,
                                                 color: Colors.white),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
+           ),
+                              ),
+                            ),
                           ),
+                          ]
+                          ),
+                         
                         ],
                       ),
-                      Icon(
-                        Icons.favorite,
-                        color: lightColor,
-                        size: 36,
-                      ),
                     ],
-                  ),
+          ),
+          Icon(
+                    Icons.favorite,
+                    color: lightColor,
+                    size: 36,
+          ),
+        ],
+      ),          
+    
+              ),
+                    //_specialistsCardInfo(),
+                  ],
                 ),
-                  ]
-                )
-              )
-            )
+              ),
+            ),
           ]
-                  )
-                )
-              );
-            }
+                          ),
+            ),
+            );
+          
+           };
+           }
+           ),
             
-          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -360,3 +378,4 @@ class MyProducts extends StatelessWidget {
     );
   }
 }
+

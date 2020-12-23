@@ -13,6 +13,7 @@ import 'package:gp_project/routes/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
+import 'package:gp_project/routes/myjobs_screen.dart' as jo;
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/widgets/moods.dart';
 
@@ -108,8 +109,16 @@ class myservices extends StatelessWidget {
                               Navigator.push(context, new MaterialPageRoute(builder: (context)=>new pro.MyProducts()));
                             },
                           ),
-              
-                          
+
+                          ListTile(
+                            leading: Icon(Icons.work),
+                            title: Text('My Jobs'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new jo.MyJobs()));
+                            },
+                          ),
                           ListTile(
                             leading: Icon(Icons.local_offer_sharp),
                             title: Text('Offers'),

@@ -24,6 +24,12 @@ const KProductDescription = 'ProductDescription';
 const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
 
+const kJobCollection = 'jobs';
+const KJobTitle = 'jobTitle';
+const KJobDescription = 'jobDescription';
+const KJobcontact_Email = 'jobcontact_Email';
+const KJobcontact_Phone = 'jobcontact_Phone';
+
 const redGradient = LinearGradient(
   colors: <Color>[darkRedColor, lightRedColor],
   stops: [0.0, 1.0],
