@@ -245,11 +245,12 @@ class MyProducts extends StatelessWidget {
                                     ),
                                     RaisedButton(
                                       onPressed: () {
-                                        Navigator.push(
+                                       /* Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Editmyproducts()));
+                                                    Editmyproducts()));*/
+                                                    Navigator.pushNamed(context,Editmyproducts.id,arguments: products[index]);
                                       },
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -345,7 +346,7 @@ class MyProducts extends StatelessWidget {
                 )
               );
             }
-            ;
+            
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

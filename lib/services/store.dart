@@ -41,6 +41,13 @@ class store
     _firestore.collection(kProductCollection).doc(documentId).delete();
   }
 
+  editService(data, documentId) {
+    _firestore
+        .collection(kServicesCollection)
+        .doc(documentId)
+        .update(data);
+  }
+
   /*Future <List<service>>loadServices() async
   {
     var snapshot = await _firestore.collection(kServicesCollection).get();
@@ -58,6 +65,13 @@ class store
     }
     return services;
   }*/
+  Stream<QuerySnapshot> loadServiceDetails(documentId) {
+    return _firestore
+        .collection(kServicesCollection)
+        .doc(documentId)
+        .collection(kServiceDetails)
+        .snapshots();
+  }
   Stream<QuerySnapshot> loadservices(){
     return _firestore.collection(kServicesCollection).snapshots();
   }
@@ -67,7 +81,7 @@ class store
   }
 
   Editmyproducts(data, documentId) {
-    _firestore
+          _firestore
         .collection(kProductCollection)
         .doc(documentId)
         .update(data);

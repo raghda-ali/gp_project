@@ -259,7 +259,7 @@ class myservices extends StatelessWidget {
                           ),
                           RaisedButton(
                             onPressed: () {
-                             // Navigator.pushNamed(context, Editmyservices.id);
+                             Navigator.pushNamed(context,Editmyservices.id,arguments: services[index]);
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(80.0)),

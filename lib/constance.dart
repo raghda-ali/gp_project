@@ -17,7 +17,7 @@ const KServiceDescription = 'ServiceDescription';
 const KServiceCategory = 'ServiceCategory';
 const KServicecontact_Phone = 'Servicecontact_Phone';
 const KServicecontact_Email = 'Servicecontact_Email';
-
+const kServiceDetails = 'ServiceDetails';
 const kProductCollection = 'Products';
 const KProductTitle = 'ProductTitle';
 const KProductDescription = 'ProductDescription';

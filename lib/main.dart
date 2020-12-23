@@ -1,6 +1,8 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gp_project/models/product.dart';
+import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/models/services.dart';
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       initialRoute: LoginScreen.id,
       routes: {
@@ -30,7 +33,8 @@ class MyApp extends StatelessWidget {
         signup_screen.id:(context)=>signup_screen(),
         Home.id:(context)=>Home(),
         myservices.id:(context)=>myservices(),
-        //Editmyservices.id:(context)=>Editmyservices(),
+        Editmyservices.id:(context)=>Editmyservices(),
+        Editmyproducts.id:(context)=>Editmyproducts(),
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,
