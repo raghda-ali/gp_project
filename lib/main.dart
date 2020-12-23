@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
+import 'package:gp_project/routes/addmyproducts.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/routes/myservices_screen.dart';
+import 'package:gp_project/routes/product_details.dart';
+import 'package:gp_project/routes/service_details.dart';
 import 'routes/login_screen.dart';
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
@@ -35,6 +38,8 @@ class MyApp extends StatelessWidget {
         myservices.id:(context)=>myservices(),
         Editmyservices.id:(context)=>Editmyservices(),
         Editmyproducts.id:(context)=>Editmyproducts(),
+        servicedetails.id:(context)=>servicedetails(),
+        productdetails.id:(context)=>productdetails(),
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,

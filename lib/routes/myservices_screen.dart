@@ -14,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
 import 'package:gp_project/routes/myjobs_screen.dart' as jo;
+import 'package:gp_project/routes/service_details.dart' as sd;
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/widgets/moods.dart';
 
@@ -166,6 +167,13 @@ class myservices extends StatelessWidget {
             }
                 return ListView.builder(itemCount : services.length,itemBuilder:
             (context,index)=> SingleChildScrollView(
+
+             child: GestureDetector(
+
+               onTap: () {
+                 Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);
+               },
+
                           child:Column(
                             mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -362,8 +370,8 @@ class myservices extends StatelessWidget {
           ]
                           ),
             ),
-            );
-          
+            ),
+                );
            };
            }
            ),

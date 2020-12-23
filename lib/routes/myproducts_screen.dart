@@ -15,6 +15,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
 import 'package:gp_project/routes/myjobs_screen.dart' as jo;
+import 'package:gp_project/routes/product_details.dart' as de;
 import 'package:gp_project/services/store.dart';
 //import 'dart:html';
 
@@ -159,8 +160,16 @@ class MyProducts extends StatelessWidget {
               return ListView.builder(
                 itemCount: products.length,
                 itemBuilder: (context, index) => SingleChildScrollView(
+
+                  child: GestureDetector(
+
+                    onTap: () {
+                      Navigator.pushNamed(context,de.productdetails.id,arguments: products[index]);
+                    },
+
                   child:Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+
           children: <Widget>[
             Stack(
               alignment: AlignmentDirectional.topCenter,
@@ -173,9 +182,12 @@ class MyProducts extends StatelessWidget {
             ),
             SizedBox(
               height: 7.0,
-              
             ),
+
             SingleChildScrollView(
+
+
+
               scrollDirection: Axis.vertical,
               child: Padding(
                 padding: EdgeInsets.all(15),
@@ -214,6 +226,7 @@ class MyProducts extends StatelessWidget {
                           SizedBox(
                             width: 10.0,
                           ),
+
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,6 +240,7 @@ class MyProducts extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     height: 1.3,
                                   ),
+
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: '${products[index].pTitle}',
@@ -248,6 +262,7 @@ class MyProducts extends StatelessWidget {
                                   ],
                                 ),
                               ),
+
                               Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -341,6 +356,7 @@ class MyProducts extends StatelessWidget {
                          
                         ],
                       ),
+
                     ],
           ),
           Icon(
@@ -360,9 +376,11 @@ class MyProducts extends StatelessWidget {
           ]
                           ),
             ),
+//************************************************************************
+                ),
             );
-          
-           };
+
+           }
            }
            ),
             
