@@ -5,7 +5,7 @@ import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/routes/myjobs_screen.dart';
-
+import 'package:gp_project/routes/myjobs_screen.dart';
 
 class addmyjobs extends StatelessWidget {
   static String id ='add jobs';
@@ -108,17 +108,17 @@ class addmyjobs extends StatelessWidget {
                   if(_formkey.currentState.validate()){
                     _formkey.currentState.save();
                     _store.addjobs(job(
-                      pTitle:  title,
-                      pDescription:  description,
-                      pContact_Email: contact_Email ,
-                      pContact_phone:  contact_phone,
+                      jTitle:  title,
+                      jDescription:  description,
+                      jContact_Email: contact_Email ,
+                      jContact_phone:  contact_phone,
 
 
                     )
                     );
                   }
 
-                  Navigator.pushNamed(context, addmyjobs.id);
+                  Navigator.pushNamed(context,MyJobs.id);
                   _formkey.currentState.save();
                   print(title);
                 },

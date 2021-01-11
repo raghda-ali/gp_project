@@ -22,7 +22,7 @@ class Editmyproducts extends StatelessWidget {
 
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
-  /*Widget _buildTitle(){
+  Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
       maxLength: 10,
@@ -84,7 +84,7 @@ class Editmyproducts extends StatelessWidget {
         contact_phone=value;
       },
     );;
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class Editmyproducts extends StatelessWidget {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       
-      body:  StreamBuilder<QuerySnapshot>(
+      body:/*  StreamBuilder<QuerySnapshot>(
         stream: _store.loadproducts(),
         builder: (context, Snapshot) {
           if (Snapshot.hasData){
@@ -111,7 +111,8 @@ class Editmyproducts extends StatelessWidget {
               }
           return ListView.builder(
                 itemCount: products.length,
-                itemBuilder: (context, index) =>Container(
+                itemBuilder: (context, index) =>*/
+      Container(
               margin: EdgeInsets.all(24),
               child: Form(
                 key: _formkey,
@@ -119,7 +120,7 @@ class Editmyproducts extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextFormField(
-      decoration: InputDecoration(labelText: 'Title :  ${products[index].pTitle}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Title :  ${pro.pTitle}',labelStyle: TextStyle(color:darkColor)),
      // maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
@@ -133,7 +134,7 @@ class Editmyproducts extends StatelessWidget {
 
     ),
     TextFormField(
-      decoration: InputDecoration(labelText: 'Description :  ${products[index].pDescription}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Description :  ${pro.pDescription}',labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
@@ -146,7 +147,7 @@ class Editmyproducts extends StatelessWidget {
       },
     ),
     TextFormField(
-      decoration: InputDecoration(labelText:'Price :  ${products[index].pPrice}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText:'Price :  ${pro.pPrice}',labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
@@ -159,7 +160,7 @@ class Editmyproducts extends StatelessWidget {
       },
     ),
     TextFormField(
-      decoration: InputDecoration(labelText:'Contact us by phone :  ${products[index].pContact_phone}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText:'Contact us by phone :  ${pro.pContact_phone}',labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       cursorColor: KMainColor,
       validator: (String value){
@@ -185,7 +186,7 @@ class Editmyproducts extends StatelessWidget {
                                     KProductDescription: description,
                                     KProductPrice: price,
                                     KProductcontact_Phone: contact_phone
-                                  },products[index].pId);
+                                  },pro.pId);
                                 }
                         /*if(_formkey.currentState.validate()){
                           _formkey.currentState.save();
@@ -233,8 +234,8 @@ class Editmyproducts extends StatelessWidget {
           }
 
         }
-      ),
+      //),
         
-    );
+   // );
 
-  }}
+  //}

@@ -81,10 +81,10 @@ class MyProducts extends StatelessWidget {
               leading: Icon(Icons.person),
               title: Text('Profile'),
             ),
-            ListTile(
+            /*ListTile(
               leading: Icon(Icons.attach_money_outlined),
               title: Text('My Donation'),
-            ),
+            ),*/
             ListTile(
               leading: Icon(Icons.support),
               title: Text('My Services'),
@@ -116,7 +116,7 @@ class MyProducts extends StatelessWidget {
                 Navigator.push(context, new MaterialPageRoute(builder: (context)=>new jo.MyJobs()));
               },
             ),
-            ListTile(
+            /*ListTile(
               leading: Icon(Icons.local_offer_sharp),
               title: Text('Offers'),
             ),
@@ -127,7 +127,7 @@ class MyProducts extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.chat),
               title: Text('Chating'),
-            ),
+            ),*/
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Log out'),

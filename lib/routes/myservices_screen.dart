@@ -301,8 +301,40 @@ class myservices extends StatelessWidget {
                               ),
                             ),
                           ),
+                             /* SizedBox(
+                                height: 6.0,
+                                width: 5.0,
+                              ),
+                              RaisedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context,Editmyservices.id,arguments: services[index]);
+                                },
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(80.0)),
+                                padding: const EdgeInsets.all(0.0),
+                                child: Ink(
+                                  decoration: const BoxDecoration(
+                                    gradient: purpleGradient,
+                                    borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                                  ),
+                                  child: Container(
+                                    constraints: const BoxConstraints(
+                                        minWidth: 88.0,
+                                        minHeight: 36.0), // min sizes for Material buttons
+                                    alignment: Alignment.center,
+                                    child:const Text(
+                                      'View',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 13,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),*/
                           SizedBox(
                             height: 6.0,
+                            width: 7.0,
                           ),
                           RaisedButton(
                             

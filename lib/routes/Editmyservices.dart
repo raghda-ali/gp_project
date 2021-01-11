@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
+import 'package:gp_project/routes/myservices_screen.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
@@ -113,7 +114,7 @@ class Editmyservices extends StatelessWidget {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Service'),backgroundColor: KMainColor,),
       
-      body:  StreamBuilder<QuerySnapshot>(
+      body: /* StreamBuilder<QuerySnapshot>(
         stream: _store.loadservices(),
         builder: (context, Snapshot) {
           if (Snapshot.hasData){
@@ -132,7 +133,7 @@ class Editmyservices extends StatelessWidget {
               }
           return ListView.builder(
                 itemCount: services.length,
-                itemBuilder: (context, index) =>Container(
+                itemBuilder: (context, index) =>*/Container(
               margin: EdgeInsets.all(24),
               child: Form(
                 key: _formkey,
@@ -140,7 +141,8 @@ class Editmyservices extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextFormField(
-      decoration: InputDecoration(labelText: 'Title :  ${services[index].servtitle}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Title :  ${serv.servtitle}',
+          labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
@@ -155,7 +157,8 @@ class Editmyservices extends StatelessWidget {
 
     ),
     TextFormField(
-      decoration: InputDecoration(labelText: 'Description :  ${services[index].servdescription}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Description :  ${serv.servdescription}'
+          ,labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
@@ -168,7 +171,8 @@ class Editmyservices extends StatelessWidget {
       },
     ),
     TextFormField(
-      decoration: InputDecoration(labelText: 'Category :  ${services[index].servcategory}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Category :  ${serv.servcategory}'
+    ,labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
@@ -181,7 +185,8 @@ class Editmyservices extends StatelessWidget {
       },
     ),
     TextFormField(
-      decoration: InputDecoration(labelText: 'Contact us by Phone :  ${services[index].servcontact_phone}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Contact us by Phone :  ${serv.servcontact_phone}'
+    ,labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       cursorColor: KMainColor,
       validator: (String value){
@@ -194,7 +199,8 @@ class Editmyservices extends StatelessWidget {
       },
     ),
     TextFormField(
-      decoration: InputDecoration(labelText: 'Contact us by Email :  ${services[index].servcontact_email}',labelStyle: TextStyle(color:darkColor)),
+      decoration: InputDecoration(labelText: 'Contact us by Email :  ${serv.servcontact_email}'
+    ,labelStyle: TextStyle(color:darkColor)),
       //maxLength: 10,
       cursorColor: KMainColor,
       validator: (String value){
@@ -223,10 +229,10 @@ class Editmyservices extends StatelessWidget {
                                     KServiceCategory: category,
                                     KServicecontact_Phone: contact_phone,
                                     KServicecontact_Email:contact_email
-                                  },services[index].servId);
+                                  },serv.servId);
                                 }
 
-                        Navigator.pushNamed(context, Editmyservices.id);
+                        Navigator.pushNamed(context, myservices.id);
                         _formkey.currentState.save();
                         print(title);
                       },
@@ -262,8 +268,8 @@ class Editmyservices extends StatelessWidget {
           }
 
         }
-      ),
+      //),
         
-    );
+   // );
 
-  }}
+

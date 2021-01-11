@@ -6,14 +6,18 @@ import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/routes/addmyjobs.dart';
+import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/signup_screen.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/services/store.dart';
-//import 'dart:html';
+import 'package:gp_project/routes/myjobs_screen.dart' ;
+import 'package:gp_project/routes/job_details.dart'as jo;
+import 'package:gp_project/services/store.dart' ;
+
+
 
 class MyJobs extends StatelessWidget {
   static String id = 'MyJobs';
@@ -77,10 +81,10 @@ class MyJobs extends StatelessWidget {
               leading: Icon(Icons.person),
               title: Text('Profile'),
             ),
-            ListTile(
+           /* ListTile(
               leading: Icon(Icons.attach_money_outlined),
               title: Text('My Donation'),
-            ),
+            ),*/
             ListTile(
               leading: Icon(Icons.support),
               title: Text('My Services'),
@@ -103,7 +107,7 @@ class MyJobs extends StatelessWidget {
                         builder: (context) => new pro.MyProducts()));
               },
             ),
-            ListTile(
+            /*ListTile(
               leading: Icon(Icons.local_offer_sharp),
               title: Text('Offers'),
             ),
@@ -114,7 +118,7 @@ class MyJobs extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.chat),
               title: Text('Chating'),
-            ),
+            ),*/
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Log out'),
@@ -138,16 +142,21 @@ class MyJobs extends StatelessWidget {
               for (var doc in Snapshot.data.docs) {
                 //var data=doc.data();
                 jobs.add(job(
-                    pId: doc.id,
-                    pTitle: doc.data()[KJobTitle],
-                    pDescription: doc.data()[KJobDescription],
-                    pContact_Email: doc.data()[KJobcontact_Email],
-                    pContact_phone: doc.data()[KJobcontact_Phone]));
+                    jId: doc.id,
+                    jTitle: doc.data()[KJobTitle],
+                    jDescription: doc.data()[KJobDescription],
+                    jContact_Email: doc.data()[KJobcontact_Email],
+                    jContact_phone: doc.data()[KJobcontact_Phone]));
 
               }
               return ListView.builder(
                   itemCount: jobs.length,
                   itemBuilder: (context, index) => SingleChildScrollView(
+                  child: GestureDetector(
+
+                      onTap: () {
+                        Navigator.pushNamed(context,jo.jobdetails.id,arguments: jobs[index]);
+                      },
                       child:Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
@@ -218,7 +227,7 @@ class MyJobs extends StatelessWidget {
                                                             ),
                                                             children: <TextSpan>[
                                                               TextSpan(
-                                                                text: '${jobs[index].pTitle}',
+                                                                text: '${jobs[index].jTitle}',
                                                                 style: TextStyle(
                                                                   color: Colors.black,
                                                                   fontSize: 16,
@@ -227,7 +236,7 @@ class MyJobs extends StatelessWidget {
                                                               ),
                                                               TextSpan(
                                                                 text:
-                                                                '\n ${jobs[index].pDescription}',
+                                                                '\n ${jobs[index].jDescription}',
                                                                 style: TextStyle(
                                                                   color: Colors.black38,
                                                                   fontWeight: FontWeight.w400,
@@ -243,15 +252,11 @@ class MyJobs extends StatelessWidget {
                                                             children: <Widget>[
                                                               SizedBox(
                                                                 height: 6.0,
+                                                                width: 5.0
                                                               ),
                                                               RaisedButton(
                                                                 onPressed: () {
-                                                                  Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(
-
-                                                                      )
-                                                                  );
+                                                                  Navigator.pushNamed(context,Editmyjob.id,arguments: jobs[index]);
                                                                 },
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:
@@ -281,7 +286,7 @@ class MyJobs extends StatelessWidget {
                                                               ),
 
                                                       // testing...................
-                                                              SizedBox(
+                                                            /*  SizedBox(
                                                                 height: 6.0,
                                                               ),
                                                               RaisedButton(
@@ -320,19 +325,10 @@ class MyJobs extends StatelessWidget {
                                                                 ),
                                                               ),
                                                               //.................................................
-
-
-
-
-
-
-
-
-
-
+,                                                            */
                                                               SizedBox(
                                                                 height: 6.0,
-                                                              ),
+                                                                  width: 5.0                                                              ),
                                                               RaisedButton(
                                                                 onPressed: () {
                                                                   Scaffold.of(context)
@@ -344,7 +340,7 @@ class MyJobs extends StatelessWidget {
                                                                       textColor: Colors.white,
                                                                       onPressed: () {
                                                                         _store.deletejob(
-                                                                            jobs[index].pId);
+                                                                            jobs[index].jId);
                                                                         // Some code to undo the change.
                                                                       },
                                                                     ),
@@ -396,7 +392,7 @@ class MyJobs extends StatelessWidget {
                           ]
                       )
                   )
-              );
+              ),);
             }
             ;
           }),

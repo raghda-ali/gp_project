@@ -108,13 +108,11 @@ class addmyproducts extends StatelessWidget {
                       pDescription:  description,
                       pPrice:  price,
                       pContact_phone:  contact_phone,
-
-
                     )
                     );
                   }
 
-                  Navigator.pushNamed(context, addmyproducts.id);
+                  Navigator.pushNamed(context, MyProducts.id);
                   _formkey.currentState.save();
                   print(title);
                 },

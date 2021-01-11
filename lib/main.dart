@@ -2,15 +2,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/models/product.dart';
+import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
+import 'package:gp_project/routes/addmyjobs.dart';
 import 'package:gp_project/routes/addmyproducts.dart';
+import 'package:gp_project/routes/job_details.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/routes/myservices_screen.dart';
+import 'package:gp_project/routes/myjobs_screen.dart';
 import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/routes/service_details.dart';
 import 'routes/login_screen.dart';
@@ -36,10 +40,14 @@ class MyApp extends StatelessWidget {
         signup_screen.id:(context)=>signup_screen(),
         Home.id:(context)=>Home(),
         myservices.id:(context)=>myservices(),
+        MyProducts.id:(context)=>MyProducts(),
+        MyJobs.id:(context)=>MyJobs(),
         Editmyservices.id:(context)=>Editmyservices(),
         Editmyproducts.id:(context)=>Editmyproducts(),
         servicedetails.id:(context)=>servicedetails(),
         productdetails.id:(context)=>productdetails(),
+        jobdetails.id:(context)=>jobdetails(),
+        Editmyjob.id:(context)=>Editmyjob(),
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,

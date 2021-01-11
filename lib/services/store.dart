@@ -16,8 +16,8 @@ class store
       KServiceTitle:service.servtitle,
       KServiceCategory:service.servcategory,
       KServiceDescription:service.servdescription,
+      KServicecontact_Phone:service.servcontact_phone,
       KServicecontact_Email:service.servcontact_email,
-      KServicecontact_Email:service.servcontact_phone,
     });
   }
 
@@ -36,10 +36,10 @@ class store
   {
 
     _firestore.collection(kJobCollection).add({
-      KJobTitle : job.pTitle,
-      KJobDescription : job.pDescription,
-      KJobcontact_Email :job.pContact_Email,
-      KJobcontact_Phone : job.pContact_phone,
+      KJobTitle : job.jTitle,
+      KJobDescription : job.jDescription,
+      KJobcontact_Email :job.jContact_Email,
+      KJobcontact_Phone : job.jContact_phone,
     });
   }
 
@@ -83,9 +83,8 @@ class store
   Stream<QuerySnapshot> loadServiceDetails(documentId) {
     return _firestore
         .collection(kServicesCollection)
-        .doc(documentId)
-        .collection(kServiceDetails)
-        .snapshots();
+        .doc(documentId).collection(kServiceDetails).snapshots();
+        
   }
   Stream<QuerySnapshot> loadservices(){
     return _firestore.collection(kServicesCollection).snapshots();
@@ -102,6 +101,12 @@ class store
   Editmyproducts(data, documentId) {
           _firestore
         .collection(kProductCollection)
+        .doc(documentId)
+        .update(data);
+  }
+  Editmyjobs(data, documentId) {
+    _firestore
+        .collection(kJobCollection)
         .doc(documentId)
         .update(data);
   }

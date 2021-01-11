@@ -1,15 +1,15 @@
 class job {
-  String pId;
-  String pTitle;
-  String pDescription;
-  String pContact_Email;
-  String pContact_phone;
+  String jId;
+  String jTitle;
+  String jDescription;
+  String jContact_Email;
+  String jContact_phone;
 
 
   job(
-      {     this.pId,
-        this.pTitle,
-        this.pDescription,
-        this.pContact_Email,
-        this.pContact_phone});
+      {   this.jId,
+        this.jTitle,
+        this.jDescription,
+        this.jContact_Email,
+        this.jContact_phone});
 }
