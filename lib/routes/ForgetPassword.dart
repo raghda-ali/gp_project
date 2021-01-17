@@ -1,63 +1,80 @@
-import 'package:flutter/material.dart';
-class ForgetPassword extends StatelessWidget{
+/*import 'package:flutter/material.dart';
+class ForgetPassword extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState(){
+    return _ForgetPassword();
+  }
+}
+class _ForgetPassword extends State<ForgetPassword>{
+  String email="";
+  var _formKey =GlobalKey<FormState>();
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title:Text("Home"),
-        backgroundColor: Colors.red[200],
-      ),
-      body: Column(children:<Widget> [
-        SizedBox(height: 150,),
-        Center(child: Text("Please, provide your account email to procced password restoring",
-        style: TextStyle(fontSize: 20,
-        color: Colors.black.withOpacity(0.6),
-        fontWeight: FontWeight.bold,
-        
+      backgroundColor: Colors.blue,
+      appBar: AppBar(title: Text("Forgetten Password",style: TextStyle(color: Colors.blue),),backgroundColor: Colors.black54,),
+      body: Center(
+        child:Padding(padding : EdgeInsets.only(top:50 , right:20 , left :20),
+        child: Form(
+          key: _formKey,
+          child:Column(
+          children: <Widget>[
+            Text("Please, provide your account email to procced password restoring",
+            style: TextStyle(color :Colors.blue ,fontSize: 20),
+            ),
+
+            Theme(
+              data: ThemeData(
+                hintColor: Colors.blue
+                ),
+                child : Padding(padding: EdgeInsets.only(top :30),
+                child: TextFormField(
+                  validator:(value){
+                    if(value.isEmpty){
+                      return " Please enter your email";
+                    }else{
+                      email=value;
+                    }
+                    return null;
+                  } ,
+                  style: TextStyle(color : Colors.white),
+                  decoration: InputDecoration(
+                    labelText:"Email",
+                    border:OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color:Colors.blue,width: 1),
+                      ), 
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius:BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.blue)
+                         ),
+                    ),
+                  ),
+                ),
+            ),
+            Padding(
+              padding:EdgeInsets.only(top :20 ,left:30, right:30) ,
+              child: RaisedButton(
+                onPressed: (){
+                  if(_formKey.currentState.validate()){
+                   FirebaseAuth.instance.sendPasswordResetEmail(email : email).then((value) => print("Check your email"));
+                  }
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                   ),
+                   color: Colors.blue,
+                   child: Text("Send Email",style: TextStyle(color: Colors.blue,
+                    fontWeight: FontWeight.bold,fontSize: 20),
+                   ),
+                   padding: EdgeInsets.all(10),
+              ),
+              )
+          ],
         ),
-        textAlign: TextAlign.center,
         ),
         ),
-        SizedBox(height: 30,),
-        Container(
-          width: 320,
-          child: TextField(
-           obscureText: true,
-           decoration: InputDecoration(
-             hintText: "Type in your email",
-             prefixIcon: Icon(Icons.email),
-             hintStyle: TextStyle(color: Colors.grey),
-             filled:true,
-             fillColor: Colors.white38,
-             enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            borderSide: BorderSide(color: Colors.red[200],width: 2),
-             ),
-             focusedBorder: OutlineInputBorder(
-               borderRadius: BorderRadius.all(Radius.circular(30.0)),
-               borderSide: BorderSide(color: Colors.red[200],width: 2),
-             ),
-           ),
-          ),
-        ),
-        Divider(
-          color: Colors.red[200] ,
-          height: 20,
-          thickness: 2,
-          indent: 50,
-          endIndent:50,
-          ),
-          RaisedButton(
-            child: Text("Reset"),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20)),
-              color: Colors.red[200],
-              textColor: Colors.white,
-            onPressed: () => print("Send"),
-          ),
-        
-      ],
       ),
     );
-  }
 }
+}*/
