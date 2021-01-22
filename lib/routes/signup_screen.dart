@@ -2,116 +2,145 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
-
 import 'login_screen.dart';
+import 'package:gp_project/routes/Home.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 
 class signup_screen extends StatelessWidget {
   final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   static String id='signupScreen';
+  final _auth=FirebaseAuth.instance;
+  bool showSpinner=false;
+  String email,password;  
   @override
   Widget build(BuildContext context) {
     double height=MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: KMainColor,
-      body: Form(
-        key: _globalkey,
-        child: ListView(
-          children:<Widget>[
-            SizedBox(
-              height: height*.02,
-            ),
-            CustomTextField(
-              hint: 'Enter your name',
-              icon: Icons.perm_identity,
-            ),
-            SizedBox(
-              height: height*.02,
-            ),
-            CustomTextField(
-              hint: 'Enter your phone',
-              icon: Icons.phone,
-            ),
-            SizedBox(
-              height: height*.02,
-            ),
-            CustomTextField(
-              hint: 'Enter your address',
-              icon: Icons.home_outlined,
-            ),
-            SizedBox(
-              height: height*.02,
-            ),
-            CustomTextField(
-              hint: 'Enter your email',
-              icon: Icons.email,
-            ),
-            SizedBox(
-              height: height*.02,
-            ),
-            CustomTextField(
-              icon: Icons.lock,
-              hint: 'Enter your password',
-            ),
-
-            RadioGroup(),
-            SizedBox(
-              height: height*.03,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 120,vertical:0),
-              child: FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                ),
-                onPressed: ()
-                {
-                 if(_globalkey.currentState.validate())
-                 {
-                   //do something
-                 }
-                },
-                color: Colors.black,
-                child: Text(
-                  'Sign up',
-                  style: TextStyle(
-                    color: Colors.white,
+      resizeToAvoidBottomPadding: false,
+          backgroundColor: KMainColor,
+          body: ModalProgressHUD (
+            inAsyncCall: showSpinner,
+              child: Form(
+              key: _globalkey,
+              child: ListView(
+                
+                children:<Widget>[
+                  SizedBox(
+                    height: height*.02,
                   ),
-                ),
+                  CustomTextField(
+                    hint: 'Enter your name',
+                    icon: Icons.perm_identity,
+                  ),
+                  SizedBox(
+                    height: height*.02,
+                  ),
+                  CustomTextField(
+                    hint: 'Enter your phone',
+                    icon: Icons.phone,
+                  ),
+                  SizedBox(
+                    height: height*.02,
+                  ),
+                  CustomTextField(
+                    hint: 'Enter your address',
+                    icon: Icons.home_outlined,
+                  ),
+                  SizedBox(
+                    height: height*.02,
+                  ),
+                  CustomTextField(
+                    
+                    hint: 'Enter your email',
+                    icon: Icons.email,
+                    onclick: (value){
+                      email=value;
+                    },
+                  ),
+                  SizedBox(
+                    height: height*.02,
+                  ),
+                  CustomTextField(
+                    icon: Icons.lock,
+                    hint: 'Enter your password',
+                    
+                    onclick: (value){
+                      password=value;
+                    },
+                  ),
+    
+                 // RadioGroup(),
+                  //SizedBox(
+                  //  height: height*.03,
+                  //),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 120,vertical:0),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                      onPressed: ()async
+                      {
+                        //StepState.((){showSpinner=true;});
+                        //print(email);
+                        //print(password);
+                       /*if(_globalkey.currentState.validate())
+                       {
+                         //do something
+                       }*/
+                       try
+                       {
+                         final newuser = await _auth.createUserWithEmailAndPassword
+                         (email: email, password: password); 
+                         if (newuser !=null){
+                           Navigator.pushNamed(context,Home.id);
+                         }
+                       }catch(e){print(e);}
+                      },
+                      color: Colors.black,
+                      child: Text(
+                        'Sign up',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ) ,
+                  SizedBox(
+                    height: height*.01,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Do have an account ? ",
+                        style: TextStyle(
+                            color:Colors.white,
+                            fontSize: 16
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, LoginScreen.id);
+    
+                        },
+                        child: Text('Login',
+                          style: TextStyle(
+                              fontSize: 16
+                          ) ,
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
-            ) ,
-            SizedBox(
-              height: height*.01,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Do have an account ? ",
-                  style: TextStyle(
-                      color:Colors.white,
-                      fontSize: 16
-                  ),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    Navigator.pushNamed(context, LoginScreen.id);
-
-                  },
-                  child: Text('Login',
-                    style: TextStyle(
-                        fontSize: 16
-                    ) ,
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+          ),
+        );
+        
   }
 }
-class RadioGroup extends StatefulWidget {
+/*class RadioGroup extends StatefulWidget {
   @override
   RadioGroupWidget createState() => RadioGroupWidget();
 }
@@ -215,4 +244,4 @@ class RadioGroupWidget extends State {
       ],
     );
   }
-}
+}*/

@@ -3,6 +3,7 @@ class ForgetPassword extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title:Text("Home"),
         backgroundColor: Colors.red[200],

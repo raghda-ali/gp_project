@@ -1,30 +1,38 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class faildata extends StatelessWidget {
+class Faildata extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
      home: Scaffold(
+       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.pink.shade100,
-       body: SafeArea(
-         child: Center(
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: <Widget>[
+       body: Container(
+         //height: MediaQuery.of(context).size.height*.4,
+             child: Center(
+               child: Stack(
+               //  alignment: Alignment.center,
+               children: <Widget>[
                Icon(Icons.done_all,
-               color: Colors.white,
-                 size: 100.0,
+                 color: Colors.white,
+                   size: 210,
                ),
-               Text('البيانات غير صحيحة',
-               style: TextStyle(
-               fontSize: 30.0,
-               color: Colors.white)
-               )
-             ],
-           ),
-         ),
-       ),
-      )
-    );
+                 Positioned(
+                   bottom: 0,
+                 child: Text('Incorrect Input Data',
+                     style: TextStyle(
+                     fontSize: 24,
+                      color: Colors.white)
+               ),
+                 )
+                 ],
+                 ),
+             )
+    ),
+             )
+
+       );
+
   }
 }
