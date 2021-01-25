@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
-import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/Jobs.dart';
-import 'package:gp_project/routes/myjobs_screen.dart';
 import 'package:gp_project/routes/myjobs_screen.dart';
 
 class addmyjobs extends StatelessWidget {

@@ -29,6 +29,7 @@ class store
       KProductDescription:product.pDescription,
       KProductPrice:product.pPrice,
       KProductcontact_Phone:product.pContact_phone,
+      KProductImage : product.pImage,
     });
   }
 

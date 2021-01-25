@@ -1,31 +1,28 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
-import 'package:gp_project/routes/addmyjobs.dart';
-import 'package:gp_project/routes/addmyproducts.dart';
 import 'package:gp_project/routes/job_details.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
-import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
-import 'package:gp_project/routes/Home.dart';
-import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/routes/myservices_screen.dart';
 import 'package:gp_project/routes/myjobs_screen.dart';
 import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/routes/service_details.dart';
 import 'routes/login_screen.dart';
-import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
+/*void main() {
   runApp(MyApp());
-  Firebase.initializeApp();
+   Firebase.initializeApp();
   
+}*/
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseApp app = await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

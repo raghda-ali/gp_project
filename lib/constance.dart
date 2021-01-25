@@ -23,6 +23,7 @@ const KProductTitle = 'ProductTitle';
 const KProductDescription = 'ProductDescription';
 const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
+const KProductImage = 'ProductImage';
 
 const kJobCollection = 'jobs';
 const KJobTitle = 'jobTitle';

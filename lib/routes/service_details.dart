@@ -1,14 +1,8 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
-import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
-import 'package:gp_project/models/product.dart';
-import 'package:gp_project/routes/myproducts_screen.dart';
 
 
 class servicedetails extends StatelessWidget {
