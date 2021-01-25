@@ -5,6 +5,7 @@ import '../constance.dart';
 class CustomTextField extends StatelessWidget {
   final String hint;
   final IconData icon;
+  final Function onclick;
   String _errorMassage(String str)
   {
     switch(hint)
@@ -16,7 +17,7 @@ class CustomTextField extends StatelessWidget {
       case'Enter your password': return'Password is empty !';
     }
   }
-  CustomTextField({@required this.icon,@required this.hint});
+  CustomTextField({ this.onclick,@required this.icon,@required this.hint});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,9 @@ class CustomTextField extends StatelessWidget {
           // ignore: missing_return
           }
         },
+        onChanged: onclick,
+        //keyboardType: hint=='Enter your email'? TextInputType.emailAddress,
+        obscureText: hint=='Enter your password'? true:false,
         cursorColor: KMainColor,
         decoration:InputDecoration(
           hintText: hint,
