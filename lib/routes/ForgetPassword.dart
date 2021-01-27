@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   TextEditingController editController = TextEditingController();
   @override
+  static String id='ForgetPassword';
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

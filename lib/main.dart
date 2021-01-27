@@ -13,6 +13,7 @@ import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/routes/service_details.dart';
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
+import 'routes/ForgetPassword.dart';
 
 /*void main() {
   runApp(MyApp());
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         productdetails.id:(context)=>productdetails(),
         jobdetails.id:(context)=>jobdetails(),
         Editmyjob.id:(context)=>Editmyjob(),
+        ForgotPasswordScreen.id:(context)=>ForgotPasswordScreen(),
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,

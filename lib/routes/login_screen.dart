@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/routes/ForgetPassword.dart';
 import 'package:gp_project/routes/signup_screen.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -85,6 +86,16 @@ class LoginScreen extends StatelessWidget {
                        Navigator.pushNamed(context, signup_screen.id);
                      },
                      child: Text('Sign up',
+                     style: TextStyle(
+                       fontSize: 16
+                     ) ,
+                     ),
+                   ),
+                    GestureDetector(
+                     onTap: (){
+                       Navigator.pushNamed(context, ForgotPasswordScreen.id);
+                     },
+                     child: Text('Forget Password',
                      style: TextStyle(
                        fontSize: 16
                      ) ,
