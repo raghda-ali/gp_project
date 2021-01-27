@@ -4,8 +4,8 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'login_screen.dart';
 import 'package:gp_project/routes/Home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class signup_screen extends StatelessWidget {
