@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gp_project/widgets/Custom_TextField.dart';
+import 'package:gp_project/constance.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   TextEditingController editController = TextEditingController();
@@ -8,9 +10,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   static String id='ForgetPassword';
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Forgot password"),
-      ),
+      backgroundColor: KMainColor,
       body: Container(
         margin: EdgeInsets.all(16),
         child: Column(
@@ -19,17 +19,36 @@ class ForgotPasswordScreen extends StatelessWidget {
             TextField(
               controller: editController,
               decoration: InputDecoration(
-                  labelText: "Email",
                   hintText: "Enter Email",
-                  border: OutlineInputBorder()),
+                  prefixIcon: Icon(Icons.email,
+                  color: KMainColor,),
+                  fillColor: KSocondaryColor,
+                  filled: true,
+                  border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.white)
+                  ),
+                  focusedBorder:  OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                  color: Colors.white
+            )    
+                  ),
+          
+              )
             ),
+            
+          
             SizedBox(
               height: 10,
             ),
-            Container(
-              width: double.infinity,
-              child: RaisedButton(
-                color: Colors.blue,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 100,vertical:20),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)
+                    ),
+                color: Colors.black,
                 onPressed: () {
                   resetPassword(context);
                 },
@@ -38,7 +57,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-            )
+        )
           ],
         ),
       ),
