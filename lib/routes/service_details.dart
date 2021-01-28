@@ -11,7 +11,10 @@ class servicedetails extends StatelessWidget {
   //final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   /*String title;
   String description;
-  String category;
+  //String category;
+  List<String> category =<String>[
+    Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
+  ];
   String contact_phone;
   String contact_Email;*/
 
@@ -49,11 +52,34 @@ class servicedetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          /*Text(
                               'Category :  ${serv.servcategory}',
 
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
+                          ),*/
+                           DropdownButton(
+                            hint:  Text("Select Category: "),
+                            dropdownColor : Colors.grey,
+                            icon: Icon(Icon.arrow_drop_down),
+                            style: TextStyle(
+                                color : Colors.black,
+                                fontSize: 20, 
+                                fontWeight: FontWeight.bold
+                                ),
+                          ),
+                            value : valueChoose,
+                            onChanged :(newValue) {
+                              setState((){
+                               valueChoose =newValue;
+                              });
+                            },
+                            category :ListItem.map((valueItem){
+                              return DropdownMenueItem(
+                                value:valueItem,
+                                child:Text(valueItem),
+                              ):
+                            }). toList(),
                           ),
                           SizedBox(
                             height: 20,
