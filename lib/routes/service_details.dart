@@ -11,10 +11,13 @@ class servicedetails extends StatelessWidget {
   //final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   /*String title;
   String description;
-  String category;
+  //String category;
+  List<String> category =<String>[
+    Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
+  ];
   String contact_phone;
   String contact_Email;*/
-
+  var selsctedtype;
   //final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
   @override
@@ -49,12 +52,46 @@ class servicedetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          /*Text(
                               'Category :  ${serv.servcategory}',
 
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
+                          ),*/
+                           DropdownButton(
+                            hint:  Text("Select Category: "),
+                            dropdownColor : Colors.grey,
+                            icon: Icon(Icons.arrow_drop_down),
+                            style: TextStyle(
+                                color : Colors.black,
+                                fontSize: 20, 
+                                fontWeight: FontWeight.bold
+                                ),
                           ),
+                            value : valueChoose,
+                            onChanged :(newValue) {
+                            items: category.map((value)=>DropdownMenueItem(
+                              child: Text(
+                                value,
+                                style: TextStyle(color :Color(0xff622F74)),
+                              ),
+                              value: value,
+
+                            )).toList(),
+                            onChanged:(SelectCategory){
+                              print('$SelectCategory');
+                              setState((){
+                                selsctedtype =SelectCategory;
+                              });
+                            },
+                            value: selsctedtype,
+                            isExpanded:false,
+                            hint:  Text('Choose service type',
+                            style:TextStyle(color: Color(0xFF2A0B35)),
+                            ),
+                           
+                                ),
+                          
                           SizedBox(
                             height: 20,
                           ),

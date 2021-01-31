@@ -71,7 +71,8 @@ class LoginScreen extends StatelessWidget {
                      ),
                    ),
               ) ,
-               SizedBox(
+              
+              SizedBox(
                height: height*.01,
              ),
                Row(
@@ -92,19 +93,29 @@ class LoginScreen extends StatelessWidget {
                        fontSize: 16
                      ) ,
                      ),
-                   ),
-                    GestureDetector(
+                   ), 
+                 ],
+               ),
+               SizedBox(
+               height: height*.01,
+             ),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: <Widget>[
+                   GestureDetector(
                      onTap: (){
                        Navigator.pushNamed(context, ForgotPasswordScreen.id);
                      },
-                     child: Text('Forget Password',
+                     child: Text('Forgot Your Password ?            ',
                      style: TextStyle(
-                       fontSize: 16
+                       fontSize: 16,
+                       color: Colors.white
                      ) ,
                      ),
-                   )
-                 ],
-               )
+                   ), 
+                 ]
+              ),
+             
         ],
       ),
     );
