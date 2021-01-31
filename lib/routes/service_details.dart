@@ -17,7 +17,7 @@ class servicedetails extends StatelessWidget {
   ];
   String contact_phone;
   String contact_Email;*/
-
+  var selsctedtype;
   //final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
   @override
@@ -61,7 +61,7 @@ class servicedetails extends StatelessWidget {
                            DropdownButton(
                             hint:  Text("Select Category: "),
                             dropdownColor : Colors.grey,
-                            icon: Icon(Icon.arrow_drop_down),
+                            icon: Icon(Icons.arrow_drop_down),
                             style: TextStyle(
                                 color : Colors.black,
                                 fontSize: 20, 
@@ -70,17 +70,28 @@ class servicedetails extends StatelessWidget {
                           ),
                             value : valueChoose,
                             onChanged :(newValue) {
+                            items: category.map((value)=>DropdownMenueItem(
+                              child: Text(
+                                value,
+                                style: TextStyle(color :Color(0xff622F74)),
+                              ),
+                              value: value,
+
+                            )).toList(),
+                            onChanged:(SelectCategory){
+                              print('$SelectCategory');
                               setState((){
-                               valueChoose =newValue;
+                                selsctedtype =SelectCategory;
                               });
                             },
-                            category :ListItem.map((valueItem){
-                              return DropdownMenueItem(
-                                value:valueItem,
-                                child:Text(valueItem),
-                              ):
-                            }). toList(),
-                          ),
+                            value: selsctedtype,
+                            isExpanded:false,
+                            hint:  Text('Choose service type',
+                            style:TextStyle(color: Color(0xFF2A0B35)),
+                            ),
+                           
+                                ),
+                          
                           SizedBox(
                             height: 20,
                           ),
