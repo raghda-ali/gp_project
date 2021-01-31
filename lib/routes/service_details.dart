@@ -68,7 +68,7 @@ class servicedetails extends StatelessWidget {
                                 fontWeight: FontWeight.bold
                                 ),
                           ),
-                            value:valueChoose,
+                            value : valueChoose,
                             onChanged :(newValue) {
                               setState((){
                                valueChoose =newValue;
