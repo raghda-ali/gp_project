@@ -19,6 +19,8 @@ dependencies:
   firebase_storage: ^5.2.0
   path: ^1.7.0
   fluttertoast: ^7.1.6
+  line_awesome_icons: ^1.0.4+2
+  flutter_rating_bar: ^3.0.1+1
 
   cupertino_icons: ^0.1.3
 
@@ -31,7 +33,9 @@ flutter:
 
   uses-material-design: true
   assets:
-    - images/
+    - images/producticon.png
+    - images/serviceicon.png
+    - images/jobicon.png
 
 
 

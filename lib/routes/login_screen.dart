@@ -7,6 +7,8 @@ import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/Home.dart';
 
+import 'MyHomePage.dart';
+
 class LoginScreen extends StatelessWidget {
   static String id='LoginScreen';
   final _auth=FirebaseAuth.instance;
@@ -56,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                       final user = await _auth.signInWithEmailAndPassword
                        (email: email, password: password);
                       if(user !=null){
-                        Navigator.pushNamed(context, Home.id );
+                        Navigator.pushNamed(context, MyHomePage.id );
                       }
                     }catch(e){print(e);}
                     },

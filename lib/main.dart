@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
+import 'package:gp_project/routes/MyHomePage.dart';
 import 'package:gp_project/routes/job_details.dart';
 import 'package:gp_project/routes/myproducts_screen.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
@@ -11,6 +12,7 @@ import 'package:gp_project/routes/myservices_screen.dart';
 import 'package:gp_project/routes/myjobs_screen.dart';
 import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/routes/service_details.dart';
+import 'package:path/path.dart';
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
 import 'routes/ForgetPassword.dart';
@@ -32,10 +34,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return MaterialApp(
-      initialRoute: LoginScreen.id,
+      initialRoute: MyHomePage.id,
       routes: {
         LoginScreen.id:(context)=>LoginScreen(),
         signup_screen.id:(context)=>signup_screen(),
+        MyHomePage.id:(context)=>MyHomePage(),
         Home.id:(context)=>Home(),
         myservices.id:(context)=>myservices(),
         MyProducts.id:(context)=>MyProducts(),

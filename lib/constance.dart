@@ -18,6 +18,7 @@ const KServiceCategory = 'ServiceCategory';
 const KServicecontact_Phone = 'Servicecontact_Phone';
 const KServicecontact_Email = 'Servicecontact_Email';
 const kServiceDetails = 'ServiceDetails';
+
 const kProductCollection = 'Products';
 const KProductTitle = 'ProductTitle';
 const KProductDescription = 'ProductDescription';
@@ -45,3 +46,4 @@ const purpleGradient = LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
 );
+//String USER_IMAGE='https://cdn4.iconfinder.com/data/icons/people-avatar-flat-1/64/girl_chubby_beautiful_people_woman_lady_avatar-512.png';

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
+import 'MyHomePage.dart';
 import 'login_screen.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -95,7 +96,7 @@ class signup_screen extends StatelessWidget {
                          final newuser = await _auth.createUserWithEmailAndPassword
                          (email: email, password: password); 
                          if (newuser !=null){
-                           Navigator.pushNamed(context,Home.id);
+                           Navigator.pushNamed(context,MyHomePage.id);
                          }
                        }catch(e){print(e);}
                       },
