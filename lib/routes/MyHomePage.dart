@@ -546,17 +546,16 @@ MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       StreamBuilder<DocumentSnapshot>(
-                 // ignore: deprecated_member_use
-                 stream: Firestore.instance
+                 stream: FirebaseFirestore.instance
                 .collection(kProductCollection)
                 .doc('0MpZB5bEDKlDjW4ZMBtL')
                 .snapshots(),
-                builder: (BuildContext context,AsyncSnapshot<DocumentSnapshot>snapshot){
+                builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot){
                 if(!snapshot.hasData)
-                 {
+                {
         
-                return Center(child: Text('Loading...'),);
-                 }
+                 return Center(child: Text('Loading...'),);
+                }
                 else{ 
                    /*   StreamBuilder<DocumentSnapshot>(stream: _store.getproductdatabyid(),
                       builder:(BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
@@ -568,7 +567,8 @@ MainAxisAlignment.spaceEvenly,
            // var data = DocumentSnapshot.data;
             var data = snapshot.data;
             */
-             children: <Widget>[
+           return Column(
+             children:<Widget>[
                       Text(
                      //   'Title :  ${doc.data.get(['ProductTitle'])}',
                       'Title :  ${snapshot.data['ProductTitle']}',
@@ -610,7 +610,7 @@ MainAxisAlignment.spaceEvenly,
                             fontSize: 14,
                           ),
                       // ignore: missing_return
-                      )];}
+                      )]);}
                       }
                       ),
                     
@@ -803,7 +803,8 @@ var document = await  Firestore.instance.collection('Products').document('0MpZB5
            // var data = DocumentSnapshot.data;
             var data = snapshot.data;
             */
-             children: <Widget>[
+            return Column(
+               children: <Widget>[
                       Text(
                      //   'Title :  ${doc.data.get(['ProductTitle'])}',
                       'Service Category :  ${snapshot.data['ServiceCategory']}',
@@ -855,7 +856,7 @@ var document = await  Firestore.instance.collection('Products').document('0MpZB5
                             fontSize: 14,
                           ),
                       // ignore: missing_return
-                      )];}
+                      )]);}
                       }
                       ),
                     
@@ -978,8 +979,7 @@ var document = await  Firestore.instance.collection('Products').document('0MpZB5
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       StreamBuilder<DocumentSnapshot>(
-                 // ignore: deprecated_member_use
-                 stream: Firestore.instance
+                 stream: FirebaseFirestore.instance
                 .collection(kJobCollection)
                 .doc('7j0Q5oUsKUvLCwIEG7QM')
                 .snapshots(),
@@ -999,7 +999,7 @@ var document = await  Firestore.instance.collection('Products').document('0MpZB5
           }else{
            // var data = DocumentSnapshot.data;
             var data = snapshot.data;
-            */
+            */return Column(
              children: <Widget>[
                       Text(
                      //   'Title :  ${doc.data.get(['ProductTitle'])}',
@@ -1042,7 +1042,7 @@ var document = await  Firestore.instance.collection('Products').document('0MpZB5
                             fontSize: 14,
                           ),
                       // ignore: missing_return
-                      )];}
+                      )]);}
                       }
                       ),
                     
