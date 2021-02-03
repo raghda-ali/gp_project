@@ -18,6 +18,7 @@ class servicedetails extends StatelessWidget {
   String contact_phone;
   String contact_Email;*/
   var selsctedtype;
+  var value;
   //final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
   @override
@@ -78,6 +79,7 @@ class servicedetails extends StatelessWidget {
                               value: value,
 
                             )).toList(),
+                            
                             onChanged:(SelectCategory){
                               print('$SelectCategory');
                               setState((){
@@ -90,8 +92,8 @@ class servicedetails extends StatelessWidget {
                             style:TextStyle(color: Color(0xFF2A0B35)),
                             ),
                            
-                                ),
-                          
+                            ),
+                            
                           SizedBox(
                             height: 20,
                           ),
@@ -124,17 +126,18 @@ class servicedetails extends StatelessWidget {
                           ),
                           SizedBox(
                             height: 20,
-                          ),
+                          ) ,
+                        
 
-
-                            ],
-                          )
-
+                    
+                            }],
+                     )
+                   
                       ),
                     ),
                   //),
 
-              ],
+                            ],
             ),
 
         ],
