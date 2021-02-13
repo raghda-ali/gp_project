@@ -5,20 +5,54 @@ import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/myservices_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:async';
+import 'dart:io';
 
 
 
-
-class addmyservice extends StatelessWidget {
+class addmyservice extends StatefulWidget {
   static String id ='addservice';
+  @override
+  _addmyserviceState createState() => _addmyserviceState();
+}
+class _addmyserviceState extends State<addmyservice> {
   final _store = store();
+  File _image;
  final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   String title;
   String category;
   String description;
   String contact_phone;
   String contact_email;
+  String _photo;
+
+Future getImageFromCam() async{
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = image;
+    });
+
+  }
+
+  Future getImageFromGallery() async{
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+  }
+
+Future uploadImage() async {    
+  Reference storageReference = FirebaseStorage.instance.ref().child('Images/image4');        
+  UploadTask uploadTask = storageReference.putFile(_image);   
+   var  imageUrl= await (await uploadTask).ref.getDownloadURL();
+   print(imageUrl);
+   _photo = imageUrl;
+   print(_photo);
+ }  
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
+
   Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
@@ -36,6 +70,7 @@ class addmyservice extends StatelessWidget {
 
     );
   }
+
   Widget _buildCategory(){
     return  TextFormField(
       decoration: InputDecoration(labelText: 'Category'),
@@ -51,6 +86,7 @@ class addmyservice extends StatelessWidget {
       },
     );;
   }
+
   Widget _buildDescription(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Description'),
@@ -66,6 +102,7 @@ class addmyservice extends StatelessWidget {
       },
     );;
   }
+
   Widget _buildContact_Phone(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Contact us by Phone'),
@@ -81,6 +118,7 @@ class addmyservice extends StatelessWidget {
       },
     );;
   }
+
   Widget _buildContact_Email(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Contact us by Email'),
@@ -99,6 +137,7 @@ class addmyservice extends StatelessWidget {
       },
     );;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,6 +150,34 @@ class addmyservice extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Flexible(child:
+          Container(
+          width:MediaQuery.of(context).size.width ,
+          height: 100,
+          child: Center(
+            child: _image == null ? Text('No selected images') :Image.file(_image),
+          ),
+        ),
+        ),
+        Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: null,
+            backgroundColor: Colors.red[300],
+            mini: true,
+            onPressed: getImageFromCam,
+            child: Icon(Icons.add_a_photo),
+            ),
+             FloatingActionButton(
+               heroTag: null,
+               backgroundColor: Colors.red[300],
+               mini: true,
+               onPressed: getImageFromGallery,
+               child: Icon(Icons.wallpaper),
+            ),
+        ],
+      ),
               _buildTitle(),
               _buildCategory(),
               _buildDescription(),
@@ -127,6 +194,7 @@ class addmyservice extends StatelessWidget {
                            servcontact_email: contact_email,
                            servcontact_phone: contact_phone,
                            servdescription: description,
+                           servImage: _photo,
 
                         )
                         );
@@ -163,6 +231,15 @@ class addmyservice extends StatelessWidget {
                       ),
                     ),
                   ),
+                   RaisedButton(
+               color: Colors.white60,
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              onPressed: (){
+                uploadImage();
+              },
+              child: Text('Upload Image'),
+             ),
               /*RaisedButton(
               child: Text('Add',
                 style: TextStyle(

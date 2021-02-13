@@ -161,7 +161,9 @@ class myservices extends StatelessWidget {
                 servcategory: doc.data()[KServiceCategory],
                 servdescription: doc.data()[KServiceDescription],
                 servcontact_email: doc.data()[KServicecontact_Email],
-                servcontact_phone: doc.data()[KServicecontact_Phone]
+                servcontact_phone: doc.data()[KServicecontact_Phone],
+                servImage: doc.data()[KServiceImage]
+
               )
               );
             }
@@ -171,7 +173,7 @@ class myservices extends StatelessWidget {
              child: GestureDetector(
 
                onTap: () {
-                 Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);
+                /* Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);*/
                },
 
                           child:Column(
@@ -222,7 +224,7 @@ class myservices extends StatelessWidget {
                     children: <Widget>[
                       CircleAvatar(
                         backgroundColor:Color(0xFFD9D9D9),
-                        backgroundImage: NetworkImage('https://hopeacademyegypt.com/wp-content/uploads/2020/05/hope-logo.png'),
+                        backgroundImage: NetworkImage('${services[index].servImage}'),
                         radius: 40.0,
                       ),
                       SizedBox(

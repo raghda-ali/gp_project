@@ -42,7 +42,7 @@ class _addmyproductsState extends State<addmyproducts> {
   }
 
 Future uploadImage() async {    
-  Reference storageReference = FirebaseStorage.instance.ref().child('Images/image3');        
+  Reference storageReference = FirebaseStorage.instance.ref().child('Images/image2');        
   UploadTask uploadTask = storageReference.putFile(_image);   
    var  imageUrl= await (await uploadTask).ref.getDownloadURL();
    print(imageUrl);

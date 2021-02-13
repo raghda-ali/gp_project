@@ -44,6 +44,11 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+            arguments = ["androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()]
+            }
+        }
     }
 
     buildTypes {

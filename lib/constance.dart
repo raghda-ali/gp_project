@@ -18,6 +18,7 @@ const KServiceCategory = 'ServiceCategory';
 const KServicecontact_Phone = 'Servicecontact_Phone';
 const KServicecontact_Email = 'Servicecontact_Email';
 const kServiceDetails = 'ServiceDetails';
+const KServiceImage='ServiceImage';
 
 const kProductCollection = 'Products';
 const KProductTitle = 'ProductTitle';
@@ -31,6 +32,7 @@ const KJobTitle = 'jobTitle';
 const KJobDescription = 'jobDescription';
 const KJobcontact_Email = 'jobcontact_Email';
 const KJobcontact_Phone = 'jobcontact_Phone';
+const KJobImage ='jobImage';
 
 const redGradient = LinearGradient(
   colors: <Color>[darkRedColor, lightRedColor],

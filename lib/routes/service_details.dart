@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
@@ -248,4 +248,4 @@ class servicedetails extends StatelessWidget {
     );
 
   }}
-
+*/

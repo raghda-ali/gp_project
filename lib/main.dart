@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         MyJobs.id:(context)=>MyJobs(),
         Editmyservices.id:(context)=>Editmyservices(),
         Editmyproducts.id:(context)=>Editmyproducts(),
-        servicedetails.id:(context)=>servicedetails(),
+       /* servicedetails.id:(context)=>servicedetails(),*/
         productdetails.id:(context)=>productdetails(),
         jobdetails.id:(context)=>jobdetails(),
         Editmyjob.id:(context)=>Editmyjob(),

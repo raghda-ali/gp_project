@@ -18,6 +18,7 @@ class store
       KServiceDescription:service.servdescription,
       KServicecontact_Phone:service.servcontact_phone,
       KServicecontact_Email:service.servcontact_email,
+      KServiceImage: service.servImage,
     });
   }
 
@@ -41,6 +42,7 @@ class store
       KJobDescription : job.jDescription,
       KJobcontact_Email :job.jContact_Email,
       KJobcontact_Phone : job.jContact_phone,
+      KJobImage:job.jImage,
     });
   }
 
