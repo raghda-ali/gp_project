@@ -7,9 +7,9 @@ import 'package:gp_project/routes/Editmyservices.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/addmyservice.dart';
 import 'package:gp_project/routes/login_screen.dart';
-//import 'package:gp_project/routes/login_screen.dart';
-//import 'package:gp_project/routes/signup_screen.dart';
-//import 'package:gp_project/widgets/Custom_TextField.dart';
+import 'package:gp_project/routes/login_screen.dart';
+import 'package:gp_project/routes/signup_screen.dart';
+import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
@@ -161,7 +161,9 @@ class myservices extends StatelessWidget {
                 servcategory: doc.data()[KServiceCategory],
                 servdescription: doc.data()[KServiceDescription],
                 servcontact_email: doc.data()[KServicecontact_Email],
-                servcontact_phone: doc.data()[KServicecontact_Phone]
+                servcontact_phone: doc.data()[KServicecontact_Phone],
+                servImage: doc.data()[KServiceImage]
+
               )
               );
             }
@@ -171,7 +173,7 @@ class myservices extends StatelessWidget {
              child: GestureDetector(
 
                onTap: () {
-                 Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);
+                /* Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);*/
                },
 
                           child:Column(
@@ -222,7 +224,7 @@ class myservices extends StatelessWidget {
                     children: <Widget>[
                       CircleAvatar(
                         backgroundColor:Color(0xFFD9D9D9),
-                        backgroundImage: NetworkImage('https://hopeacademyegypt.com/wp-content/uploads/2020/05/hope-logo.png'),
+                        backgroundImage: NetworkImage('${services[index].servImage}'),
                         radius: 40.0,
                       ),
                       SizedBox(

@@ -5,6 +5,7 @@ class service {
   String servcontact_phone;
   String servcontact_email;
   String servId;
+  String servImage;
 
   service(
       {this.servtitle,
@@ -12,5 +13,7 @@ class service {
       this.servdescription,
       this.servcontact_phone,
       this.servcontact_email,
-      this.servId});
+      this.servId,
+      this.servImage
+      });
 }

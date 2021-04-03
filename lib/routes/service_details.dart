@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/services/store.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class servicedetails extends StatelessWidget {
@@ -17,7 +18,8 @@ class servicedetails extends StatelessWidget {
   ];
   String contact_phone;
   String contact_Email;*/
-  var selsctedtype;
+  var selectedType;
+ // var value;
   //final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
   @override
@@ -52,6 +54,36 @@ class servicedetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(fontAwesomeIcons.service,
+                                size:25.0,
+                                color: Color(0xff622F74),
+                                
+                                ),
+                                SizedBox(width:50.0,),
+                                DropdownButton(
+                                           items: category.map((value))=>DropdownMenueItem(
+                                             child: Text(
+                                             //'value :  ${serv.servcategory}',
+                                               value,
+                                               style: TextStyle(color:Color(0xff622F74)),
+                                             ),
+                                             value: value,
+                                           )).toList().
+                                           onChanged:(selectCategoryType){
+                                            setState((){
+                                                selectedType=selectCategoryType;
+                                            });
+                                           },
+                                           value:selectedType,
+                                           isExpanded: false,
+                                           hint:Text('Choose service type',
+                                           style: TextStyle(color:Color(0xFF2A0B35)),),
+                          ),
+                              ]
+                          )
                           /*Text(
                               'Category :  ${serv.servcategory}',
 
@@ -78,6 +110,7 @@ class servicedetails extends StatelessWidget {
                               value: value,
 
                             )).toList(),
+                            
                             onChanged:(SelectCategory){
                               print('$SelectCategory');
                               setState((){
@@ -90,8 +123,8 @@ class servicedetails extends StatelessWidget {
                             style:TextStyle(color: Color(0xFF2A0B35)),
                             ),
                            
-                                ),
-                          
+                            ),
+                            
                           SizedBox(
                             height: 20,
                           ),
@@ -124,17 +157,18 @@ class servicedetails extends StatelessWidget {
                           ),
                           SizedBox(
                             height: 20,
-                          ),
+                          ) ,
+                        
 
-
-                            ],
-                          )
-
+                    
+                            }],
+                     )
+                   
                       ),
                     ),
                   //),
 
-              ],
+                            ],
             ),
 
         ],
@@ -245,4 +279,4 @@ class servicedetails extends StatelessWidget {
     );
 
   }}
-
+*/

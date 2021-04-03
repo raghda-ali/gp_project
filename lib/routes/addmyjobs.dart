@@ -4,18 +4,52 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/routes/myjobs_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:async';
+import 'dart:io';
 
-class addmyjobs extends StatelessWidget {
+class addmyjobs extends StatefulWidget {
   static String id ='add jobs';
+  @override
+  _addmyjobsState createState() => _addmyjobsState();
+}
+class _addmyjobsState extends State<addmyjobs> {
   final _store = store();
+  File _image;
   final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
-
   String title;
   String description;
   String contact_Email;
   String contact_phone;
+  String _photo;
+
+Future getImageFromCam() async{
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = image;
+    });
+
+  }
+
+  Future getImageFromGallery() async{
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+  }
+
+Future uploadImage() async {    
+  Reference storageReference = FirebaseStorage.instance.ref().child('Images/image6');        
+  UploadTask uploadTask = storageReference.putFile(_image);   
+   var  imageUrl= await (await uploadTask).ref.getDownloadURL();
+   print(imageUrl);
+   _photo = imageUrl;
+   print(_photo);
+ }  
 
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
+
   Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
@@ -49,6 +83,7 @@ class addmyjobs extends StatelessWidget {
       },
     );
   }
+
   Widget _buildContact_Email(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Contact us by Email'),
@@ -96,6 +131,34 @@ class addmyjobs extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+               Flexible(child:
+          Container(
+          width:MediaQuery.of(context).size.width ,
+          height: 100,
+          child: Center(
+            child: _image == null ? Text('No selected images') :Image.file(_image),
+          ),
+        ),
+        ),
+        Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: null,
+            backgroundColor: Colors.red[300],
+            mini: true,
+            onPressed: getImageFromCam,
+            child: Icon(Icons.add_a_photo),
+            ),
+             FloatingActionButton(
+               heroTag: null,
+               backgroundColor: Colors.red[300],
+               mini: true,
+               onPressed: getImageFromGallery,
+               child: Icon(Icons.wallpaper),
+            ),
+        ],
+      ),
               _buildTitle(),
               _buildDescription(),
               _buildContact_Email(),
@@ -110,8 +173,7 @@ class addmyjobs extends StatelessWidget {
                       jDescription:  description,
                       jContact_Email: contact_Email ,
                       jContact_phone:  contact_phone,
-
-
+                      jImage: _photo,
                     )
                     );
                   }
@@ -143,7 +205,15 @@ class addmyjobs extends StatelessWidget {
                   ),
                 ),
               ),
-
+               RaisedButton(
+               color: Colors.white60,
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              onPressed: (){
+                uploadImage();
+              },
+              child: Text('Upload Image'),
+             ),
             ],
           ),
         ),

@@ -146,7 +146,10 @@ class MyJobs extends StatelessWidget {
                     jTitle: doc.data()[KJobTitle],
                     jDescription: doc.data()[KJobDescription],
                     jContact_Email: doc.data()[KJobcontact_Email],
-                    jContact_phone: doc.data()[KJobcontact_Phone]));
+                    jContact_phone: doc.data()[KJobcontact_Phone],
+                    jImage: doc.data()[KJobImage]
+
+                    ));
 
               }
               return ListView.builder(
@@ -206,7 +209,7 @@ class MyJobs extends StatelessWidget {
                                                   children: <Widget>[
                                                     CircleAvatar(
                                                       backgroundColor: Color(0xFFD9D9D9),
-                                                      // backgroundImage: NetworkImage('https://hopeacademyegypt.com/wp-content/uploads/2020/05/hope-logo.png'),
+                                                       backgroundImage: NetworkImage('${jobs[index].jImage}'),
                                                       radius: 36.0,
                                                     ),
                                                     SizedBox(
