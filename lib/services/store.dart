@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/product.dart';
@@ -8,6 +9,7 @@ import 'package:gp_project/routes/Editmyproducts.dart';
 class store
 {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   addservice(service service)
   {
@@ -30,6 +32,7 @@ class store
       KProductPrice:product.pPrice,
       KProductcontact_Phone:product.pContact_phone,
       KProductImage : product.pImage,
+    //  KProductuserid: auth.currentUser.uid, 
     });
   }
 
