@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class productdetails extends StatelessWidget {
@@ -13,6 +14,9 @@ class productdetails extends StatelessWidget {
   String description;
   String price;
   String contact_phone;
+  List<String> category =<String>[
+    Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
+  ];
 
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 */
@@ -78,6 +82,36 @@ class productdetails extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
+                       Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(FontAwesomeIcons.solidArrowAltCircleUp,
+                                size:25.0,
+                                color: Color(0xff622F74),
+                                
+                                ),
+                                SizedBox(width:50.0,),
+                                DropdownButton(
+                                           items: category.map((value))=> DropdownMenueItem(
+                                             child: Text(
+                                             //'value :  ${serv.servcategory}',
+                                               value,
+                                               style: TextStyle(color:Color(0xff622F74)),
+                                             ),
+                                             value: value,
+                                           )).toList().
+                                           onChanged:(selectCategoryType){
+                                            setState((){
+                                                selectedType=selectCategoryType;
+                                            });
+                                           },
+                                           value:selectedType,
+                                           isExpanded: false,
+                                           hint:Text('Choose service type',
+                                           style: TextStyle(color:Color(0xFF2A0B35)),),
+                          ),
+                              
+                          
 
 
                     ],

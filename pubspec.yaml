@@ -21,6 +21,7 @@ dependencies:
   fluttertoast: ^7.1.6
   line_awesome_icons: ^1.0.4+2
   flutter_rating_bar: ^3.0.1+1
+  font_awesome_flutter: ^9.0.0
 
   cupertino_icons: ^0.1.3
 
