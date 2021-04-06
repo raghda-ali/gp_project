@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
        double height = MediaQuery.of(context).size.height;
         return Scaffold(
-          resizeToAvoidBottomPadding: false,
+          resizeToAvoidBottomInset: false,
         backgroundColor: KMainColor,
           body: ListView(
             children:<Widget>[

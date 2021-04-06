@@ -1,8 +1,9 @@
-/*import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/services/store.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -13,13 +14,13 @@ class servicedetails extends StatelessWidget {
   /*String title;
   String description;
   //String category;
-  List<String> category =<String>[
+  List<String> _category =<String>[
     Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
   ];
   String contact_phone;
   String contact_Email;*/
-  var selectedType;
- // var value;
+  var selectedcurrency,selsctedtype;
+  var value;
   //final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
   @override
@@ -27,7 +28,7 @@ class servicedetails extends StatelessWidget {
    // String documentId = ModalRoute.of(context).settings.arguments;
      service serv= ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
 
       appBar: AppBar(title: Text('service details'),backgroundColor: KMainColor,),
 
@@ -54,17 +55,17 @@ class servicedetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
+                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Icon(fontAwesomeIcons.service,
+                                Icon(FontAwesomeIcons.solidArrowAltCircleUp,
                                 size:25.0,
                                 color: Color(0xff622F74),
                                 
                                 ),
                                 SizedBox(width:50.0,),
                                 DropdownButton(
-                                           items: category.map((value))=>DropdownMenueItem(
+                                           items: _category.map((value))=> DropdownMenueItem(
                                              child: Text(
                                              //'value :  ${serv.servcategory}',
                                                value,
@@ -72,7 +73,7 @@ class servicedetails extends StatelessWidget {
                                              ),
                                              value: value,
                                            )).toList().
-                                           onChanged:(selectCategoryType){
+                                           onChanged: (selectCategoryType){
                                             setState((){
                                                 selectedType=selectCategoryType;
                                             });
@@ -82,14 +83,39 @@ class servicedetails extends StatelessWidget {
                                            hint:Text('Choose service type',
                                            style: TextStyle(color:Color(0xFF2A0B35)),),
                           ),
-                              ]
-                          )
+                               SizedBox(height: 40.0,),
+                      StreamBuilder<QuerySnapshot>(
+                      stream:Firestore.instance.collection("Srvices").snapshots(),
+                      builder:(context,Snapshot){
+                        if(!Snapshot.hasData){
+                          Text("loading");
+                        }
+                        else{
+                          List<DropdownMenueItem> currencyItems = [];
+                          for(int i=0;i<Snapshot.data.documents.length;i++){
+                            DocumentSnapshot snap=Snapshot.data.documents[i];
+                            currencyItems.add( DropdownMenueItem(
+                                child : Text(
+                                  snap.documentID,
+                                  style:TextStyle(color: Color(0xFF2A0B35)),
+
+                                ),
+                                value:"${snap.documentID}"
+                              )
+                            );
+                          }
+                        
+                        }
+                      },
+                      ),
+                          
+
                           /*Text(
                               'Category :  ${serv.servcategory}',
 
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
-                          ),*/
+                          ),
                            DropdownButton(
                             hint:  Text("Select Category: "),
                             dropdownColor : Colors.grey,
@@ -124,6 +150,7 @@ class servicedetails extends StatelessWidget {
                             ),
                            
                             ),
+                            */
                             
                           SizedBox(
                             height: 20,
@@ -161,7 +188,7 @@ class servicedetails extends StatelessWidget {
                         
 
                     
-                            }],
+                            ],
                      )
                    
                       ),
@@ -279,4 +306,3 @@ class servicedetails extends StatelessWidget {
     );
 
   }}
-*/

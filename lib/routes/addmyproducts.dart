@@ -121,7 +121,7 @@ Future uploadImage() async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       body: Container(
         margin: EdgeInsets.all(24),

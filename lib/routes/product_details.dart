@@ -4,9 +4,12 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class productdetails extends StatelessWidget {
+    var selectedcurrency,selsctedtype;
   static String id ='product details';
   final _store = store();
   //final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
@@ -14,7 +17,7 @@ class productdetails extends StatelessWidget {
   String description;
   String price;
   String contact_phone;
-  List<String> category =<String>[
+  List<String> _category =<String>[
     Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
   ];
 
@@ -24,7 +27,7 @@ class productdetails extends StatelessWidget {
   Widget build(BuildContext context) {
     product pro = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
 
       appBar: AppBar(title: Text('Product details'),backgroundColor: KMainColor,),
 
@@ -84,6 +87,7 @@ class productdetails extends StatelessWidget {
                       ),
                        Row(
                               mainAxisAlignment: MainAxisAlignment.center,
+
                               children: <Widget>[
                                 Icon(FontAwesomeIcons.solidArrowAltCircleUp,
                                 size:25.0,
@@ -92,16 +96,16 @@ class productdetails extends StatelessWidget {
                                 ),
                                 SizedBox(width:50.0,),
                                 DropdownButton(
-                                           items: category.map((value))=> DropdownMenueItem(
+                                           items: _category.map((value))=> DropdownMenueItem(
                                              child: Text(
                                              //'value :  ${serv.servcategory}',
                                                value,
                                                style: TextStyle(color:Color(0xff622F74)),
                                              ),
                                              value: value,
-                                           )).toList().
-                                           onChanged:(selectCategoryType){
-                                            setState((){
+                                 )).toList().
+                                           onChanged : (selectCategoryType){
+                                            setState(() {
                                                 selectedType=selectCategoryType;
                                             });
                                            },
@@ -111,8 +115,31 @@ class productdetails extends StatelessWidget {
                                            style: TextStyle(color:Color(0xFF2A0B35)),),
                           ),
                               
-                          
+                       SizedBox(height: 40.0,),
+                      StreamBuilder<QuerySnapshot>(
+                      stream:Firestore.instance.collection("Products").snapshots(),
+                      builder:(context,Snapshot){
+                        if(!Snapshot.hasData){
+                          Text("loading");
+                        }
+                        else{
+                          List<DropdownMenueItem> currencyItems = [];
+                          for(int i=0;i<Snapshot.data.documents.length;i++){
+                            DocumentSnapshot snap=Snapshot.data.documents[i];
+                            currencyItems.add( DropdownMenueItem(
+                                child : Text(
+                                  snap.documentID,
+                                  style:TextStyle(color: Color(0xFF2A0B35)),
 
+                                ),
+                                value:"${snap.documentID}"
+                              )
+                            );
+                          }
+                        
+                        }
+                      },
+                      ),
 
                     ],
                   )

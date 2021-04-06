@@ -6,7 +6,7 @@ class Faildata extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
      home: Scaffold(
-       resizeToAvoidBottomPadding: false,
+       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.pink.shade100,
        body: Container(
          //height: MediaQuery.of(context).size.height*.4,
