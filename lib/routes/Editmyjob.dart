@@ -7,13 +7,13 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/addmyjobs.dart';
-import 'package:gp_project/routes/myservices_screen.dart';
+import 'package:gp_project/routes/Services_screen.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
-import 'package:gp_project/routes/myproducts_screen.dart';
+import 'package:gp_project/routes/Products_screen.dart';
 
-import 'myjobs_screen.dart';
+import 'Jobs_screen.dart';
 
 
 class Editmyjob extends StatelessWidget {

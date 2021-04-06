@@ -11,9 +11,9 @@ import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/signup_screen.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gp_project/routes/myproducts_screen.dart' as pro;
-import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/routes/myjobs_screen.dart' as jo;
+import 'package:gp_project/routes/Products_screen.dart' as pro;
+import 'package:gp_project/routes/Services_screen.dart' as serv;
+import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/service_details.dart' as sd;
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/widgets/moods.dart';
@@ -271,7 +271,7 @@ class myservices extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        /*  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                              SizedBox(
                             height: 6.0,
@@ -381,17 +381,17 @@ class myservices extends StatelessWidget {
                             ),
                           ),
                           ]
-                          ),
+                          ),*/
                          
                         ],
                       ),
                     ],
           ),
-          Icon(
-                    Icons.favorite,
-                    color: lightColor,
-                    size: 36,
-          ),
+         // Icon(
+           //         Icons.favorite,
+             //       color: lightColor,
+               //     size: 36,
+          //),
         ],
       ),          
     

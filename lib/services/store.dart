@@ -21,6 +21,7 @@ class store
       KServicecontact_Phone:service.servcontact_phone,
       KServicecontact_Email:service.servcontact_email,
       KServiceImage: service.servImage,
+      KServiceUserID : auth.currentUser.uid,
     });
   }
 
@@ -33,7 +34,7 @@ class store
       KProductPrice:product.pPrice,
       KProductcontact_Phone:product.pContact_phone,
       KProductImage : product.pImage,
-    //  KProductuserid: auth.currentUser.uid, 
+      KProductUserID : auth.currentUser.uid,
     });
   }
 
@@ -46,6 +47,7 @@ class store
       KJobcontact_Email :job.jContact_Email,
       KJobcontact_Phone : job.jContact_phone,
       KJobImage:job.jImage,
+      KJobUserID : auth.currentUser.uid,
     });
   }
 
@@ -116,8 +118,29 @@ class store
         .doc(documentId)
         .update(data);
   }
+Stream<QuerySnapshot> loadMyProduct()
+//Future <List<product>>loadMyProduct() async
+  {
+  // var snapshot = _firestore.collection(kProductCollection).snapshots();
+  
+   //var snapshot =  _firestore.collection(kProductCollection).get();
+   return  _firestore.collection(kProductCollection).snapshots();}
+  /* if(auth.currentUser.uid==KProductUserID){
+    List<product> MyProductByID = [];
+      //for(var doc in MyProductByID){
+    for(var doc in snapshot.data.docs){
+      var data=doc.data();
+      MyProductByID.add(product(
+        pTitle: data[KProductTitle],
+        pDescription: data[KProductDescription],
+        pPrice: data[KProductPrice],
+        pContact_phone: data[KProductcontact_Phone],
+        pImage:data[KProductImage],
+      )
+      );
+    }}
+    return MyProductByID; */
+  }
 
 
 
-
-}

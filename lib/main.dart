@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
-import 'package:gp_project/routes/MyHomePage.dart';
+import 'package:gp_project/routes/HomePage.dart';
+import 'package:gp_project/routes/MyJobByID.dart';
+import 'package:gp_project/routes/MyProductsByID.dart';
+import 'package:gp_project/routes/MyServicesByID.dart';
 import 'package:gp_project/routes/job_details.dart';
-import 'package:gp_project/routes/myproducts_screen.dart';
+import 'package:gp_project/routes/Products_screen.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
-import 'package:gp_project/routes/myservices_screen.dart';
-import 'package:gp_project/routes/myjobs_screen.dart';
+import 'package:gp_project/routes/Services_screen.dart';
+import 'package:gp_project/routes/Jobs_screen.dart';
 import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/routes/service_details.dart';
+import 'package:gp_project/routes/MyProductsByID.dart';
 import 'package:path/path.dart';
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
@@ -50,6 +54,9 @@ class MyApp extends StatelessWidget {
         jobdetails.id:(context)=>jobdetails(),
         Editmyjob.id:(context)=>Editmyjob(),
         ForgotPasswordScreen.id:(context)=>ForgotPasswordScreen(),
+        MyProductsByID.id:(context)=>MyProductsByID(),
+        MyServicesByID.id:(context)=>MyServicesByID(),
+        MyJobByID.id:(context)=>MyJobByID(),
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,

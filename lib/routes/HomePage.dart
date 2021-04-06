@@ -9,13 +9,13 @@ import 'package:flutter/cupertino.dart';
 //import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/login_screen.dart';
-import 'package:gp_project/routes/myproducts_screen.dart';
-import 'package:gp_project/routes/myservices_screen.dart';
-import 'package:gp_project/routes/myjobs_screen.dart';
+import 'package:gp_project/routes/Products_screen.dart';
+import 'package:gp_project/routes/Services_screen.dart';
+import 'package:gp_project/routes/Jobs_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../constance.dart';
-import 'myjobs_screen.dart';
-import 'myproducts_screen.dart';
+import 'Jobs_screen.dart';
+import 'Products_screen.dart';
 final _auth=FirebaseAuth.instance;
 
 //void main() => runApp(MyApp());
@@ -936,7 +936,7 @@ MainAxisAlignment.spaceEvenly,
                             final user = _auth.signInWithEmailAndPassword;
                    //    (email: email, password: password);
                         if(user !=null){
-                        Navigator.pushNamed(context, myservices.id);
+                        Navigator.pushNamed(context, MyProducts.id);
                       }
                           },
                           child:CircleAvatar(

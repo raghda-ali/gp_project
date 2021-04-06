@@ -57,7 +57,7 @@ class servicedetails extends StatelessWidget {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Icon(fontAwesomeIcons.service,
+                                Icon(FontAwesomeIcons.service,
                                 size:25.0,
                                 color: Color(0xff622F74),
                                 
@@ -84,12 +84,12 @@ class servicedetails extends StatelessWidget {
                           ),
                               ]
                           )
-                          /*Text(
+                          Text(
                               'Category :  ${serv.servcategory}',
 
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
-                          ),*/
+                          ),
                            DropdownButton(
                             hint:  Text("Select Category: "),
                             dropdownColor : Colors.grey,
@@ -178,7 +178,7 @@ class servicedetails extends StatelessWidget {
 
 
 
-      /*StreamBuilder<QuerySnapshot>(
+      StreamBuilder<QuerySnapshot>(
 
           stream: _store.loadServiceDetails(documentId),
           builder: (context, Snapshot) {
@@ -274,9 +274,10 @@ class servicedetails extends StatelessWidget {
             }
           }
 
-      ),*/
+      ),
 
     );
 
   }}
+
 */

@@ -4,14 +4,18 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/product.dart';
+import 'package:gp_project/routes/MyProductsByID.dart'as pro;
 import 'package:gp_project/routes/addmyproducts.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gp_project/routes/myproducts_screen.dart' as pro;
-import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/routes/myjobs_screen.dart' as jo;
+import 'package:gp_project/routes/Products_screen.dart' as pro;
+import 'package:gp_project/routes/Services_screen.dart' as serv;
+import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/product_details.dart' as de;
 import 'package:gp_project/services/store.dart';
+
+import 'MyProductsByID.dart';
+import 'MyProductsByID.dart';
 //import 'dart:html';
 
 class MyProducts extends StatelessWidget {
@@ -39,7 +43,7 @@ class MyProducts extends StatelessWidget {
       backgroundColor: mainBgColor,
       appBar: AppBar(
           elevation: 0,
-          title: Text('My Products',
+          title: Text('Products',
               style: TextStyle(
                 fontSize: 25,
               )),
@@ -100,7 +104,7 @@ class MyProducts extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new pro.MyProducts()));
+                        builder: (context) => new pro.MyProductsByID()));
               },
             ),
             ListTile(
@@ -265,7 +269,7 @@ class MyProducts extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                Row(
+                                              /*  Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
@@ -394,16 +398,16 @@ class MyProducts extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                    ]),
+                                                    ]), */
                                               ],
                                             ),
                                           ],
                                         ),
-                                        Icon(
-                                          Icons.favorite,
-                                          color: lightColor,
-                                          size: 36,
-                                        ),
+                                      //  Icon(
+                                        //  Icons.favorite,
+                                          //color: lightColor,
+                                          //size: 36,
+                                        //),
                                       ],
                                     ),
                                   ),
