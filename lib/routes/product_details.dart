@@ -18,7 +18,7 @@ class productdetails extends StatelessWidget {
   String price;
   String contact_phone;
   List<String> _category =<String>[
-    Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
+    Intellectual disability,Impaired mobility,Visual impairment,Impaired hearing,Others
   ];
 
   final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
