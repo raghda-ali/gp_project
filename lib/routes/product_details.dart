@@ -6,24 +6,26 @@ import 'package:gp_project/models/product.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
 
-class productdetails extends StatelessWidget {
-    var selectedcurrency,selsctedtype;
+class productdetails extends StatefulWidget {
   static String id ='product details';
-  final _store = store();
-  //final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
-  /*String title;
-  String description;
-  String price;
-  String contact_phone;
-  List<String> _category =<String>[
-    Intellectual disability,Impaired mobility,Visual impairment,Impaired hearing,Others
-  ];
 
-  final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
-*/
   @override
+  _productdetailsState createState() => _productdetailsState();
+}
+
+class _productdetailsState extends State<productdetails> {
+    var selectedcurrency,selsctedtype;
+
+  final _store = store();
+
+    List<String> _category =<String>[
+     ' Intellectual disability','Impaired mobility','Visual impairment','Impaired hearing','Others'
+    ];
+
+    @override
   Widget build(BuildContext context) {
     product pro = ModalRoute.of(context).settings.arguments;
     return Scaffold(
@@ -85,36 +87,36 @@ class productdetails extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                       Row(
+                      Row(
                               mainAxisAlignment: MainAxisAlignment.center,
 
                               children: <Widget>[
                                 Icon(FontAwesomeIcons.solidArrowAltCircleUp,
                                 size:25.0,
-                                color: Color(0xff622F74),
-                                
-                                ),
+                                color: Color(0xff622F74), ),
                                 SizedBox(width:50.0,),
                                 DropdownButton(
-                                           items: _category.map((value))=> DropdownMenueItem(
+                                           items: _category.map((value)=> DropdownMenuItem(
                                              child: Text(
                                              //'value :  ${serv.servcategory}',
                                                value,
                                                style: TextStyle(color:Color(0xff622F74)),
                                              ),
-                                             value: value,
-                                 )).toList().
-                                           onChanged : (selectCategoryType){
-                                            setState(() {
-                                                selectedType=selectCategoryType;
+                                             value: value, ))
+                                               .toList(),
+                                        onChanged : (selectCategoryType) {
+                                             print('$selectCategoryType');
+                                             setState(() {
+                                           selsctedtype  =selectCategoryType;
                                             });
-                                           },
-                                           value:selectedType,
+                                         },
+
+                                           value:selsctedtype,
                                            isExpanded: false,
                                            hint:Text('Choose service type',
                                            style: TextStyle(color:Color(0xFF2A0B35)),),
                           ),
-                              
+
                        SizedBox(height: 40.0,),
                       StreamBuilder<QuerySnapshot>(
                       stream:Firestore.instance.collection("Products").snapshots(),
@@ -123,10 +125,11 @@ class productdetails extends StatelessWidget {
                           Text("loading");
                         }
                         else{
-                          List<DropdownMenueItem> currencyItems = [];
+                          // ignore: missing_return
+                          List<DropdownMenuItem> currencyItems = [];
                           for(int i=0;i<Snapshot.data.documents.length;i++){
                             DocumentSnapshot snap=Snapshot.data.documents[i];
-                            currencyItems.add( DropdownMenueItem(
+                            currencyItems.add( DropdownMenuItem(
                                 child : Text(
                                   snap.documentID,
                                   style:TextStyle(color: Color(0xFF2A0B35)),
@@ -136,11 +139,12 @@ class productdetails extends StatelessWidget {
                               )
                             );
                           }
-                        
+
                         }
                       },
                       ),
-
+             ],
+                      ),
                     ],
                   )
 

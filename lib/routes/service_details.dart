@@ -7,21 +7,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class servicedetails extends StatelessWidget {
+class servicedetails extends StatefulWidget {
   static String id ='service details';
+
+  @override
+  _servicedetailsState createState() => _servicedetailsState();
+}
+
+class _servicedetailsState extends State<servicedetails> {
   final _store = store();
-  //final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
-  /*String title;
-  String description;
-  //String category;
-  List<String> _category =<String>[
-    Rehabilitation centers ,Transpotation,Hospitals,Clubbing 
-  ];
-  String contact_phone;
-  String contact_Email;*/
+
   var selectedcurrency,selsctedtype;
+
   var value;
-  //final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
+
+  List<String> get _Category => <String>[
+   ' Rehabilitation centers ,Transpotation,Hospitals,Clubbing'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,60 +57,6 @@ class servicedetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                           Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.solidArrowAltCircleUp,
-                                size:25.0,
-                                color: Color(0xff622F74),
-                                
-                                ),
-                                SizedBox(width:50.0,),
-                                DropdownButton(
-                                           items: _category.map((value))=> DropdownMenueItem(
-                                             child: Text(
-                                             //'value :  ${serv.servcategory}',
-                                               value,
-                                               style: TextStyle(color:Color(0xff622F74)),
-                                             ),
-                                             value: value,
-                                           )).toList().
-                                           onChanged: (selectCategoryType){
-                                            setState((){
-                                                selectedType=selectCategoryType;
-                                            });
-                                           },
-                                           value:selectedType,
-                                           isExpanded: false,
-                                           hint:Text('Choose service type',
-                                           style: TextStyle(color:Color(0xFF2A0B35)),),
-                          ),
-                               SizedBox(height: 40.0,),
-                      StreamBuilder<QuerySnapshot>(
-                      stream:Firestore.instance.collection("Srvices").snapshots(),
-                      builder:(context,Snapshot){
-                        if(!Snapshot.hasData){
-                          Text("loading");
-                        }
-                        else{
-                          List<DropdownMenueItem> currencyItems = [];
-                          for(int i=0;i<Snapshot.data.documents.length;i++){
-                            DocumentSnapshot snap=Snapshot.data.documents[i];
-                            currencyItems.add( DropdownMenueItem(
-                                child : Text(
-                                  snap.documentID,
-                                  style:TextStyle(color: Color(0xFF2A0B35)),
-
-                                ),
-                                value:"${snap.documentID}"
-                              )
-                            );
-                          }
-                        
-                        }
-                      },
-                      ),
-                          
 
                           /*Text(
                               'Category :  ${serv.servcategory}',
@@ -122,7 +70,7 @@ class servicedetails extends StatelessWidget {
                             icon: Icon(Icons.arrow_drop_down),
                             style: TextStyle(
                                 color : Colors.black,
-                                fontSize: 20, 
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold
                                 ),
                           ),
@@ -136,7 +84,7 @@ class servicedetails extends StatelessWidget {
                               value: value,
 
                             )).toList(),
-                            
+
                             onChanged:(SelectCategory){
                               print('$SelectCategory');
                               setState((){
@@ -148,10 +96,10 @@ class servicedetails extends StatelessWidget {
                             hint:  Text('Choose service type',
                             style:TextStyle(color: Color(0xFF2A0B35)),
                             ),
-                           
+
                             ),
                             */
-                            
+
                           SizedBox(
                             height: 20,
                           ),
@@ -185,23 +133,78 @@ class servicedetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ) ,
-                        
 
-                    
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+
+                            children: <Widget>[
+                              Icon(FontAwesomeIcons.solidArrowAltCircleUp,
+                                size:25.0,
+                                color: Color(0xff622F74), ),
+                              SizedBox(width:50.0,),
+                              DropdownButton(
+                                items: _Category
+                                    .map((value)=> DropdownMenuItem(
+                                      child: Text(
+                                    //'value :  ${serv.servcategory}',
+                                       value,
+                                      style: TextStyle(color:Color(0xff622F74)),
+                                      ),
+                                        value: value, ))
+                                     .toList(),
+                                     onChanged : (selectCategoryType) {
+                                      print('$selectCategoryType');
+                                      setState(() {
+                                    selsctedtype  =selectCategoryType;
+                                  });
+                                },
+
+                                value:selsctedtype,
+                                isExpanded: false,
+                                hint:Text('Choose service type',
+                                  style: TextStyle(color:Color(0xFF2A0B35)),),
+                              ),
+
+                              SizedBox(height: 40.0,),
+                              StreamBuilder<QuerySnapshot>(
+                                stream:Firestore.instance.collection("Products").snapshots(),
+                                builder:(context,Snapshot){
+                                  if(!Snapshot.hasData){
+                                    Text("loading");
+                                  }
+                                  else{
+                                    // ignore: missing_return
+                                    List<DropdownMenuItem> currencyItems = [];
+                                    for(int i=0;i<Snapshot.data.documents.length;i++){
+                                      DocumentSnapshot snap=Snapshot.data.documents[i];
+                                      currencyItems.add( DropdownMenuItem(
+                                          child : Text(
+                                            snap.documentID,
+                                            style:TextStyle(color: Color(0xFF2A0B35)),
+
+                                          ),
+                                          value:"${snap.documentID}"
+                                      )
+                                      );
+                                    }
+
+                                  }
+                                },
+                              ),
                             ],
-                     )
-                   
-                      ),
+                          ),
+                        ],
+                      )
+
                     ),
-                  //),
+                   ),
+                //),
 
-                            ],
-            ),
+              ],
+             ),
 
         ],
       ),
-
-
 
 
 
