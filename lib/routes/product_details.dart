@@ -1,31 +1,292 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/provider/cartItem.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
+import 'package:provider/provider.dart';
 
+import 'CartScreen.dart';
 
-class productdetails extends StatelessWidget {
-  static String id ='product details';
+class productdetails extends StatefulWidget {
+  static String id = 'ProductInfo';
+  @override
+  _productdetailsState createState() => _productdetailsState();
+}
+
+class _productdetailsState extends State<productdetails> {
+  int _quantity = 1;
   final _store = store();
-  //final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
-  /*String title;
-  String description;
-  String price;
-  String contact_phone;
 
-  final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
-*/
   @override
   Widget build(BuildContext context) {
     product pro = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Image(
+              fit: BoxFit.fill,
+              image : NetworkImage(pro.pImage),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+            child: Container(
+              height: MediaQuery.of(context).size.height * .1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, CartScreen.id);
+                      },
+                      child: Icon(Icons.shopping_cart,color: Colors.white,))
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Column(
+              children: <Widget>[
+                Opacity(
+                  child: Container(
+                    color: Colors.white,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * .3,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            pro.pTitle,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            pro.pDescription,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w800),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '\$${pro.pPrice}',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ClipOval(
+                                child: Material(
+                                  color: KMainColor,
+                                  child: GestureDetector(
+                                    onTap: add,
+                                    child: SizedBox(
+                                      child: Icon(Icons.add),
+                                      height: 29,
+                                      width: 29,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                _quantity.toString(),
+                                style: TextStyle(fontSize: 40),
+                              ),
+                              ClipOval(
+                                child: Material(
+                                  color: KMainColor,
+                                  child: GestureDetector(
+                                    onTap: subtract,
+                                    child: SizedBox(
+                                      child: Icon(Icons.remove),
+                                      height: 29,
+                                      width: 29,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  opacity: .5,
+               
+                ),
+                ButtonTheme(
+                 /* minWidth: MediaQuery.of(context).size.width,*/
+                  
+                  child: Builder(
+                    builder: (context) => RaisedButton(
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10))),
+                      color: KMainColor,
+                      child: Text('Add To Cart'),
+                      onPressed: () {
+                      CartItem cartItem = Provider.of<CartItem>(context, listen: false);
+                      pro.pQuantity = _quantity;
+                      bool exist = false;
+                      var productsInCart = cartItem.products;
+                      for (var productInCart in productsInCart) {
+                      if ( productInCart.pTitle == pro.pTitle){
+                         exist = true;
+                          }
+                        }
+                      if (exist) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('you\'ve added this item before'),
+                      ));
+                       } else {
+                       cartItem.addProduct(pro);
+                       Scaffold.of(context).showSnackBar(SnackBar(
+                       content: Text('Added to Cart'),
+                       ));
+                       }
+                      }
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+   subtract() {
+    if (_quantity > 1) {
+      setState(() {
+        _quantity--;
+        print(_quantity);
+      });
+    }
+  }
+
+  add() {
+    setState(() {
+      _quantity++;
+      print(_quantity);
+    });
+  }
+}
+
+
+/*void addToCart(context,pro){
+  CartItem cartItem = Provider.of<CartItem>(context, listen: false);
+    pro.pQuantity = _quantity;
+    bool exist = false;
+    var productsInCart = cartItem.products;
+    for (var productInCart in productsInCart) {
+    if ( productInCart == pro){
+
+        exist = true;
+      }
+    }
+    if (exist) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('you\'ve added this item before'),
+      ));
+    } else {
+      cartItem.addProduct(pro);
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Added to Cart'),
+      ));
+    }
+  }
+}*/
+ 
+
+  /*void addToCart(context, pro){
+    CartItem cartItem = Provider.of<CartItem>( context , listen: false);
+    pro.pQuantity = _quantity;
+    cartItem.addProduct(pro);
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text('Added to Cart'),
+
+    ));
+
+  }*/
+
+/*class productdetails extends StatefulWidget {
+  static String id = 'product details';
+  @override
+  _productdetailsState createState() => _productdetailsState();
+}
+
+class _productdetailsState extends State<productdetails> {
+  @override
+  Widget build(BuildContext context) {
+    product pro = ModelRoute.of(context).settings.arguments;
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Image(
+          image: AssetImage(pro.pImage),
+          ),
+        ],),
+      
+    );
+  }
+}*/
+/*class productdetails extends StatefulWidget {
+  static String id ='product details';
+
+  @override
+  _productdetailsState createState() => _productdetailsState();
+}
+
+class _productdetailsState extends State<productdetails> {
+  int _quantity =1;
+
+  final _store = store();
+
+  @override
+  Widget build(BuildContext context) {
+    product pro = ModalRoute.of(context).settings.arguments;
+    return Scaffold(
+      body: Stack(children: <Widget>[
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          
+        child :Image(
+          fit:  BoxFit.fill,
+          image: AssetImage(pro.pImage), 
+          ),
+        ),
+
+      ],
+      ),
+      );
+  }
+}*/
+   /* return Scaffold(
       resizeToAvoidBottomPadding: false,
 
-      appBar: AppBar(title: Text('Product details'),backgroundColor: KMainColor,),
-
-
-    body: Stack(
+      appBar: AppBar(title: Text('Product details'),backgroundColor: KMainColor,),  
+      body: Stack(
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -68,123 +329,104 @@ class productdetails extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-
                         'phone :  ${pro.pContact_phone}',
                         //'\$${product.pPrice}',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-
                       SizedBox(
                         height: 20,
                       ),
+                      Row(
+                        children : <Widget>[
+                           Text(
+                        "Quantity : ",
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      ),
+                          ClipOval(
+                            child: Material(
+                            color:KMainColor,
+                            child:GestureDetector(
+                              onTap: plus,
+                              child: SizedBox(
+                              child: Icon(Icons.add),
+                              height: 25,
+                              width: 25,  
+                              ),
+                            ),
+                            ),
+                          ),
+                       Text(
+                         _quantity.toString(),
+                         style:TextStyle(fontSize: 30),
 
-
+                       ),
+                        ClipOval(
+                            child: Material(
+                            color:KMainColor,
+                            child:GestureDetector(
+                              onTap: subtract,
+                              child: SizedBox(
+                              child: Icon(Icons.remove),
+                              height: 25,
+                              width: 25,  
+                              ),
+                            ),
+                            ),
+                          ),
+                           
+                        ]
+                      ),
+                      ButtonTheme(
+                        minWidth: MediaQuery.of(context).size.width,
+                         child : Builder(
+                         builder : (context) =>RaisedButton(
+                           shape: RoundedRectangleBorder(
+                           borderRadius:BorderRadius.circular(80.0)),
+                          color: KMainColor,
+                          onPressed: (){
+                          CartItem cartItem =Provider.of<CartItem>(context,listen: false);
+                          pro.pQuantity = _quantity;
+                          cartItem.addProduct(pro);
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('Added to Cart'
+                          ),
+                           ));
+                          },
+                          child: Text("Add to Cart",
+                          style: TextStyle(color: Colors.white,),
+                          ),
+                          
+                      ),
+                       )
+                      )
                     ],
+                   
                   )
 
               ),
             ),
             //),
-
+                       
           ],
         ),
 
       ],
     ),
-
-      /*StreamBuilder<QuerySnapshot>(
-
-    stream: _store.loadproducts(),
-    builder: (context, Snapshot) {
-    if (Snapshot.hasData){
-    List<product> products = [];
-    for (var doc in Snapshot.data.docs) {
-    products.add(product(
-    pId: doc.id,
-    pTitle: doc.data()[KProductTitle],
-    pDescription: doc.data()[KProductDescription],
-    pPrice: doc.data()[KProductPrice],
-    pContact_phone: doc.data()[KProductcontact_Phone]));
-    }
-
-
-    return Column(
-        children: <Widget>[
-   Expanded(
-    child: ListView.builder(
-
-        itemBuilder: (context, index) => Padding(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        height: MediaQuery.of(context).size.height * .2,
-        color: KMainColor,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Title :  ${products[index].pTitle}',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold)),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Description :  ${products[index].pDescription}',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Price :  ${products[index].pPrice}',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Contact us by phone :  ${products[index].pContact_phone}',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-        ),
-      ),
-    ),
-     itemCount: products.length,
-      ),
-      ),
-],
-   );
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-    }
-
-    ),*///////////////
-
     );
+  }
 
-  }}
+plus(){
+    setState(() {
+          _quantity++;
+        });
+  }
+    subtract(){
+  if(_quantity>1){
+    setState((){
+    _quantity--;
+    });
+  }  
+    }
 
-
+   }*/

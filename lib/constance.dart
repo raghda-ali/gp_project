@@ -26,6 +26,7 @@ const KProductDescription = 'ProductDescription';
 const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
 const KProductImage = 'ProductImage';
+const KProductQuantity = 'ProductQuantity';
 
 const kJobCollection = 'jobs';
 const KJobTitle = 'jobTitle';
@@ -33,6 +34,12 @@ const KJobDescription = 'jobDescription';
 const KJobcontact_Email = 'jobcontact_Email';
 const KJobcontact_Phone = 'jobcontact_Phone';
 const KJobImage ='jobImage';
+
+const kOrders ='Orders';
+const kOrderDetails ='OrderDetails';
+const kTotallPrice = 'TotallPrice';
+const kAddress ='Address';
+const kProductQuantity ='Quantity';
 
 const redGradient = LinearGradient(
   colors: <Color>[darkRedColor, lightRedColor],

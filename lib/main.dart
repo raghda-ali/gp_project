@@ -1,6 +1,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gp_project/routes/CartScreen.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
@@ -16,6 +17,10 @@ import 'package:path/path.dart';
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
 import 'routes/ForgetPassword.dart';
+import 'provider/cartItem.dart';
+import 'package:provider/provider.dart';
+
+
 
 /*void main() {
   runApp(MyApp());
@@ -32,8 +37,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+   return  MultiProvider(
+      providers: [
+      ChangeNotifierProvider<CartItem>(
+        create :(context) => CartItem(),
+      ),
+
+      ],
     
-    return MaterialApp(
+      child:MaterialApp(
       initialRoute: MyHomePage.id,
       routes: {
         LoginScreen.id:(context)=>LoginScreen(),
@@ -50,11 +62,17 @@ class MyApp extends StatelessWidget {
         jobdetails.id:(context)=>jobdetails(),
         Editmyjob.id:(context)=>Editmyjob(),
         ForgotPasswordScreen.id:(context)=>ForgotPasswordScreen(),
+        CartScreen.id : (context) => CartScreen(),
       },
+      ),
+   );
+    
       /*theme: ThemeData(
         primarySwatch: Colors.purple,
       ),*/
       //home:Home(),
-    );
+      //
+     
+    
   }
 }    

@@ -114,6 +114,20 @@ class store
         .update(data);
   }
 
+storeOrders(data , List<product> products){
+  var documentRef =_firestore.collection(kOrders).document();
+  documentRef.setData(data);
+  for(var pro in products){
+    documentRef.collection(kOrderDetails).document().setData(
+      {
+        KProductTitle : pro.pTitle,
+        KProductPrice : pro.pPrice,
+        KProductQuantity : pro.pQuantity,
+        KProductImage : pro.pImage,
+      });
+  }
+}
+
 
 
 

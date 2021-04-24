@@ -147,7 +147,7 @@ class servicedetails extends StatelessWidget {
 
 
 
-      /*StreamBuilder<QuerySnapshot>(
+      StreamBuilder<QuerySnapshot>(
 
           stream: _store.loadServiceDetails(documentId),
           builder: (context, Snapshot) {
@@ -245,7 +245,6 @@ class servicedetails extends StatelessWidget {
 
       ),*/
 
-    );
+  /*  );
 
-  }}
-*/
+  }}*/
