@@ -1,13 +1,16 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/HomePage.dart';
+import 'package:gp_project/routes/JobSearch.dart';
 import 'package:gp_project/routes/MyJobByID.dart';
 import 'package:gp_project/routes/MyProductsByID.dart';
 import 'package:gp_project/routes/MyServicesByID.dart';
+import 'package:gp_project/routes/ProductSearch.dart';
+import 'package:gp_project/routes/ServicesSearch.dart';
 import 'package:gp_project/routes/job_details.dart';
 import 'package:gp_project/routes/Products_screen.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
@@ -37,13 +40,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return MaterialApp(
+    return GetMaterialApp(
       initialRoute: MyHomePage.id,
       routes: {
         LoginScreen.id:(context)=>LoginScreen(),
         signup_screen.id:(context)=>signup_screen(),
         MyHomePage.id:(context)=>MyHomePage(),
-        Home.id:(context)=>Home(),
+       // Home.id:(context)=>Home(),
         myservices.id:(context)=>myservices(),
         MyProducts.id:(context)=>MyProducts(),
         MyJobs.id:(context)=>MyJobs(),
@@ -57,6 +60,9 @@ class MyApp extends StatelessWidget {
         MyProductsByID.id:(context)=>MyProductsByID(),
         MyServicesByID.id:(context)=>MyServicesByID(),
         MyJobByID.id:(context)=>MyJobByID(),
+        Search.id:(context)=>Search(),
+        ServicesSearch.id:(context)=>ServicesSearch(),
+        JobSearch.id:(context)=>JobSearch(),
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,

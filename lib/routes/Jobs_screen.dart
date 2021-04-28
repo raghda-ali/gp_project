@@ -5,6 +5,9 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/Jobs.dart';
+import 'package:gp_project/routes/HomePage.dart';
+import 'package:gp_project/routes/MyProductsByID.dart';
+import 'package:gp_project/routes/MyServicesByID.dart';
 import 'package:gp_project/routes/addmyjobs.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/login_screen.dart';
@@ -16,6 +19,9 @@ import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' ;
 import 'package:gp_project/routes/job_details.dart'as jo;
 import 'package:gp_project/services/store.dart' ;
+
+import 'JobSearch.dart';
+import 'MyJobByID.dart';
 
 
 
@@ -43,10 +49,17 @@ class MyJobs extends StatelessWidget {
       backgroundColor: mainBgColor,
       appBar: AppBar(
           elevation: 0,
-          title: Text('My Jobs',
+          title: Text('Jobs',
               style: TextStyle(
                 fontSize: 25,
               )),
+              actions: [IconButton(icon: Icon(Icons.search),iconSize:30, onPressed:(){
+             Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new JobSearch()));
+          })],
           backgroundColor: KMainColor),
       drawer: Drawer(
         child: ListView(
@@ -61,7 +74,8 @@ class MyJobs extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    'User Name',
+                   // '${_auth.currentUser.displayName}',
+                   'UserName',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -74,7 +88,7 @@ class MyJobs extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new Home()));
+                    new MaterialPageRoute(builder: (context) => new MyHomePage()));
               },
             ),
             ListTile(
@@ -93,7 +107,7 @@ class MyJobs extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new serv.myservices()));
+                        builder: (context) => new MyServicesByID()));
               },
             ),
             ListTile(
@@ -104,9 +118,18 @@ class MyJobs extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new pro.MyProducts()));
+                        builder: (context) => new MyProductsByID()));
               },
             ),
+            ListTile(
+                            leading: Icon(Icons.work),
+                            title: Text('My Jobs'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyJobByID()));
+                            },
+                          ),
             /*ListTile(
               leading: Icon(Icons.local_offer_sharp),
               title: Text('Offers'),

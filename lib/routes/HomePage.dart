@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+     /* bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('3')),
         ],
         onTap: onTapped,
-      ),
+      ),*/
     );
   }
 
@@ -186,7 +186,8 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Welcome',
+           // 'Welcome ${_auth.currentUser.email}',
+           'Welcome',
             style: TextStyle(
               fontSize: 36,
               fontWeight: FontWeight.w500,
@@ -200,9 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
            // color:Color(0xFFA52C4D),
             child: Text('LogIn'),
             onPressed:(){
-              Navigator.push(context, MaterialPageRoute
-
-(builder: (context){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
                 return LoginScreen();
               }));
             })
