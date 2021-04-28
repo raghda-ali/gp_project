@@ -114,7 +114,7 @@ class Editmyjob extends StatelessWidget {
     //String pId =ModalRoute.of(context).settings.arguments;
     // FieldPath.documentId;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text('My jobs'),backgroundColor: KMainColor,),
 
       body: /* StreamBuilder<QuerySnapshot>(

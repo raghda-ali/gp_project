@@ -111,7 +111,7 @@ class Editmyservices extends StatelessWidget {
     //String pId =ModalRoute.of(context).settings.arguments;
    // FieldPath.documentId;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text('My Service'),backgroundColor: KMainColor,),
       
       body: /* StreamBuilder<QuerySnapshot>(
