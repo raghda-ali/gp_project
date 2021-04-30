@@ -27,7 +27,7 @@ class myservices extends StatelessWidget {
   Widget build(BuildContext context) {
     
 
-  Container _backBgCover() {////////////////
+  Container _backBgCover() {
     return Container(
       //height:0.0,
       decoration: BoxDecoration(
@@ -173,7 +173,7 @@ class myservices extends StatelessWidget {
              child: GestureDetector(
 
                onTap: () {
-                /* Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);*/
+                 Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);
                },
 
                           child:Column(

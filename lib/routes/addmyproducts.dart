@@ -115,7 +115,7 @@ Future uploadImage() async {
       onSaved: (String value){
         contact_phone=value;
       },
-    );;
+    );
   }
 
   @override
@@ -158,6 +158,7 @@ Future uploadImage() async {
             ),
         ],
       ),
+         
               _buildTitle(),
               _buildDescription(),
               _buildPrice(),

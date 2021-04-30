@@ -16,21 +16,14 @@ class servicedetails extends StatefulWidget {
 
 class _servicedetailsState extends State<servicedetails> {
   final _store = store();
-
-  var selectedcurrency,selsctedtype;
-
   var value;
-
-  List<String> get _Category => <String>[
-   ' Rehabilitation centers ,Transpotation,Hospitals,Clubbing'
-  ];
-
   @override
   Widget build(BuildContext context) {
    // String documentId = ModalRoute.of(context).settings.arguments;
      service serv= ModalRoute.of(context).settings.arguments;
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
 
       appBar: AppBar(title: Text('service details'),backgroundColor: KMainColor,),
 
@@ -42,7 +35,7 @@ class _servicedetailsState extends State<servicedetails> {
                    Container(
                     color: Colors.white,
                     width: MediaQuery.of(context).size.width,
-                    //height: MediaQuery.of(context).size.height * .3,
+                    height: MediaQuery.of(context).size.height * .3,
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -134,81 +127,22 @@ class _servicedetailsState extends State<servicedetails> {
                             height: 20,
                           ) ,
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.solidArrowAltCircleUp,
-                                size:25.0,
-                                color: Color(0xff622F74), ),
-                              SizedBox(width:50.0,),
-                              DropdownButton(
-                                items: _Category
-                                    .map((value)=> DropdownMenuItem(
-                                      child: Text(
-                                    //'value :  ${serv.servcategory}',
-                                       value,
-                                      style: TextStyle(color:Color(0xff622F74)),
-                                      ),
-                                        value: value, ))
-                                     .toList(),
-                                     onChanged : (selectCategoryType) {
-                                      print('$selectCategoryType');
-                                      setState(() {
-                                    selsctedtype  =selectCategoryType;
-                                  });
-                                },
-
-                                value:selsctedtype,
-                                isExpanded: false,
-                                hint:Text('Choose service type',
-                                  style: TextStyle(color:Color(0xFF2A0B35)),),
-                              ),
-
-                              SizedBox(height: 40.0,),
-                              StreamBuilder<QuerySnapshot>(
-                                stream:Firestore.instance.collection("Products").snapshots(),
-                                builder:(context,Snapshot){
-                                  if(!Snapshot.hasData){
-                                    Text("loading");
-                                  }
-                                  else{
-                                    // ignore: missing_return
-                                    List<DropdownMenuItem> currencyItems = [];
-                                    for(int i=0;i<Snapshot.data.documents.length;i++){
-                                      DocumentSnapshot snap=Snapshot.data.documents[i];
-                                      currencyItems.add( DropdownMenuItem(
-                                          child : Text(
-                                            snap.documentID,
-                                            style:TextStyle(color: Color(0xFF2A0B35)),
-
-                                          ),
-                                          value:"${snap.documentID}"
-                                      )
-                                      );
-                                    }
-
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
                         ],
-                      )
 
+                              
+                      ),
                     ),
                    ),
-                //),
-
               ],
              ),
-
+      
         ],
-      ),
+      )
+    );
+      
 
 
-
-      StreamBuilder<QuerySnapshot>(
+      /*  StreamBuilder<QuerySnapshot>(
 
           stream: _store.loadServiceDetails(documentId),
           builder: (context, Snapshot) {
@@ -304,12 +238,7 @@ class _servicedetailsState extends State<servicedetails> {
             }
           }
 
-      ),*/
-
-  /*  );
-
-<<<<<<< HEAD
-  }}*/
-=======
-  }}
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
+      ),
+*/
+  }
+}

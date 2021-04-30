@@ -3,19 +3,11 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/provider/cartItem.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
-<<<<<<< HEAD
 import 'package:provider/provider.dart';
-=======
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
 
 import 'CartScreen.dart';
 
 class productdetails extends StatefulWidget {
-<<<<<<< HEAD
   static String id = 'ProductInfo';
   @override
   _productdetailsState createState() => _productdetailsState();
@@ -24,20 +16,8 @@ class productdetails extends StatefulWidget {
 class _productdetailsState extends State<productdetails> {
   int _quantity = 1;
   final _store = store();
-=======
-  static String id ='product details';
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
-
-  @override
-  _productdetailsState createState() => _productdetailsState();
-}
-
-class _productdetailsState extends State<productdetails> {
-    var selectedcurrency,selsctedtype;
-
-  final _store = store();
-
-    List<String> _category =<String>[
+  var selectedcurrency,selsctedtype;
+  List<String> _category =<String>[
      ' Intellectual disability','Impaired mobility','Visual impairment','Impaired hearing','Others'
     ];
 
@@ -45,7 +25,6 @@ class _productdetailsState extends State<productdetails> {
   Widget build(BuildContext context) {
     product pro = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-<<<<<<< HEAD
       body: Stack(
         children: <Widget>[
           Container(
@@ -281,9 +260,6 @@ class _productdetailsState extends State<productdetails> {
   @override
   _productdetailsState createState() => _productdetailsState();
 }
-=======
-      resizeToAvoidBottomInset: false,
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
 
 class _productdetailsState extends State<productdetails> {
   int _quantity =1;
@@ -366,7 +342,6 @@ class _productdetailsState extends State<productdetails> {
                         height: 20,
                       ),
                       Row(
-<<<<<<< HEAD
                         children : <Widget>[
                            Text(
                         "Quantity : ",
@@ -429,65 +404,6 @@ class _productdetailsState extends State<productdetails> {
                       ),
                        )
                       )
-=======
-                              mainAxisAlignment: MainAxisAlignment.center,
-
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.solidArrowAltCircleUp,
-                                size:25.0,
-                                color: Color(0xff622F74), ),
-                                SizedBox(width:50.0,),
-                                DropdownButton(
-                                           items: _category.map((value)=> DropdownMenuItem(
-                                             child: Text(
-                                             //'value :  ${serv.servcategory}',
-                                               value,
-                                               style: TextStyle(color:Color(0xff622F74)),
-                                             ),
-                                             value: value, ))
-                                               .toList(),
-                                        onChanged : (selectCategoryType) {
-                                             print('$selectCategoryType');
-                                             setState(() {
-                                           selsctedtype  =selectCategoryType;
-                                            });
-                                         },
-
-                                           value:selsctedtype,
-                                           isExpanded: false,
-                                           hint:Text('Choose service type',
-                                           style: TextStyle(color:Color(0xFF2A0B35)),),
-                          ),
-
-                       SizedBox(height: 40.0,),
-                      StreamBuilder<QuerySnapshot>(
-                      stream:Firestore.instance.collection("Products").snapshots(),
-                      builder:(context,Snapshot){
-                        if(!Snapshot.hasData){
-                          Text("loading");
-                        }
-                        else{
-                          // ignore: missing_return
-                          List<DropdownMenuItem> currencyItems = [];
-                          for(int i=0;i<Snapshot.data.documents.length;i++){
-                            DocumentSnapshot snap=Snapshot.data.documents[i];
-                            currencyItems.add( DropdownMenuItem(
-                                child : Text(
-                                  snap.documentID,
-                                  style:TextStyle(color: Color(0xFF2A0B35)),
-
-                                ),
-                                value:"${snap.documentID}"
-                              )
-                            );
-                          }
-
-                        }
-                      },
-                      ),
-             ],
-                      ),
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
                     ],
                    
                   )
