@@ -23,7 +23,7 @@ class jobdetails extends StatelessWidget {
   Widget build(BuildContext context) {
     job jb = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
 
       appBar: AppBar(title: Text('Job details'),backgroundColor: KMainColor,),
 
