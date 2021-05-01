@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
@@ -6,19 +8,39 @@ import 'package:gp_project/routes/HomePage.dart';
 import 'login_screen.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+<<<<<<< Updated upstream
 import 'package:firebase_auth/firebase_auth.dart';
+=======
+import 'package:gp_project/models/user.dart';
+import 'package:gp_project/services/store.dart';
+>>>>>>> Stashed changes
 
+class signup_screen extends StatefulWidget {
+  static String id = 'signupScreen';
+  @override
+  _signup_screen createState() => _signup_screen();
+}
 
-class signup_screen extends StatelessWidget {
-  final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
-  static String id='signupScreen';
-  final _auth=FirebaseAuth.instance;
-  bool showSpinner=false;
-  String email,password;  
+class _signup_screen extends State<signup_screen> {
+  final GlobalKey<FormState> _globalkey = GlobalKey<FormState>();
+  static String id = 'signupScreen';
+  final _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
+  user _user = user();
+  String email, password, name, phone, address;
+  var selectedType;
+  List<String> _accountType = <String>[
+    'special needs',
+    'Rehabilitation center',
+    'General',
+  ];
+  // String valuechoos='special needs';
+  //List listItem = ["special needs","Rehabilitation center","Volunteer"];
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
+<<<<<<< Updated upstream
       resizeToAvoidBottomInset: false,
           backgroundColor: KMainColor,
           body: ModalProgressHUD (
@@ -44,32 +66,263 @@ class signup_screen extends StatelessWidget {
                   ),
                   SizedBox(
                     height: height*.02,
+=======
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: KMainColor,
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: Form(
+          key: _globalkey,
+          child: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                hint: 'Enter your name',
+                icon: Icons.perm_identity,
+                onclick: (value) {
+                  name = value;
+                },
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                hint: 'Enter your phone',
+                icon: Icons.phone,
+                onclick: (value) {
+                  phone = value;
+                },
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                hint: 'Enter your address',
+                icon: Icons.home_outlined,
+                onclick: (value) {
+                  address = value;
+                },
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                hint: 'Enter your email',
+                icon: Icons.email,
+                onclick: (value) {
+                  email = value;
+                },
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                icon: Icons.lock,
+                hint: 'Enter your password',
+                onclick: (value) {
+                  password = value;
+                },
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              /*Row(
+                  children: <Widget>[
+                    Padding(padding:const EdgeInsets.symmetric(horizontal: 30,) ),
+
+                Expanded(child:TextField(
+                  //padding: const EdgeInsets.symmetric(horizontal: 30),
+                  //keyboardType: TextInputType.number,
+                //TextField(
+                  decoration: InputDecoration(
+                      labelText: 'Type',
+                      //hintText: '%',
+                      filled: true,
+                      fillColor: KSocondaryColor,
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                              color: Colors.white
+                          )
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                              color: Colors.white
+                          )
+                      ),
+                      border:  OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                              color: Colors.white
+                          )
+                      )
+>>>>>>> Stashed changes
                   ),
-                  CustomTextField(
-                    hint: 'Enter your address',
-                    icon: Icons.home_outlined,
+                //)
+                    ),),
+                    Expanded(child:DropdownButton<String>(
+                      //DropdownButton<String>(
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      items: listItem.map((valueItem){
+                        return DropdownMenuItem<String>(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      onChanged: (String newValue){
+                        setState(() {valuechoos = newValue;});
+                      },
+                      value: valuechoos,
+                    ),
+                    ),
+
+               ] ),*/
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.account_box_sharp,
+                    size: 25.0,
+                    color: KSocondaryColor,
                   ),
-                  SizedBox(
-                    height: height*.02,
+                  SizedBox(width: 50.0),
+                  new Theme(
+                    data: Theme.of(context).copyWith(
+                      canvasColor: KMainColor,
+                    ),
+                    child: DropdownButton(
+                      items: _accountType
+                          .map((value) => DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: KSocondaryColor),
+                                ),
+                                value: value,
+                              ))
+                          .toList(),
+                      onChanged: (selectedAccountType) {
+                        print('$selectedAccountType');
+                        setState(() {
+                          selectedType = selectedAccountType;
+                        });
+                      },
+                      value: selectedType,
+                      isExpanded: false,
+                      hint: Text(
+                        'Choose Account Type',
+                        style: TextStyle(color: KSocondaryColor),
+                      ),
+                    ),
                   ),
-                  CustomTextField(
-                    
-                    hint: 'Enter your email',
-                    icon: Icons.email,
-                    onclick: (value){
-                      email=value;
+                ],
+              ),
+              SizedBox(height: 40.0),
+              /* StreamBuilder<QuerySnapshot>(
+    stream: FirebaseFirestore.instance.collection("currency").snapshots(),
+    builder: (context, snapshot) {
+    if (!snapshot.hasData)
+    const Text("Loading.....");
+    else {
+    List<DropdownMenuItem> currencyItems = [];
+    for (int i = 0; i < snapshot.data.documents.length; i++) {
+    DocumentSnapshot snap = snapshot.data.documents[i];
+    currencyItems.add(
+    DropdownMenuItem(
+    child: Text(
+    snap.id,
+    style: TextStyle(color: Color(0xff11b719)),
+    ),
+    value: "${snap.documentID}",
+    ),
+    );
+    }*/
+              //  return Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              //  children: <Widget>[
+              //Icon(FontAwesomeIcons.coins,
+              //size: 25.0, color: Color(0xff11b719)),
+              // SizedBox(width: 50.0),
+              /*DropdownButton(
+    items: currencyItems,
+    onChanged: (currencyValue) {
+    final snackBar = SnackBar(
+    content: Text(
+    'Selected Currency value is $currencyValue',
+    style: TextStyle(color: Color(0xff11b719)),
+    ),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+    setState(() {
+    selectedCurrency = currencyValue;
+    });
+    },
+    value: selectedCurrency,
+    isExpanded: false,
+    hint: new Text(
+    "Choose Currency Type",
+    style: TextStyle(color: Color(0xff11b719)),
+    ),
+    ),*/
+              //  ],
+              // );
+
+              // RadioGroup(),
+              //SizedBox(
+              //  height: height*.03,
+              //),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 120, vertical: 0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  onPressed: () async {
+                    try {
+                      final newuser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+
+                      _user.uid = newuser.user.uid;
+                      _user.phone = phone;
+                      _user.address = address;
+                      _user.name = name;
+                      _user.email = newuser.user.email;
+                      _user.type = selectedType;
+                      store().create_user(_user);
+                      if (newuser != null) {
+                        Navigator.pushNamed(context, Home.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                  color: Colors.black,
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: height * .01,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Do have an account ? ",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, LoginScreen.id);
                     },
-                  ),
-                  SizedBox(
-                    height: height*.02,
-                  ),
-                  CustomTextField(
-                    icon: Icons.lock,
-                    hint: 'Enter your password',
-                    
-                    onclick: (value){
-                      password=value;
-                    },
+<<<<<<< Updated upstream
                   ),
     
                  // RadioGroup(),
@@ -107,39 +360,20 @@ class signup_screen extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
+=======
+                    child: Text(
+                      'Login',
+                      style: TextStyle(fontSize: 16),
+>>>>>>> Stashed changes
                     ),
-                  ) ,
-                  SizedBox(
-                    height: height*.01,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Do have an account ? ",
-                        style: TextStyle(
-                            color:Colors.white,
-                            fontSize: 16
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, LoginScreen.id);
-    
-                        },
-                        child: Text('Login',
-                          style: TextStyle(
-                              fontSize: 16
-                          ) ,
-                        ),
-                      )
-                    ],
                   )
                 ],
-              ),
-            ),
+              )
+            ],
           ),
-        );
-        
+        ),
+      ),
+    );
   }
 }
 /*class RadioGroup extends StatefulWidget {
