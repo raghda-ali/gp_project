@@ -119,6 +119,7 @@ class store
         .doc(documentId)
         .update(data);
   }
+  
 Stream<QuerySnapshot> loadMyProduct()
 //Future <List<product>>loadMyProduct() async
   {
@@ -141,7 +142,7 @@ Stream<QuerySnapshot> loadMyProduct()
       );
     }}
     return MyProductByID; */
-  }
+  
 
 storeOrders(data , List<product> products){
   var documentRef =_firestore.collection(kOrders).document();
@@ -157,5 +158,5 @@ storeOrders(data , List<product> products){
   }
 }
 
-
+}
 

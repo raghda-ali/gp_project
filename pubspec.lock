@@ -190,23 +190,21 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "7.1.8"
   font_awesome_flutter:
-=======
-    version: "7.1.6"
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "9.0.0-nullsafety"
   get:
->>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
     dependency: "direct main"
     description:
       name: get
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "9.0.0-nullsafety"
-=======
     version: "3.26.0"
->>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
   http:
     dependency: transitive
     description:
@@ -283,7 +281,7 @@ packages:
       name: nested
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "0.0.5"
   path:
     dependency: "direct main"
     description:
@@ -311,7 +309,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.3"
+    version: "5.0.0-nullsafety.3"
   quiver:
     dependency: transitive
     description:

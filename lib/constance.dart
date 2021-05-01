@@ -27,11 +27,7 @@ const KProductDescription = 'ProductDescription';
 const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
 const KProductImage = 'ProductImage';
-<<<<<<< HEAD
 const KProductQuantity = 'ProductQuantity';
-=======
-const KProductUserID = 'UserID';
->>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
 
 const kJobCollection = 'jobs';
 const KJobTitle = 'jobTitle';
@@ -46,6 +42,8 @@ const kOrderDetails ='OrderDetails';
 const kTotallPrice = 'TotallPrice';
 const kAddress ='Address';
 const kProductQuantity ='Quantity';
+const KProductUserID ='UserID';
+
 
 const redGradient = LinearGradient(
   colors: <Color>[darkRedColor, lightRedColor],

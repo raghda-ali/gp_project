@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-/*
-=======
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
@@ -54,8 +51,7 @@ class _servicedetailsState extends State<servicedetails> {
                           SizedBox(
                             height: 20,
                           ),
-<<<<<<< HEAD
-                          Row(
+                         /* Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(FontAwesomeIcons.service,
@@ -86,10 +82,6 @@ class _servicedetailsState extends State<servicedetails> {
                               ]
                           )
                           Text(
-=======
-
-                          /*Text(
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
                               'Category :  ${serv.servcategory}',
 
                             style: TextStyle(
@@ -180,11 +172,7 @@ class _servicedetailsState extends State<servicedetails> {
       
 
 
-<<<<<<< HEAD
       /*  StreamBuilder<QuerySnapshot>(
-=======
-      StreamBuilder<QuerySnapshot>(
->>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
 
           stream: _store.loadServiceDetails(documentId),
           builder: (context, Snapshot) {
@@ -280,19 +268,7 @@ class _servicedetailsState extends State<servicedetails> {
             }
           }
 
-      ),
-<<<<<<< HEAD
-*/
+      ),*/
+    
+                            }
   }
-}
-=======
-
-    );
-
-  }}
-<<<<<<< HEAD
-
-*/
-=======
->>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
->>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
