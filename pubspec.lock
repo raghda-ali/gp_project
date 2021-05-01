@@ -190,14 +190,23 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "7.1.8"
   font_awesome_flutter:
+=======
+    version: "7.1.6"
+  get:
+>>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
     dependency: "direct main"
     description:
-      name: font_awesome_flutter
+      name: get
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "9.0.0-nullsafety"
+=======
+    version: "3.26.0"
+>>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
   http:
     dependency: transitive
     description:

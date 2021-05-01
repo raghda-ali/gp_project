@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+/*
+=======
+>>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
@@ -50,8 +54,42 @@ class _servicedetailsState extends State<servicedetails> {
                           SizedBox(
                             height: 20,
                           ),
+<<<<<<< HEAD
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(FontAwesomeIcons.service,
+                                size:25.0,
+                                color: Color(0xff622F74),
+                                
+                                ),
+                                SizedBox(width:50.0,),
+                                DropdownButton(
+                                           items: category.map((value))=>DropdownMenueItem(
+                                             child: Text(
+                                             //'value :  ${serv.servcategory}',
+                                               value,
+                                               style: TextStyle(color:Color(0xff622F74)),
+                                             ),
+                                             value: value,
+                                           )).toList().
+                                           onChanged:(selectCategoryType){
+                                            setState((){
+                                                selectedType=selectCategoryType;
+                                            });
+                                           },
+                                           value:selectedType,
+                                           isExpanded: false,
+                                           hint:Text('Choose service type',
+                                           style: TextStyle(color:Color(0xFF2A0B35)),),
+                          ),
+                              ]
+                          )
+                          Text(
+=======
 
                           /*Text(
+>>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
                               'Category :  ${serv.servcategory}',
 
                             style: TextStyle(
@@ -142,7 +180,11 @@ class _servicedetailsState extends State<servicedetails> {
       
 
 
+<<<<<<< HEAD
       /*  StreamBuilder<QuerySnapshot>(
+=======
+      StreamBuilder<QuerySnapshot>(
+>>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
 
           stream: _store.loadServiceDetails(documentId),
           builder: (context, Snapshot) {
@@ -239,6 +281,18 @@ class _servicedetailsState extends State<servicedetails> {
           }
 
       ),
+<<<<<<< HEAD
 */
   }
 }
+=======
+
+    );
+
+  }}
+<<<<<<< HEAD
+
+*/
+=======
+>>>>>>> b9ce5b7e1c97d21ebebefbc489c0798539c3e648
+>>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40

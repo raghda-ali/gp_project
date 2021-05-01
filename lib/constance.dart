@@ -19,6 +19,7 @@ const KServicecontact_Phone = 'Servicecontact_Phone';
 const KServicecontact_Email = 'Servicecontact_Email';
 const kServiceDetails = 'ServiceDetails';
 const KServiceImage='ServiceImage';
+const KServiceUserID='UserID';
 
 const kProductCollection = 'Products';
 const KProductTitle = 'ProductTitle';
@@ -26,7 +27,11 @@ const KProductDescription = 'ProductDescription';
 const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
 const KProductImage = 'ProductImage';
+<<<<<<< HEAD
 const KProductQuantity = 'ProductQuantity';
+=======
+const KProductUserID = 'UserID';
+>>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
 
 const kJobCollection = 'jobs';
 const KJobTitle = 'jobTitle';
@@ -34,6 +39,7 @@ const KJobDescription = 'jobDescription';
 const KJobcontact_Email = 'jobcontact_Email';
 const KJobcontact_Phone = 'jobcontact_Phone';
 const KJobImage ='jobImage';
+const KJobUserID='UserID';
 
 const kOrders ='Orders';
 const kOrderDetails ='OrderDetails';

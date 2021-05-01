@@ -4,20 +4,37 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/product.dart';
+import 'package:gp_project/routes/HomePage.dart';
+import 'package:gp_project/routes/MyProductsByID.dart'as pro;
+import 'package:gp_project/routes/ProductSearch.dart';
 import 'package:gp_project/routes/addmyproducts.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gp_project/routes/myproducts_screen.dart' as pro;
-import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/routes/myjobs_screen.dart' as jo;
+import 'package:gp_project/routes/Products_screen.dart' as pro;
+import 'package:gp_project/routes/Services_screen.dart' as serv;
+import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/product_details.dart' as de;
 import 'package:gp_project/services/store.dart';
+import 'MyJobByID.dart';
+import 'MyProductsByID.dart';
+import 'MyServicesByID.dart';
 //import 'dart:html';
 
 class MyProducts extends StatelessWidget {
   static String id = 'MyProducts';
-  final store _store = store();
-  final _auth = FirebaseAuth.instance;
+  // @override
+  //_MyProducts createState() => _MyProducts();
+  //}
+
+
+  //class _MyProducts extends State<MyProducts> {
+    final _auth = FirebaseAuth.instance;
+    final store _store = store();
+   // int _currentIndex=0;
+    /*final List<Widget>_pages=[
+      MyHomePage(),
+      Search(),
+    ];*/
   @override
   Widget build(BuildContext context) {
     Container _backBgCover() {
@@ -39,10 +56,17 @@ class MyProducts extends StatelessWidget {
       backgroundColor: mainBgColor,
       appBar: AppBar(
           elevation: 0,
-          title: Text('My Products',
+          title: Text('Products',
               style: TextStyle(
                 fontSize: 25,
               )),
+          actions: [IconButton(icon: Icon(Icons.search),iconSize:30, onPressed:(){
+             Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new Search()));
+          })],
           backgroundColor: KMainColor),
       drawer: Drawer(
         child: ListView(
@@ -57,6 +81,7 @@ class MyProducts extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
+                   // '${_auth.currentUser.email}',
                     'User Name',
                     style: TextStyle(
                       color: Colors.white,
@@ -70,7 +95,7 @@ class MyProducts extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new Home()));
+                    new MaterialPageRoute(builder: (context) => new MyHomePage()));
               },
             ),
             ListTile(
@@ -89,7 +114,7 @@ class MyProducts extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new serv.myservices()));
+                        builder: (context) => new MyServicesByID()));
               },
             ),
             ListTile(
@@ -100,7 +125,7 @@ class MyProducts extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new pro.MyProducts()));
+                        builder: (context) => new pro.MyProductsByID()));
               },
             ),
             ListTile(
@@ -111,7 +136,7 @@ class MyProducts extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new jo.MyJobs()));
+                        builder: (context) => new MyJobByID()));
               },
             ),
             /*ListTile(
@@ -137,7 +162,35 @@ class MyProducts extends StatelessWidget {
           ],
         ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: /*Column(
+         children :<Widget>[
+           Expanded(child: ListView(children :<Widget>[
+          _pages[_currentIndex],
+        BottomNavigationBar(
+        //showSelectedLabels: false,
+       // showUnselectedLabels: false,
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home,
+                size: 30.0,
+              ),
+              title: Text('Home'),
+              backgroundColor: Colors.purple.shade500),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search,
+                size: 30.0,
+              ),
+              title: Text('Search'),
+              backgroundColor: Colors.purple.shade500),
+        ],
+        onTap:(index) {
+          setState((){
+            _currentIndex = index;
+          });
+        },
+      ),*/
+       StreamBuilder<QuerySnapshot>(
           stream: _store.loadproducts(),
           builder: (context, Snapshot) {
             if (!Snapshot.hasData) {
@@ -265,7 +318,7 @@ class MyProducts extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                Row(
+                                              /*  Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
@@ -394,16 +447,16 @@ class MyProducts extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                    ]),
+                                                    ]), */
                                               ],
                                             ),
                                           ],
                                         ),
-                                        Icon(
-                                          Icons.favorite,
-                                          color: lightColor,
-                                          size: 36,
-                                        ),
+                                      //  Icon(
+                                        //  Icons.favorite,
+                                          //color: lightColor,
+                                          //size: 36,
+                                        //),
                                       ],
                                     ),
                                   ),
@@ -414,7 +467,6 @@ class MyProducts extends StatelessWidget {
                           ),
                         ]),
                   ),
-//************************************************************************
                 ),
               );
             }
@@ -428,6 +480,11 @@ class MyProducts extends StatelessWidget {
         child: Icon(Icons.add),
         backgroundColor: KMainColor,
       ),
-    );
+     
+      );
+      //)
+      //]
+      //)
+      //);
   }
 }

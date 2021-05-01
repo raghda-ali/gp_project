@@ -21,9 +21,13 @@ dependencies:
   fluttertoast: ^7.1.6
   line_awesome_icons: ^1.0.4+2
   flutter_rating_bar: ^3.0.1+1
+<<<<<<< HEAD
   provider: ^4.3.3
   font_awesome_flutter: ^9.0.0-nullsafety
+=======
+>>>>>>> 70381b61bd711934eeac249c9b17925ad3f5ab40
   cupertino_icons: ^0.1.3
+  get: ^3.25.3
 
 dev_dependencies:
   flutter_test:

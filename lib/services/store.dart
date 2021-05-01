@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/product.dart';
@@ -8,6 +9,7 @@ import 'package:gp_project/routes/Editmyproducts.dart';
 class store
 {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   addservice(service service)
   {
@@ -19,6 +21,8 @@ class store
       KServicecontact_Phone:service.servcontact_phone,
       KServicecontact_Email:service.servcontact_email,
       KServiceImage: service.servImage,
+      KServiceUserID : auth.currentUser.uid,
+
     });
   }
 
@@ -31,6 +35,7 @@ class store
       KProductPrice:product.pPrice,
       KProductcontact_Phone:product.pContact_phone,
       KProductImage : product.pImage,
+      KProductUserID : auth.currentUser.uid,
     });
   }
 
@@ -43,6 +48,7 @@ class store
       KJobcontact_Email :job.jContact_Email,
       KJobcontact_Phone : job.jContact_phone,
       KJobImage:job.jImage,
+      KJobUserID : auth.currentUser.uid,
     });
   }
 
@@ -113,6 +119,29 @@ class store
         .doc(documentId)
         .update(data);
   }
+Stream<QuerySnapshot> loadMyProduct()
+//Future <List<product>>loadMyProduct() async
+  {
+  // var snapshot = _firestore.collection(kProductCollection).snapshots();
+  
+   //var snapshot =  _firestore.collection(kProductCollection).get();
+   return  _firestore.collection(kProductCollection).snapshots();}
+  /* if(auth.currentUser.uid==KProductUserID){
+    List<product> MyProductByID = [];
+      //for(var doc in MyProductByID){
+    for(var doc in snapshot.data.docs){
+      var data=doc.data();
+      MyProductByID.add(product(
+        pTitle: data[KProductTitle],
+        pDescription: data[KProductDescription],
+        pPrice: data[KProductPrice],
+        pContact_phone: data[KProductcontact_Phone],
+        pImage:data[KProductImage],
+      )
+      );
+    }}
+    return MyProductByID; */
+  }
 
 storeOrders(data , List<product> products){
   var documentRef =_firestore.collection(kOrders).document();
@@ -130,5 +159,3 @@ storeOrders(data , List<product> products){
 
 
 
-
-}

@@ -7,7 +7,7 @@ import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/Home.dart';
 
-import 'MyHomePage.dart';
+import 'HomePage.dart';
 
 class LoginScreen extends StatelessWidget {
   static String id='LoginScreen';

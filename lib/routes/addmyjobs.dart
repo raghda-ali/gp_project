@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/Jobs.dart';
-import 'package:gp_project/routes/myjobs_screen.dart';
+import 'package:gp_project/routes/Jobs_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
