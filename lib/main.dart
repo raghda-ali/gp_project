@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
+import 'package:gp_project/routes/Editprofile.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/JobSearch.dart';
@@ -18,8 +19,13 @@ import 'package:gp_project/routes/Services_screen.dart';
 import 'package:gp_project/routes/Jobs_screen.dart';
 import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/routes/service_details.dart';
+<<<<<<< Updated upstream
 import 'package:gp_project/routes/MyProductsByID.dart';
 import 'package:path/path.dart';
+=======
+import 'package:gp_project/routes/profile.dart';
+import 'routes/login_screen.dart';
+>>>>>>> Stashed changes
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
 import 'routes/ForgetPassword.dart';
@@ -56,6 +62,7 @@ class MyApp extends StatelessWidget {
         productdetails.id:(context)=>productdetails(),
         jobdetails.id:(context)=>jobdetails(),
         Editmyjob.id:(context)=>Editmyjob(),
+<<<<<<< Updated upstream
         ForgotPasswordScreen.id:(context)=>ForgotPasswordScreen(),
         MyProductsByID.id:(context)=>MyProductsByID(),
         MyServicesByID.id:(context)=>MyServicesByID(),
@@ -63,6 +70,10 @@ class MyApp extends StatelessWidget {
         Search.id:(context)=>Search(),
         ServicesSearch.id:(context)=>ServicesSearch(),
         JobSearch.id:(context)=>JobSearch(),
+=======
+        profile.id:(context)=>profile(),
+        Editprofile.id:(context)=>Editprofile(),
+>>>>>>> Stashed changes
       },
       /*theme: ThemeData(
         primarySwatch: Colors.purple,
