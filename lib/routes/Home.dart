@@ -1,17 +1,13 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/login_screen.dart';
-<<<<<<< Updated upstream
 import 'package:gp_project/routes/Products_screen.dart' as pro;
 import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' as jo;
-=======
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/profile.dart' ;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/routes/myjobs_screen.dart' as jo;
->>>>>>> Stashed changes
 import 'package:firebase_auth/firebase_auth.dart';
 import '../constance.dart';
 import 'package:gp_project/routes/profile.dart';
@@ -38,8 +34,7 @@ class Home extends StatefulWidget{
   @override
   _HomeState createState() =>_HomeState();
    // getcurrentUser();
-
-} 
+}
 class _HomeState extends State<Home>{
   Widget build(BuildContext context){
         var _currentIndex = 0;
@@ -357,4 +352,4 @@ class _HomeState extends State<Home>{
     // TODO: implement createState
     throw UnimplementedError();
   }
-}
+}*/

@@ -3,21 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
-import 'package:gp_project/routes/Editmyservices.dart';
-import 'package:gp_project/routes/Home.dart';
+import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/addmyservice.dart';
 import 'package:gp_project/routes/login_screen.dart';
-import 'package:gp_project/routes/login_screen.dart';
-import 'package:gp_project/routes/signup_screen.dart';
-import 'package:gp_project/widgets/Custom_TextField.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
 //import 'package:gp_project/routes/myjobs_screen.dart' as jo;
 import 'package:gp_project/routes/service_details.dart' as sd;
 import 'package:gp_project/services/store.dart';
-import 'package:gp_project/widgets/moods.dart';
-
 import 'Jobs_screen.dart';
 import 'Products_screen.dart';
 
@@ -82,7 +77,7 @@ class myservices extends StatelessWidget {
                             onTap: ()
                             {
                               Navigator.pop(context);
-                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new Home()));
+                              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyHomePage()));
                             },
                           ),
                           ListTile(

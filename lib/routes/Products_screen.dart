@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:gp_project/constance.dart';
-import 'package:gp_project/routes/Editmyproducts.dart';
-import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/MyProductsByID.dart'as pro;
@@ -16,26 +19,33 @@ import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/product_details.dart' as de;
 import 'package:gp_project/services/store.dart';
 import 'MyJobByID.dart';
-import 'MyProductsByID.dart';
 import 'MyServicesByID.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'Rating.dart'; 
+
 //import 'dart:html';
 
-class MyProducts extends StatelessWidget {
+class MyProducts extends StatefulWidget {
   static String id = 'MyProducts';
-  // @override
-  //_MyProducts createState() => _MyProducts();
-  //}
 
-
-  //class _MyProducts extends State<MyProducts> {
-    final _auth = FirebaseAuth.instance;
-    final store _store = store();
-   // int _currentIndex=0;
-    /*final List<Widget>_pages=[
-      MyHomePage(),
-      Search(),
-    ];*/
   @override
+  _MyProductsState createState() => _MyProductsState();
+}
+
+
+class _MyProductsState extends State<MyProducts> {
+    final _auth = FirebaseAuth.instance;
+
+    final store _store = store();
+   // double rating = 4.0;
+     double _rating;
+     double _rate;
+
+  @override
+  /*void initState(){
+  getNamePreference().then(updateName);
+  super.initState();
+}*/
   Widget build(BuildContext context) {
     Container _backBgCover() {
       return Container(
@@ -231,244 +241,354 @@ class MyProducts extends StatelessWidget {
                           ],
                           ),
                   SizedBox(
-                  height: 7.0,
+                 // height: 5.0,
                  ),
                   SingleChildScrollView(
                  scrollDirection: Axis.vertical,
-                 child: Padding(
-                 padding: EdgeInsets.all(15),
-                 child: Column(
-                 mainAxisAlignment: MainAxisAlignment.start, 
-                 children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 14.0, horizontal: 18.0),
-                                    margin: EdgeInsets.only(
-                                      bottom: 20.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            spreadRadius: 1.0,
-                                            blurRadius: 6.0,
+                   child: Padding(
+                     padding: EdgeInsets.all(12),
+                     child: Column(
+                     mainAxisAlignment: MainAxisAlignment.start, 
+                     children: <Widget>[
+                                      Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 7.0, horizontal: 20.0),
+                                          margin: EdgeInsets.only(
+                                            bottom: 0,
                                           ),
-                                        ]),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Color(0xFFD9D9D9),
-                                       backgroundImage: NetworkImage('${products[index].pImage}'),
-                                              radius: 36.0,
-                                            ),
-                                            SizedBox(
-                                              width: 10.0,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                RichText(
-                                                  text: TextSpan(
-                                                    text: 'In Cairo\n',
-                                                    style: TextStyle(
-                                                      color: Colors.purple,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      height: 1.3,
-                                                    ),
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                        text:
-                                                            '${products[index].pTitle}',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            '\n ${products[index].pDescription}',
-                                                        style: TextStyle(
-                                                          color: Colors.black38,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey.withOpacity(0.2),
+                                                  spreadRadius: 1.0,
+                                                  blurRadius: 6.0,
                                                 ),
-                                              /*  Row(
+                                              ]),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  CircleAvatar(
+                                                    backgroundColor:
+                                                        Color(0xFFD9D9D9),
+                                                   backgroundImage: NetworkImage('${products[index].pImage}'),
+                                                    radius: 40.0,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+
+                                                  Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
                                                     children: <Widget>[
-                                                      SizedBox(
-                                                        height: 6.0,
-                                                      ),
-                                                      RaisedButton(
-                                                        onPressed: () {
-                                                          /* Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Editmyproducts()));*/
-                                                          Navigator.pushNamed(
-                                                              context,
-                                                              Editmyproducts.id,
-                                                              arguments:
-                                                                  products[
-                                                                      index]);
-                                                        },
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        80.0)),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(0.0),
-                                                        child: Ink(
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            gradient:
-                                                                purpleGradient,
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        80.0)),
+                                                      RichText(
+                                                        text: TextSpan(
+                                                          text: 'In Cairo\n',
+                                                          style: TextStyle(
+                                                            color: Colors.purple,
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            height: 1.3,
                                                           ),
-                                                          child: Container(
-                                                            constraints:
-                                                                const BoxConstraints(
-                                                                    minWidth:
-                                                                        88.0,
-                                                                    minHeight:
-                                                                        36.0), // min sizes for Material buttons
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: const Text(
-                                                              'Edit',
+                                                          children: <TextSpan>[
+                                                            TextSpan(
+                                                              text:
+                                                                  '${products[index].pTitle}',
                                                               style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  fontSize: 13,
-                                                                  color: Colors
-                                                                      .white),
+                                                                color: Colors.black,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight.w600,
+                                                              ),
                                                             ),
-                                                          ),
+                                                            TextSpan(
+                                                              text:
+                                                                  '\n ${products[index].pDescription}',
+                                                              style: TextStyle(
+                                                                color: Colors.black38,
+                                                                fontWeight:
+                                                                    FontWeight.w400,
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                        
+                                                            TextSpan(
+                                                              text:
+                                                                  '\n ${products[index].pPrice} EGP',
+                                                              style: TextStyle(
+                                                                color: Colors.black38,
+                                                                fontWeight:
+                                                                    FontWeight.w400,
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        height: 6.0,
-                                                      ),
-                                                      RaisedButton(
-                                                        onPressed: () {
-                                                          Scaffold.of(context)
-                                                              .showSnackBar(
-                                                                  SnackBar(
-                                                            backgroundColor:
-                                                                KMainColor,
-                                                            content: Text(
-                                                                'Sure you want to delete this Product?!'),
-                                                            action:
-                                                                SnackBarAction(
-                                                              label: 'Delete',
-                                                              textColor:
-                                                                  Colors.white,
+                                                      RatingBar(
+                                                        initialRating: 0,
+                                                        direction: Axis.horizontal,
+                                                        allowHalfRating: true,
+                                                        itemCount: 5,
+                                                        itemSize: 22,
+                                                        ratingWidget: RatingWidget(
+                                                          full: Icon(Icons.star, color: Colors.orange),
+                                                          half: Icon(
+                                                            Icons.star_half,
+                                                            color: Colors.orange,
+                                                          ),
+                                                          empty: Icon(
+                                                            Icons.star_outline,
+                                                            color: Colors.orange,
+                                                          )
+                                                        ),
+                                                
+                                                        onRatingUpdate: (value) async{
+                                                          rate(value);
+                                                        /*  _rating = prefs.getDouble('_rating') ?? 0 + 1;
+                                                          prefs.setDouble('_rating', _rating);
+                                                         setState(() {
+                                                            _rating =value;
+                                                                                                                      
+                                                    });*/
+                                                        }
+                                                        
+                                                        ),
+
+                                                      /* Column(
+                                                           children: [
+                                                             Rating((rating){
+                                                               setState(() {
+                                                                 _rating = rating;
+                                                                 });
+
+                                                             },
+                                                             5),
+                                                            /* SizedBox(height: 10,
+                                                             child:(_rating!=null&&_rating!=0)?
+                                                            Text("$_rating",
+                                                             style: TextStyle(fontSize: 10),
+                                                             textAlign: TextAlign.start,)
+                                                             :SizedBox.shrink())*/
+                                                           ],
+                                                         ),*/
+                                                       
+                                                       /*  Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: <Widget>[
+                                                            SizedBox(
+                                                              height: 6.0,
+                                                            ),
+                                                            RaisedButton(
                                                               onPressed: () {
-                                                                _store.deleteproduct(
-                                                                    products[
-                                                                            index]
-                                                                        .pId);
-                                                                // Some code to undo the change.
+                                                                /* Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Editmyproducts()));*/
+                                                                Navigator.pushNamed(
+                                                                    context,
+                                                                    Editmyproducts.id,
+                                                                    arguments:
+                                                                        products[
+                                                                            index]);
                                                               },
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              80.0)),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(0.0),
+                                                              child: Ink(
+                                                                decoration:
+                                                                    const BoxDecoration(
+                                                                  gradient:
+                                                                      purpleGradient,
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              80.0)),
+                                                                ),
+                                                                child: Container(
+                                                                  constraints:
+                                                                      const BoxConstraints(
+                                                                          minWidth:
+                                                                              88.0,
+                                                                          minHeight:
+                                                                              36.0), // min sizes for Material buttons
+                                                                  alignment: Alignment
+                                                                      .center,
+                                                                  child: const Text(
+                                                                    'Edit',
+                                                                    style: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w300,
+                                                                        fontSize: 13,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ));
-                                                        },
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        80.0)),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(0.0),
-                                                        child: Ink(
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            gradient:
-                                                                purpleGradient,
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        80.0)),
-                                                          ),
-                                                          child: Container(
-                                                            constraints:
-                                                                const BoxConstraints(
-                                                                    minWidth:
-                                                                        88.0,
-                                                                    minHeight:
-                                                                        36.0), // min sizes for Material buttons
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: const Text(
-                                                              'Delete',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  fontSize: 13,
-                                                                  color: Colors
-                                                                      .white),
+                                                            SizedBox(
+                                                              height: 6.0,
                                                             ),
+                                                            RaisedButton(
+                                                              onPressed: () {
+                                                                Scaffold.of(context)
+                                                                    .showSnackBar(
+                                                                        SnackBar(
+                                                                  backgroundColor:
+                                                                      KMainColor,
+                                                                  content: Text(
+                                                                      'Sure you want to delete this Product?!'),
+                                                                  action:
+                                                                      SnackBarAction(
+                                                                    label: 'Delete',
+                                                                    textColor:
+                                                                        Colors.white,
+                                                                    onPressed: () {
+                                                                      _store.deleteproduct(
+                                                                          products[
+                                                                                  index]
+                                                                              .pId);
+                                                                      // Some code to undo the change.
+                                                                    },
+                                                                  ),
+                                                                ));
+                                                              },
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              80.0)),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(0.0),
+                                                              child: Ink(
+                                                                decoration:
+                                                                    const BoxDecoration(
+                                                                  gradient:
+                                                                      purpleGradient,
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              80.0)),
+                                                                ),
+                                                                child: Container(
+                                                                  constraints:
+                                                                      const BoxConstraints(
+                                                                          minWidth:
+                                                                              88.0,
+                                                                          minHeight:
+                                                                              36.0), // min sizes for Material buttons
+                                                                  alignment: Alignment
+                                                                      .center,
+                                                                  child: const Text(
+                                                                    'Delete',
+                                                                    style: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w300,
+                                                                        fontSize: 13,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ]), */
+                                                         /* Padding(
+                                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),*/
+                                        
+                                       
+                                                          ],
                                                           ),
-                                                        ),
-                                                      ),
-                                                    ]), */
-                                              ],
-                                            ),
+                                                          
+                                                           
+                                                  
+                                                  ],
+                                                     ),
+                                                    SizedBox(width: 20,),
+                                                  /*  SmoothStarRating(
+                                                        rating: rating,
+                                                        size: 45,
+                                                        filledIconData: Icons.star,
+                                                        halfFilledIconData: Icons.star_half,
+                                                        defaultIconData: Icons.star_border,
+                                                        starCount: 5,
+                                                        spacing: 2.0,
+                                                        onRated: (value){
+                                                          setState(() {
+                                                            rating =value;
+                                                          });
+                                                        
+                                                },
+                                                  ),
+                                                  Text("you have selected : $rating Star",
+                                                  style: TextStyle(fontSize: 15),),*/
+                                                    /* Padding(
+                                         padding: const EdgeInsets.fromLTRB(10, 40, 5, 5),
+                                         child: Column(
+                                                         children: [
+                                                           Rating((rating){
+                                                             setState(() {
+                                                               _rating = rating;
+                                                               });
+
+                                                           },
+                                                           5),
+                                                           SizedBox(height: 10,
+                                                           child:(_rating!=null&&_rating!=0)?
+                                                           Text("you selected $_rating rating",
+                                                           style: TextStyle(fontSize: 10))
+                                                           :SizedBox.shrink())
+                                                         ],
+                                                       ),
+                                       )*/
+                                                ],
+                                              ),
+                                              
+                                               ),
+                                              /* Icon(
+                                              Icons.favorite,
+                                              color: lightColor,
+                                              size: 36,
+                                            ),*/
                                           ],
-                                        ),
-                                      //  Icon(
-                                        //  Icons.favorite,
-                                          //color: lightColor,
-                                          //size: 36,
-                                        //),
-                                      ],
-                                    ),
-                                  ),
-                                  //_specialistsCardInfo(),
-                                ],
-                              ),
+                                        )
+                                     ),
+                 
+                 ),
+                                 
+                               ]
                             ),
                           ),
-                        ]),
-                  ),
-                ),
-              );
+                        ),
+                  );
+                
+              
             }
           }),
       floatingActionButton: FloatingActionButton(
@@ -487,4 +607,53 @@ class MyProducts extends StatelessWidget {
       //)
       //);
   }
+  @override
+     initState() {
+      // TODO: implement initState
+      super.initState();
+      init();
+    }
+
+    void init() async{
+      prefs = await SharedPreferences.getInstance();
+     _rating = prefs.getDouble('_rating') ?? 0.0 ;
+     setState(() {
+            _rating = _rating;
+          });
+
+    }
+
+        SharedPreferences prefs;
+        void rate(value) {
+         // prefs= await SharedPreferences.getInstance();
+        //  _rating = prefs.getDouble('_rating') ?? 0 ;
+         // prefs.setDouble('_rating', _rating);
+          setState(() {
+          _rating =value;                                                                                                            
+         });
+         prefs.setDouble('_rating', _rating);
+        }
+
 }
+  /*void updateName(double rate){
+  setState((){
+    this._rate = rate;
+  });
+  }
+
+}
+
+Future<bool> saveNamePreference(double rate)async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setDouble("rate", rate);
+  return prefs.commit();
+}
+
+Future<double> getNamePreference() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  double rate = prefs.getDouble("rate");
+  return rate;
+}
+void saveName(){
+
+}*/

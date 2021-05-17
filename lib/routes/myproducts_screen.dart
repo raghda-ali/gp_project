@@ -1,9 +1,7 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
-import 'package:gp_project/models/Jobs.dart';
-import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/product.dart';
@@ -14,7 +12,6 @@ import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/myproducts_screen.dart' as pro;
 import 'package:gp_project/routes/myservices_screen.dart' as serv;
-import 'package:gp_project/routes/myjobs_screen.dart' as jo;
 import 'package:gp_project/routes/product_details.dart' as de;
 import 'package:gp_project/services/store.dart';
 //import 'dart:html';
@@ -384,7 +381,7 @@ class MyProducts extends StatelessWidget {
            }
            }
            ),
-            
+        */    
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -397,4 +394,4 @@ class MyProducts extends StatelessWidget {
     );
   }
 }
-
+*/

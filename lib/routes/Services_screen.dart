@@ -2,9 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/services.dart';
-import 'package:gp_project/routes/Editmyservices.dart';
-import 'package:gp_project/routes/Editmyservices.dart';
-import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/MyJobByID.dart';
 import 'package:gp_project/routes/MyProductsByID.dart';
@@ -12,22 +9,31 @@ import 'package:gp_project/routes/MyServicesByID.dart';
 import 'package:gp_project/routes/addmyservice.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/login_screen.dart';
-import 'package:gp_project/routes/signup_screen.dart';
-import 'package:gp_project/widgets/Custom_TextField.dart';
+import 'package:gp_project/routes/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/Products_screen.dart' as pro;
 import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/service_details.dart' as sd;
 import 'package:gp_project/services/store.dart';
-import 'package:gp_project/widgets/moods.dart';
 
+import 'Rating.dart';
 import 'ServicesSearch.dart';
 
-class myservices extends StatelessWidget {
+class myservices extends StatefulWidget {
   static String id = 'Myservices';
+
+  @override
+  _myservicesState createState() => _myservicesState();
+}
+
+class _myservicesState extends State<myservices> {
   final _auth = FirebaseAuth.instance;
+
   final store _store = store();
+
+  int _rating;
+
   @override
   Widget build(BuildContext context) {
     Container _backBgCover() {
@@ -80,8 +86,8 @@ class myservices extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    '${_auth.currentUser.displayName}',
-                    // 'User Name',
+                  //  '${_auth.currentUser.displayName}',
+                     'User Name',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -102,6 +108,13 @@ class myservices extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.person),
               title: Text('Profile'),
+               onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new profile()));
+              },
             ),
             /* ListTile(
                             leading: Icon(Icons.attach_money_outlined),
@@ -188,7 +201,7 @@ class myservices extends StatelessWidget {
                 itemBuilder: (context, index) => SingleChildScrollView(
                   child: GestureDetector(
                     onTap: () {
-                      /* Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);*/
+                       Navigator.pushNamed(context,sd.servicedetails.id,arguments: services[index]);
                     },
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -203,20 +216,20 @@ class myservices extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 7.0,
+                           // height: 7.0,
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: Padding(
-                              padding: EdgeInsets.all(15),
+                              padding: EdgeInsets.all(12),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
                                     padding: EdgeInsets.symmetric(
-                                        vertical: 7.0, horizontal: 14.0),
+                                        vertical: 7.0, horizontal: 20.0),
                                     margin: EdgeInsets.only(
-                                      bottom: 20.0,
+                                      bottom: 0.0,
                                     ),
                                     decoration: BoxDecoration(
                                         color: Colors.white,
@@ -285,7 +298,7 @@ class myservices extends StatelessWidget {
                                                           color: Colors.black45,
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 14,
                                                         ),
                                                       ),
                                                       TextSpan(
@@ -412,10 +425,29 @@ class myservices extends StatelessWidget {
                           ),
                           ]
                           ),*/
+                                                         Column(
+                                                         children: [
+                                                           Rating((rating){
+                                                             setState(() {
+                                                               _rating = rating;
+                                                               });
+
+                                                           },
+                                                           5),
+                                                         /*  SizedBox(height: 10,
+                                                           child:(_rating!=null&&_rating!=0)?
+                                                           Text("you selected $_rating rating",
+                                                           style: TextStyle(fontSize: 10),
+                                                           textAlign: TextAlign.start,)
+                                                           :SizedBox.shrink())*/
+                                                         ],
+                                                       ),
+                                       
                                               ],
                                             ),
                                           ],
                                         ),
+                                       SizedBox(width: 20,),
                                         // Icon(
                                         //         Icons.favorite,
                                         //       color: lightColor,

@@ -31,7 +31,12 @@ class _addmyserviceState extends State<addmyservice> {
   String contact_phone;
   String contact_email;
   String _photo;
-  
+  var selectedType;
+  List<String> _accountType = <String>[
+    'special needs',
+    'Rehabilitation center',
+    'General',
+  ];
 
 Future getImageFromCam() async{
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -121,7 +126,7 @@ Future uploadImage() async {
       onSaved: (String value){
         contact_phone=value;
       },
-    );;
+    );
   }
 
   Widget _buildContact_Email(){
@@ -159,7 +164,7 @@ Future uploadImage() async {
               Flexible(child:
           Container(
           width:MediaQuery.of(context).size.width ,
-          height: 35,
+          height: 30,
           child: Center(
             child: _image == null ? Text('No selected images') :Image.file(_image),
           ),
@@ -170,14 +175,14 @@ Future uploadImage() async {
         children: <Widget>[
           FloatingActionButton(
             heroTag: null,
-            backgroundColor: Colors.purple[200],
+            backgroundColor: Colors.purple[400],
             mini: true,
             onPressed: getImageFromCam,
             child: Icon(Icons.add_a_photo),
             ),
              FloatingActionButton(
                heroTag: null,
-               backgroundColor: Colors.purple[200],
+               backgroundColor: Colors.purple[400],
                mini: true,
                onPressed: getImageFromGallery,
                child: Icon(Icons.wallpaper),
@@ -210,7 +215,46 @@ Future uploadImage() async {
               _buildContact_Phone(),
               _buildContact_Email(),
               SizedBox(height: 20),
-              StreamBuilder<QuerySnapshot>(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.account_box_sharp,
+                    size: 25.0,
+                    color: KMainColor,
+                  ),
+                  SizedBox(width: 50.0),
+                  new Theme(
+                    data: Theme.of(context).copyWith(
+                      canvasColor: Colors.white
+                    ),
+                    child: DropdownButton(
+                      items: _accountType
+                          .map((value) => DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                value: value,
+                              ))
+                          .toList(),
+                      onChanged: (selectedCategoryType) {
+                        print('$selectedCategoryType');
+                        setState(() {
+                          selectedType = selectedCategoryType;
+                        });
+                      },
+                      value: selectedType,
+                      isExpanded: false,
+                      hint: Text(
+                        'Choose Category Type',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              /*StreamBuilder<QuerySnapshot>(
                    stream: FirebaseFirestore.instance.collection("Products").orderBy('ProductTitle').snapshots(),
                       builder: (context, snapshot){
                         if (!snapshot.hasData)
@@ -269,77 +313,122 @@ Future uploadImage() async {
                         
                         }
                         return Text("Loading....");
-                      }),
+                      }),*/
 
-                   
+                   SizedBox(height: 20,),
                     
-              RaisedButton(
-                    onPressed: () {
-                      if(_formkey.currentState.validate()){
-                        _formkey.currentState.save();
-                        _store.addservice(service(
-                           servtitle: title,
-                          /* servcategory: category,*/
-                           servcontact_email: contact_email,
-                           servcontact_phone: contact_phone,
-                           servdescription: description,
-                           servImage: _photo,
-                           servcategory: selectedCurrency,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                        onPressed: () {
+                          if(_formkey.currentState.validate()){
+                            _formkey.currentState.save();
+                            _store.addservice(service(
+                               servtitle: title,
+                              /* servcategory: category,*/
+                               servcontact_email: contact_email,
+                               servcontact_phone: contact_phone,
+                               servdescription: description,
+                               servImage: _photo,
+                               servcategory: selectedType,
 
-                        )
-                        );
-                      }
-                     /* if(_formkey.currentState.validate()){
-                        Scaffold
-                          .of(context)
-                          .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  }*/
-                  Navigator.pushNamed(context, myservices.id);
-                  _formkey.currentState.save();
-                  print(title);
-                    },
-                    shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(20.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 88.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child:const Text(
-                          'Add Service',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 13,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
+                            )
+                            );
+                          }
+                         /* if(_formkey.currentState.validate()){
+                            Scaffold
+                              .of(context)
+                              .showSnackBar(SnackBar(content: Text('Processing Data')));
+                      }*/
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushNamed(context, myservices.id);
+                      });
+                      _formkey.currentState.save();
+                      print(title);
+                        },
+                       /* shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(20.0)),
+                        padding: const EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: const BoxDecoration(
+                            gradient: purpleGradient,
+                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          ),
+                          child: Container(
+                            constraints: const BoxConstraints(
+                                minWidth: 88.0,
+                                minHeight: 36.0), // min sizes for Material buttons
+                            alignment: Alignment.center,
+                            child:const Text(
+                              'Add Service',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 13,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),*/
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                        decoration: BoxDecoration(
+                       gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+                       begin: Alignment.centerLeft,
+                       end: Alignment.centerRight,
+                       ),
+                       borderRadius: BorderRadius.circular(30.0)
+                       ),
+                     child: Container(
+                     constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+                    alignment: Alignment.center,
+                    child: const Text(
+                    "Add Service",
+                    textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white
+               ),
                   ),
+                ),
+               ),
+                      ),
+                
+              SizedBox(width: 20),
                
                    RaisedButton(
-               color: Colors.white60,
+                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+               padding: EdgeInsets.all(0.0),
+               child: Ink(
+              decoration: BoxDecoration(
+               gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+             borderRadius: BorderRadius.circular(30.0)
+          ),
+           child: Container(
+            constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+              alignment: Alignment.center,
+             child: Text(
+          "Upload Image",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: Colors.white
+            ),
+        ),
+      ),
+    ),
+               /*color: Colors.white60,
               shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),*/
               onPressed: (){
                 uploadImage();
               },
-              child: Text('Upload Image'),
              ),
-
-             
-               
-               
-
-
-          
-             
-                         /* RaisedButton(onPressed:(){
+                         ],
+                       ),     
+                       
+                      /* RaisedButton(onPressed:(){
                           Navigator.pushNamed(context,Test.id);
 
                           } ,)*/

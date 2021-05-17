@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-<<<<<<< Updated upstream
 
 class auth {
   final _auth = FirebaseAuth.instance;
@@ -14,8 +13,7 @@ class auth {
     await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
     return "login successfully";
-=======
-import 'package:gp_project/models/user.dart';
+/*import 'package:gp_project/models/user.dart';
 
 class auth {
   //auth(){}
@@ -29,6 +27,7 @@ class auth {
   }
   Future getCurrentUser() async {
     return _firebaseAuth.currentUser;
->>>>>>> Stashed changes
+  }
+}*/
   }
 }

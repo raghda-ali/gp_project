@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/job_details.dart';

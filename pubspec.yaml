@@ -21,10 +21,14 @@ dependencies:
   fluttertoast: ^7.1.8
   line_awesome_icons: ^1.0.4+2
   flutter_rating_bar: ^3.0.1+1
+  get: ^3.0.1
   provider: ^5.0.0-nullsafety.1
   font_awesome_flutter: ^9.0.0-nullsafety
   cupertino_icons: ^0.1.3
-  get: ^3.0.0
+  smooth_star_rating:
+  get_storage:
+  shared_preferences: 
+
 
 dev_dependencies:
   flutter_test:

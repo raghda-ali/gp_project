@@ -4,18 +4,23 @@ import 'package:gp_project/routes/CartScreen.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Editmyservices.dart';
+import 'package:gp_project/routes/Editprofile.dart';
 import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/Jobs_screen.dart';
 import 'package:gp_project/routes/Products_screen.dart';
+import 'package:gp_project/routes/RatingController.dart';
 import 'package:gp_project/routes/Services_screen.dart';
 import 'package:gp_project/routes/job_details.dart';
 import 'package:gp_project/routes/product_details.dart';
+import 'package:gp_project/routes/profile.dart';
 import 'package:gp_project/routes/service_details.dart';
 import 'routes/login_screen.dart';
 import 'routes/signup_screen.dart';
 import 'routes/ForgetPassword.dart';
 import 'provider/cartItem.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 
 
@@ -27,6 +32,8 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseApp app = await Firebase.initializeApp();
+ /* await GetStorage.init();
+  Get.put(RatingController());*/
   runApp(MyApp());
 }
 
@@ -44,9 +51,10 @@ class MyApp extends StatelessWidget {
     
       child:MaterialApp(
       initialRoute: MyHomePage.id,
+      
       routes: {
         LoginScreen.id:(context)=>LoginScreen(),
-        signup_screen.id:(context)=>signup_screen(),
+       signup_screen.id:(context)=>signup_screen(),
         MyHomePage.id:(context)=>MyHomePage(),
        // Home.id:(context)=>Home(),
         myservices.id:(context)=>myservices(),
@@ -60,6 +68,9 @@ class MyApp extends StatelessWidget {
         Editmyjob.id:(context)=>Editmyjob(),
         ForgotPasswordScreen.id:(context)=>ForgotPasswordScreen(),
         CartScreen.id : (context) => CartScreen(),
+        Editprofile.id:(context)=>Editprofile(),
+        profile.id: (context)=>profile(),
+
      /*   Test.id :(context) => Test(),*/
       },
       ),

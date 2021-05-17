@@ -25,40 +25,200 @@ class _productdetailsState extends State<productdetails> {
   Widget build(BuildContext context) {
     product pro = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Image(
-              fit: BoxFit.fill,
-              image : NetworkImage(pro.pImage),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * .1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, CartScreen.id);
-                      },
-                      child: Icon(Icons.shopping_cart,color: Colors.white,))
-                ],
+      body: 
+       Column(
+         children: [
+           Stack(
+            children: <Widget>[
+            
+              Container(
+                //height: MediaQuery.of(context).size.height,
+                //width: MediaQuery.of(context).size.width,
+                height :450,
+                width: 500,
+                child: Image(
+                 fit: BoxFit.fill,
+                  image : NetworkImage(pro.pImage),
+                ),
               ),
-            ),
+  
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, CartScreen.id);
+                          },
+                          child: Icon(Icons.shopping_cart,color: Colors.white,))
+                    ],
+                  ),
+                ),
+              ),
+            ],
+            
+           ),
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Column(children: <Widget>[
+                Opacity(
+                  child: Container(
+                    color: Colors.white,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height*0.2 ,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(children: <Widget>[
+                            Text(
+                              pro.pTitle,
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: 210,),
+                            Text(
+                            '\$${pro .pPrice}',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold,
+                               ),
+                          ),
+                          ],),
+                          
+          
+                       /*   Text(
+                            pro.pTitle,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            '\$${pro.pPrice}',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),*/
+                         
+                          Text(
+                            pro.pDescription,
+                            style: TextStyle(
+                                fontSize: 16,),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              ClipOval(
+                                child: Material(
+                                  color: KMainColor,
+                                  child: GestureDetector(
+                                    onTap: add,
+                                    child: SizedBox(
+                                      child: Icon(Icons.add),
+                                      height: 23,
+                                      width: 23,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                _quantity.toString(),
+                                style: TextStyle(fontSize: 28,),
+                              ),
+                              ClipOval(
+                                child: Material(
+                                  color: KMainColor,
+                                  child: GestureDetector(
+                                    onTap: subtract,
+                                    child: SizedBox(
+                                      child: Icon(Icons.remove),
+                                      height: 23,
+                                      width: 23,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  opacity: 0.9,
+                ),
+             ],
+             ),
+           ),
+         
+         RaisedButton(
+                onPressed: () {
+                 CartItem cartItem = Provider.of<CartItem>(context, listen: false);
+                      pro.pQuantity = _quantity;
+                      bool exist = false;
+                      var productsInCart = cartItem.products;
+                      for (var productInCart in productsInCart) {
+                      if ( productInCart.pTitle == pro.pTitle){
+                         exist = true;
+                          }
+                        }
+                      if (exist) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('you\'ve added this item before'),
+                      ));
+                       } else {
+                       cartItem.addProduct(pro);
+                       Scaffold.of(context).showSnackBar(SnackBar(
+                       content: Text('Added to Cart'),
+                       ));
+                       }
+                },
+               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+               padding: EdgeInsets.all(0.0),
+               child: Ink(
+              decoration: BoxDecoration(
+               gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-          Positioned(
+          borderRadius: BorderRadius.circular(30.0)
+          ),
+           child: Container(
+            constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+              alignment: Alignment.center,
+             child: const Text(
+          "Add To Cart",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: Colors.white
+ ),
+        ),
+      ),
+    ),
+              ),
+      
+         ],
+       ),
+
+  
+      
+       
+          /*Positioned(
             bottom: 0,
-            child: Column(
+           child: Column(
               children: <Widget>[
                 Opacity(
                   child: Container(
@@ -70,32 +230,48 @@ class _productdetailsState extends State<productdetails> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
+                          Row(children: <Widget>[
+                            Text(
+                              pro.pTitle,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: 245,),
+                            Text(
+                            '\$${pro .pPrice}',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold,
+                               ),
+                          ),
+                          ],),
+                          
+          
+                       /*   Text(
                             pro.pTitle,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
+                          
                           SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            pro.pDescription,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w800),
-                          ),
-                          SizedBox(
-                            height: 10,
+                            width: 10,
                           ),
                           Text(
                             '\$${pro.pPrice}',
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
+                          ),*/
+                         
+                          Text(
+                            pro.pDescription,
+                            style: TextStyle(
+                                fontSize: 16,),
                           ),
                           SizedBox(
                             height: 10,
                           ),
+                          
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               ClipOval(
                                 child: Material(
@@ -104,15 +280,15 @@ class _productdetailsState extends State<productdetails> {
                                     onTap: add,
                                     child: SizedBox(
                                       child: Icon(Icons.add),
-                                      height: 29,
-                                      width: 29,
+                                      height: 23,
+                                      width: 23,
                                     ),
                                   ),
                                 ),
                               ),
                               Text(
                                 _quantity.toString(),
-                                style: TextStyle(fontSize: 40),
+                                style: TextStyle(fontSize: 28,),
                               ),
                               ClipOval(
                                 child: Material(
@@ -121,8 +297,8 @@ class _productdetailsState extends State<productdetails> {
                                     onTap: subtract,
                                     child: SizedBox(
                                       child: Icon(Icons.remove),
-                                      height: 29,
-                                      width: 29,
+                                      height: 23,
+                                      width: 23,
                                     ),
                                   ),
                                 ),
@@ -133,7 +309,7 @@ class _productdetailsState extends State<productdetails> {
                       ),
                     ),
                   ),
-                  opacity: .5,
+                  opacity: 0.9,
                
                 ),
                 ButtonTheme(
@@ -173,9 +349,10 @@ class _productdetailsState extends State<productdetails> {
                 ),
               ],
             ),
-          )
-        ],
-      ),
+          ),
+        //],
+        //),*/
+      
     );
   }
 

@@ -186,6 +186,17 @@ class CartScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
+         /* Row(
+            children: <Widget>[
+              Expanded(
+                child: Divider(),
+              ),
+              Text("Cart Items"),
+              Expanded(
+                child: Divider(),
+              ),
+            ],
+          ),*/
           LayoutBuilder(
             builder:(context,constrains){
               if(products.isNotEmpty){
@@ -258,22 +269,37 @@ class CartScreen extends StatelessWidget {
             }
             }
           ),
+
         Builder(
           builder: (context) => ButtonTheme(
-            minWidth: screenWidth,
-            height: screenHeight* .08,
+           // minWidth: screenWidth,
+           // height: screenHeight* .08,
             child :RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(10),
-                  topLeft: Radius.circular(10)
-                )
-              ),
               onPressed: (){
                 showCustomDialog(products,context);
               },
-              child: Text('Order'.toUpperCase()),
-              color: KMainColor,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+               padding: EdgeInsets.all(0.0),
+               child: Ink(
+              decoration: BoxDecoration(
+               gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+                 borderRadius: BorderRadius.circular(30.0)
+               ),
+              child: Container(
+            constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+              alignment: Alignment.center,
+             child: const Text(
+                 "Order",
+                 textAlign: TextAlign.center,
+                 style: TextStyle(
+              color: Colors.white
+             ),
+             ),
+             ),
+             ),
             ),
           ),
         )
