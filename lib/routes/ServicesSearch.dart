@@ -6,6 +6,7 @@ import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/product_details.dart';
 import 'package:gp_project/services/DataController.dart';
 import 'package:gp_project/routes/product_details.dart' as de;
+import 'package:gp_project/routes/service_details.dart';
 
 import '../constance.dart';
 
@@ -45,7 +46,7 @@ class _ServicesSearchState extends State<ServicesSearch> {
             itemBuilder: (BuildContext context, int index) {
               return  GestureDetector(
                  onTap: (){
-                   Navigator.pushNamed(context, de.productdetails.id,
+                   Navigator.pushNamed(context, servicedetails.id,
                           arguments: services[index]);
                   // print('{$snapshotData[index].docs}');
                 // Get.to(productdetails(),

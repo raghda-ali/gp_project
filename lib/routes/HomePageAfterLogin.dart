@@ -34,19 +34,19 @@ final _auth=FirebaseAuth.instance;
   }
 }
 */
-class MyHomePage extends StatefulWidget {
+class MyHomePageAfterLogin extends StatefulWidget {
 
-  static String id='MyHomePage';
-  MyHomePage({Key key, this.title}) : super(key: key);
+  static String id='MyHomePageAfterLogin';
+  MyHomePageAfterLogin({Key key, this.title}) : super(key: key);
   final String title;
  
   
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageAfterLoginState createState() => _MyHomePageAfterLoginState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageAfterLoginState extends State<MyHomePageAfterLogin> {
   int _selectedIndex = 0;
   final _store = store();
 
@@ -183,16 +183,25 @@ class _MyHomePageState extends State<MyHomePage> {
   Positioned _greetings() {
     return Positioned(
       left: 20,
-      bottom: 90,
+      bottom: 100,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            //'Welcome ${_auth.currentUser.email}',
-           'Welcome',
+            'Welcome',
+          // 'Welcome',
             style: TextStyle(
-              fontSize: 36,
+              fontSize: 29,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
+          ),
+          Text( 
+           '${_auth.currentUser.email}',
+          // 'Welcome',
+            style: TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
@@ -202,14 +211,14 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 10,
           ),
           
-          RaisedButton( 
-           // color:Color(0xFFA52C4D),
-            child: Text('LogIn'),
-            onPressed:(){
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return LoginScreen();
-              }));
-             }),
+          // RaisedButton( 
+          //  // color:Color(0xFFA52C4D),
+          //   child: Text('LogIn'),
+          //   onPressed:(){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context){
+          //       return LoginScreen();
+          //     }));
+          //    }),
           
          /* Text(
             'How are you feeling today ?',
@@ -258,124 +267,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-/*
-  Container _appoinmentCard() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.0, 
 
-horizontal: 18.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment:MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Color(0xFFD9D9D9),
-                backgroundImage: NetworkImage(USER_IMAGE),
-                radius: 36.0,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: 'Dr Dan MlayahFX',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '\nSunday,May 5th at 8:00 PM',
-                      style: TextStyle(
-                        color: Colors.black45,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                      ),
-                    ),
-                    TextSpan(
-                      text: '\n570 Kyemmer Stores \nNairobi Kenya C -54 Drive',
-                      style: TextStyle(
-                        color: Colors.black38,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.grey[400],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-          Divider(
-            color: Colors.grey[200],
-            height: 3,
-            thickness: 1,
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-           RaisedButton(
-                    onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                        borderRadius:BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 88.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Book Visit',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 13,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-        /*  Row(
-            mainAxisAlignment: 
-
-MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              _iconBuilder(LineAwesomeIcons.check_circle, 
-
-'Check-in'),
-              _iconBuilder(LineAwesomeIcons.times_circle, 
-
-'Cancel'),
-              _iconBuilder
-
-(LineAwesomeIcons.calendar_times_o, 'Calender'),
-              _iconBuilder(LineAwesomeIcons.compass, 
-
-'Directions'),
-            ],
-          )*/
-        ],
-      ),
-    );
-  }
-*/
   Column _iconBuilder(icon, title) {
     return Column(
       children: <Widget>[
@@ -399,54 +291,7 @@ MainAxisAlignment.spaceEvenly,
     );
   }
 
-  /*Container _notificationCard() {
-    return Container(
-      width: 700,
-      height: 100,
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Color(0xFFBF4954),
-        // gradient: redGradient,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ListTile(
-        leading: Icon(
-          LineAwesomeIcons.calendar_check_o,
-          color: Colors.white,
-          size: 32,
-        ),
-        title: Text(
-          'Our vision for the future is that we can help people with special needs that they can communicate with each other and with the appropriate means and services to help them and to easily promote their jobs and talents.',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        /*trailing: OutlineButton(
-          onPressed: () {},
-          color: Colors.transparent,
-          borderSide: BorderSide(
-            color: Colors.white,
-            width: 1.0,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(26),
-          ),
-          child: Text(
-            'Review & Add Notes',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              fontSize: 12,
-              color: Colors.white,
-            ),
-          ),
-        ),*/
-      ),
-    );
-  }
   
-*/
   Widget _specialistsJobText() {
     return Container(
       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -699,7 +544,7 @@ MainAxisAlignment.spaceEvenly,
                             Card( 
                            color : Colors.white, 
                            elevation: 0,
-                           margin: EdgeInsets.all(0.0),
+                           margin: EdgeInsets.all(0),
                            
                           // margin: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
                            shape: RoundedRectangleBorder(
@@ -784,128 +629,14 @@ MainAxisAlignment.spaceEvenly,
                                  style: TextStyle(
                                    fontSize: 20.0,
                                    color: Colors.purple.shade800,
-                                  // fontWeight: FontWeight.w500
+                                 
                                  ),
                                  ),
                                   ]
                            )
                            )
                            ),
-               // mainAxisAlignment: MainAxisAlignment.start,
-               // crossAxisAlignment: CrossAxisAlignment.start,
-               /*      children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: Color(0xFFD9D9D9),
-                    backgroundImage: AssetImage('images/serviceicon.png'),
-                    //backgroundImage: NetworkImage(USER_IMAGE),
-                    radius: 36.0,
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      StreamBuilder<DocumentSnapshot>(
-                 // ignore: deprecated_member_use
-                 stream: Firestore.instance
-                .collection(kServicesCollection)
-                .doc('BSwR2VsjnYf2obVotH0V')
-                .snapshots(),
-                builder: (BuildContext context,AsyncSnapshot<DocumentSnapshot>snapshot){
-                if(!snapshot.hasData)
-                 {
-        
-                return Center(child: Text('Loading...'),);
-                 }
-                else{ 
-            return Column(
-               children: <Widget>[
-                      Text(
-                     //   'Title :  ${doc.data.get(['ProductTitle'])}',
-                      'Service Category :  ${snapshot.data['ServiceCategory']}',
-                        style: TextStyle(
-                            color: Colors.purple,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        height: 1.3),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                       // 'Price :  ${DocumentSnapshot.data.get(['ProductPrice'])}',
-                        'Title :  ${snapshot.data['ServiceTitle']}',
-                        style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('Description :  ${snapshot.data['ServiceDescription']}',
-                        //'\$${product.pPrice}',
-                        style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('E-mail :  ${snapshot.data['Servicecontact_Email']}',
-                        //'\$${product.pPrice}',
-                        style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('phone :  ${snapshot.data['Servicecontact_Phone']}',
-                        //'\$${product.pPrice}',
-                        style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),
-                      // ignore: missing_return
-                      )]);}
-                      }
-                      ),    */
-                    
-                
-                  //SizedBox(
-                  //  height: 6.0,
-                //  ),
-                  /*RaisedButton(
-                    onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                        borderRadius:BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 88.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Visit',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 13,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),*/
+               
                 ],
               ),
          ),
@@ -1047,69 +778,12 @@ MainAxisAlignment.spaceEvenly,
                       SizedBox(
                         height: 30,
                       ),
-                      /*
-                      Text(
-                       // 'Price :  ${DocumentSnapshot.data.get(['ProductPrice'])}',
-                        'E-mail :  ${snapshot.data['jobcontact_Email']}',
-                        style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('phone :  ${snapshot.data['jobcontact_Phone']}',
-                        //'\$${product.pPrice}',
-                        style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),
-                      // ignore: missing_return
-                      )*/
+                     
                       ]);}
                       }
                       ),
                     
-                /*  RichText(
-                    text: TextSpan(
-                      text: 'Wellness\n',
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        height: 1.3,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Dr Ayor Kruger',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '\nPoplar Pharma Limited',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '\nDermatologist \nSAn Franscisco CA | 5 min',
-                          style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  */
+            
                   SizedBox(
                     height: 6.0,
                   ),

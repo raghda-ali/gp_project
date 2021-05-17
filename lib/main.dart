@@ -5,6 +5,7 @@ import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
 import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/routes/HomePage.dart';
+import 'package:gp_project/routes/HomePageAfterLogin.dart';
 import 'package:gp_project/routes/JobSearch.dart';
 import 'package:gp_project/routes/MyJobByID.dart';
 import 'package:gp_project/routes/MyProductsByID.dart';
@@ -46,13 +47,14 @@ class MyApp extends StatelessWidget {
         LoginScreen.id:(context)=>LoginScreen(),
         signup_screen.id:(context)=>signup_screen(),
         MyHomePage.id:(context)=>MyHomePage(),
+        MyHomePageAfterLogin.id:(context)=>MyHomePageAfterLogin(),
        // Home.id:(context)=>Home(),
         myservices.id:(context)=>myservices(),
         MyProducts.id:(context)=>MyProducts(),
         MyJobs.id:(context)=>MyJobs(),
         Editmyservices.id:(context)=>Editmyservices(),
         Editmyproducts.id:(context)=>Editmyproducts(),
-       /* servicedetails.id:(context)=>servicedetails(),*/
+        servicedetails.id:(context)=>servicedetails(),
         productdetails.id:(context)=>productdetails(),
         jobdetails.id:(context)=>jobdetails(),
         Editmyjob.id:(context)=>Editmyjob(),

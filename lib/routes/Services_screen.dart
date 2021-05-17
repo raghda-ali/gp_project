@@ -22,6 +22,7 @@ import 'package:gp_project/routes/service_details.dart' as sd;
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/widgets/moods.dart';
 
+import 'HomePageAfterLogin.dart';
 import 'ServicesSearch.dart';
 
 class myservices extends StatelessWidget {
@@ -80,11 +81,11 @@ class myservices extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    '${_auth.currentUser.displayName}',
-                    // 'User Name',
+                    '${_auth.currentUser.email}',
+                    //'User Name',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 16,
                     ),
                   ),
                 ])),
@@ -96,7 +97,7 @@ class myservices extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new MyHomePage()));
+                        builder: (context) => new MyHomePageAfterLogin()));
               },
             ),
             ListTile(

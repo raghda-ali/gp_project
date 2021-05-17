@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/Home.dart';
 
 import 'HomePage.dart';
+import 'HomePageAfterLogin.dart';
 
 class LoginScreen extends StatelessWidget {
   static String id='LoginScreen';
@@ -58,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                       final user = await _auth.signInWithEmailAndPassword
                        (email: email, password: password);
                       if(user !=null){
-                        Navigator.pushNamed(context, MyHomePage.id );
+                        Navigator.pushNamed(context, MyHomePageAfterLogin.id );
                       }
                     }catch(e){print(e);}
                     },

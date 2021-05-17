@@ -15,6 +15,7 @@ import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/product_details.dart' as de;
 import 'package:gp_project/services/store.dart';
+import 'HomePageAfterLogin.dart';
 import 'MyJobByID.dart';
 import 'MyProductsByID.dart';
 import 'MyServicesByID.dart';
@@ -81,11 +82,11 @@ class MyProducts extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                   // '${_auth.currentUser.email}',
-                    'User Name',
+                    '${_auth.currentUser.email}',
+                    //'User Name',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 16,
                     ),
                   ),
                 ])),
@@ -95,7 +96,7 @@ class MyProducts extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new MyHomePage()));
+                    new MaterialPageRoute(builder: (context) => new MyHomePageAfterLogin()));
               },
             ),
             ListTile(

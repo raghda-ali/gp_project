@@ -20,6 +20,7 @@ import 'package:gp_project/routes/Jobs_screen.dart' ;
 import 'package:gp_project/routes/job_details.dart'as jo;
 import 'package:gp_project/services/store.dart' ;
 
+import 'HomePageAfterLogin.dart';
 import 'JobSearch.dart';
 import 'MyJobByID.dart';
 
@@ -74,11 +75,11 @@ class MyJobs extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                   // '${_auth.currentUser.displayName}',
-                   'UserName',
+                    '${_auth.currentUser.email}',
+                   //'UserName',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 16,
                     ),
                   ),
                 ])),
@@ -88,7 +89,7 @@ class MyJobs extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new MyHomePage()));
+                    new MaterialPageRoute(builder: (context) => new MyHomePageAfterLogin()));
               },
             ),
             ListTile(
