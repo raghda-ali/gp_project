@@ -52,7 +52,8 @@ class _myservicesState extends State<myservices> {
 
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+     // resizeToAvoidBottomPadding: false,
+     resizeToAvoidBottomInset: false,
       backgroundColor: mainBgColor,
       appBar: AppBar(
           elevation: 0,

@@ -123,7 +123,8 @@ class _Editprofile extends State<Editprofile> {
     //String pId =ModalRoute.of(context).settings.arguments;
     // FieldPath.documentId;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text('My profile'),backgroundColor: KMainColor,),
 
       body: /* StreamBuilder<QuerySnapshot>(

@@ -166,7 +166,7 @@ class CartScreen extends StatelessWidget {
     final double appBarHeight = AppBar().preferredSize.height;
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+     // resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: KMainColor,
         elevation: 0,

@@ -123,7 +123,7 @@ Future uploadImage() async {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
+     // resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       body: Container(
         margin: EdgeInsets.all(25),

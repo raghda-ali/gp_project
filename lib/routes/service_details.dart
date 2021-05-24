@@ -25,7 +25,7 @@ class _servicedetailsState extends State<servicedetails> {
      service serv= ModalRoute.of(context).settings.arguments;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
      
       body: 
        Column(
