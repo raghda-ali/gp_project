@@ -33,6 +33,7 @@ const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
 const KProductImage = 'ProductImage';
 const KProductQuantity = 'ProductQuantity';
+const KProductCategory ='ProductCategory';
 
 const kRateCollection = 'Rates';
 const KRate = 'Rate';

@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/models/product.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/MyJobByID.dart';
@@ -16,7 +19,7 @@ import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/service_details.dart' as sd;
 import 'package:gp_project/services/store.dart';
-
+import 'package:gp_project/models/rate.dart';
 import 'HomePageAfterLogin.dart';
 import 'Rating.dart';
 import 'ServicesSearch.dart';
@@ -30,10 +33,9 @@ class serviceslist extends StatefulWidget {
 
 class _serviceslistState extends State<serviceslist> {
   final _auth = FirebaseAuth.instance;
-
   final store _store = store();
-
   int _rating;
+  final GlobalKey<FormState> _formkey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,8 @@ class _serviceslistState extends State<serviceslist> {
 
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: mainBgColor,
       // appBar: AppBar(
       //     elevation: 0,
@@ -431,11 +434,30 @@ class _serviceslistState extends State<serviceslist> {
                                                            Rating((rating){
                                                              setState(() {
                                                                _rating = rating;
+                                                               /*if(_formkey.currentState.validate()){
+                                                                 _formkey.currentState.save();
+                                                                 _store.addrate(rates(
+                                                                 myrate: _rating,
+                                                                 userID: 
+                                                                 ),
+                                                                 
+                                                                  product(
+                                                                   pId: 
+                                                                  
+                                                                   
+
+                                                                 ));
+                                                               
+                                                               }*/
                                                                });
 
                                                            },
                                                            5),
-                                                         /*  SizedBox(height: 10,
+                                                           
+
+                                                           
+
+                                                          /*  SizedBox(height: 10,
                                                            child:(_rating!=null&&_rating!=0)?
                                                            Text("you selected $_rating rating",
                                                            style: TextStyle(fontSize: 10),

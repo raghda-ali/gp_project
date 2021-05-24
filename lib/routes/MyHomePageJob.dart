@@ -8,7 +8,8 @@ class MyHomePageJob extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-     resizeToAvoidBottomPadding: false,
+   //  resizeToAvoidBottomPadding: false,
+   resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text(''),backgroundColor: KMainColor,),
      body: Stack(
        children: <Widget>[

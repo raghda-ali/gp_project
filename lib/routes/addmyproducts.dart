@@ -26,6 +26,12 @@ class _addmyproductsState extends State<addmyproducts> {
    int price;
   String contact_phone;
   String _photo;
+  var selectedType;
+  List<String> _accountType = <String>[
+    'special needs',
+    'Rehabilitation center',
+    'General',
+  ];
 
   Future getImageFromCam() async{
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -123,7 +129,7 @@ Future uploadImage() async {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
+     // resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       body: Container(
         margin: EdgeInsets.all(25),
@@ -165,7 +171,47 @@ Future uploadImage() async {
               _buildDescription(),
               _buildPrice(),
               _buildContact_Phone(),
-              SizedBox(height: 50),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.account_box_sharp,
+                    size: 25.0,
+                    color: KMainColor,
+                  ),
+                  SizedBox(width: 50.0),
+                  new Theme(
+                    data: Theme.of(context).copyWith(
+                      canvasColor: Colors.white
+                    ),
+                    child: DropdownButton(
+                      items: _accountType
+                          .map((value) => DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                value: value,
+                              ))
+                          .toList(),
+                      onChanged: (selectedCategoryType) {
+                        print('$selectedCategoryType');
+                        setState(() {
+                          selectedType = selectedCategoryType;
+                        });
+                      },
+                      value: selectedType,
+                      isExpanded: false,
+                      hint: Text(
+                        'Choose Category Type',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -179,6 +225,7 @@ Future uploadImage() async {
                           pPrice:  price,
                           pContact_phone:  contact_phone,
                           pImage: _photo,
+                          proCategory: selectedType,
                         )
                         );
                       }

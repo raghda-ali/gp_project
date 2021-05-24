@@ -51,6 +51,7 @@ class store
       KProductPrice:product.pPrice,
       KProductcontact_Phone:product.pContact_phone,
       KProductImage : product.pImage,
+      KProductCategory : product.proCategory,
       KProductUserID : auth.currentUser.uid,
     });
   }
