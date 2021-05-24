@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             SizedBox(
-              height: 50.0,
+              height: 25.0,
             ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -700,7 +700,7 @@ MainAxisAlignment.spaceEvenly,
                             Card( 
                            color : Colors.white, 
                            elevation: 0,
-                           margin: EdgeInsets.all(0.0),
+                           margin: EdgeInsets.all(20.0),
                            
                           // margin: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
                            shape: RoundedRectangleBorder(
@@ -912,13 +912,13 @@ MainAxisAlignment.spaceEvenly,
               ),
          ),
           Container(
-             height: 200,
+             height: 160,
 
                        child: Row(
                         children: <Widget>[
               
                           Padding(
-                            padding: const EdgeInsets.all(40.0),
+                            padding: const EdgeInsets.all(50.0),
                           ),
                             Card( 
                            color : Colors.white, 
@@ -930,7 +930,7 @@ MainAxisAlignment.spaceEvenly,
                              borderRadius: BorderRadius.circular(15.0),
                            ),
                            child :Container(
-                             width: 160,
+                             width: 150,
                              height: 160,
                              child: Column(
                                mainAxisSize: MainAxisSize.min,
