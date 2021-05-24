@@ -3,7 +3,7 @@ import 'dart:ffi';
 class rates {
   String userID;
   String productId;
-  Float myrate;
+  int myrate;
   Float avg;
 
   rates(
