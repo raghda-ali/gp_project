@@ -38,7 +38,7 @@ class _ProductListState extends State<ProductList> {
 
     final store _store = store();
    // double rating = 4.0;
-     double _rating;
+     int _rating;
      double _rate;
 
   @override
@@ -314,7 +314,35 @@ class _ProductListState extends State<ProductList> {
                                                           ],
                                                         ),
                                                       ),
-                                                      RatingBar(
+
+                                                      Column(
+                                                         children: [
+                                                           Rating((rating){
+                                                             setState(() {
+                                                               _rating = rating;
+                                                               /*if(_formkey.currentState.validate()){
+                                                                 _formkey.currentState.save();
+                                                                 _store.addrate(rates(
+                                                                 myrate: _rating,
+                                                                 userID: 
+                                                                 ),
+                                                                 
+                                                                  product(
+                                                                   pId: 
+                                                                  
+                                                                   
+
+                                                                 ));
+                                                               
+                                                               }*/
+                                                               });
+
+                                                           },
+                                                           5),
+                                                ],
+                                                    ),
+                                            
+                                                     /* RatingBar(
                                                         initialRating: 0,
                                                         direction: Axis.horizontal,
                                                         allowHalfRating: true,
@@ -342,7 +370,7 @@ class _ProductListState extends State<ProductList> {
                                                     });*/
                                                         }
                                                         
-                                                        ),
+                                                        ),*/
 
                                                   
                                         
@@ -372,34 +400,14 @@ class _ProductListState extends State<ProductList> {
                                                   ),
                                                   Text("you have selected : $rating Star",
                                                   style: TextStyle(fontSize: 15),),*/
-                                                    /* Padding(
-                                         padding: const EdgeInsets.fromLTRB(10, 40, 5, 5),
-                                         child: Column(
-                                                         children: [
-                                                           Rating((rating){
-                                                             setState(() {
-                                                               _rating = rating;
-                                                               });
-                                                           },
-                                                           5),
-                                                           SizedBox(height: 10,
-                                                           child:(_rating!=null&&_rating!=0)?
-                                                           Text("you selected $_rating rating",
-                                                           style: TextStyle(fontSize: 10))
-                                                           :SizedBox.shrink())
-                                                         ],
-                                                       ),
-                                       )*/
-                                                ],
-                                              ),
-                                              
-                                               ),
-                                            
+                                            ],
+                                          ),
+                                      )
                                           ],
                                         )
                                      ),
                  
-                 ),
+                     ),
                                  
                                ]
                             ),
@@ -424,7 +432,7 @@ class _ProductListState extends State<ProductList> {
 
     void init() async{
       prefs = await SharedPreferences.getInstance();
-     _rating = prefs.getDouble('_rating') ?? 0.0 ;
+     //_rating = prefs.getDouble('_rating') ?? 0.0 ;
      setState(() {
             _rating = _rating;
           });
@@ -439,7 +447,7 @@ class _ProductListState extends State<ProductList> {
           setState(() {
           _rating =value;                                                                                                            
          });
-         prefs.setDouble('_rating', _rating);
+        // prefs.setDouble('_rating', _rating);
         }
 
 }

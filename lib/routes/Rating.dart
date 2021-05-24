@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
-  
+import 'package:gp_project/models/rate.dart';
 
 class Rating extends StatefulWidget{
 final int mazimunRating;
@@ -48,6 +48,10 @@ Widget _buildBody(){
               children: stars,
             ),
           SizedBox(width: 15,),
+          if(_currentRating!=null&&_currentRating!=0)
+          Text("you selected $_currentRating rating",
+          style: TextStyle(fontSize: 10),
+          textAlign: TextAlign.start,)
          /* FlatButton(
             child: Text("Clear", style: TextStyle(color: KMainColor )),
             onPressed: (){

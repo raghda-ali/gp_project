@@ -6,6 +6,7 @@ class product {
   String pId;
   String pImage;
   int pQuantity;
+  String proCategory;
 
   product(
   {     this.pId,
@@ -15,5 +16,6 @@ class product {
         this.pContact_phone,
         this.pImage,
         this.pQuantity,
+        this.proCategory,
         });
 }
