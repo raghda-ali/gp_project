@@ -62,6 +62,13 @@ class _ResultDropDownServicesState extends State<ResultDropDownServices> {
             fontWeight: FontWeight.bold,
            fontSize: 16.0),
      ),
+     trailing: Text(
+       fservices.servdescription,
+       style: TextStyle(
+           color: Colors.black,
+            fontWeight: FontWeight.bold,
+           fontSize: 16.0),
+     ),
     
 
          ),

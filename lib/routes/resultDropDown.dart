@@ -54,7 +54,14 @@ class _ResultDropDownState extends State<ResultDropDown> {
      subtitle: Text(
          //  snapshotData.docs[index].data()['ProductDescription'],
          // productss[index].pDescription,
-         fProduct.pDescription,
+         fProduct.pPrice.toString(),
+       style: TextStyle(
+           color: Colors.black,
+            fontWeight: FontWeight.bold,
+           fontSize: 16.0),
+     ),
+     trailing: Text(
+       fProduct.pDescription,
        style: TextStyle(
            color: Colors.black,
             fontWeight: FontWeight.bold,

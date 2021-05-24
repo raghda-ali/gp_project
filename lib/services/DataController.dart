@@ -42,12 +42,10 @@ Future getServicesData(String collection) async {
         .get();
   }
 
-    Future<QuerySnapshot> filterServiceData(int filterData) async {
+    Future<QuerySnapshot> filterServiceData(String filterData) async {
     return FirebaseFirestore.instance
         .collection('Services')
         .where('ServiceCategory', isEqualTo : filterData)
-       // .where('ProductTitle',isEqualTo: filterData) 
-        //isGreaterthan: filterData)
         .get();
   }
   

@@ -199,7 +199,7 @@ class _myservicesState extends State<myservices> {
                      children: <Widget>[
                        DropdownButton(
                               items: _accountType.map((value) => DropdownMenuItem(
-                                        child: Text(value,
+                                        child: Text(value.toString(),
                                           style: TextStyle(color: Colors.black),
                                         ),
                                         value: value,

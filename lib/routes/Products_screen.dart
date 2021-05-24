@@ -55,10 +55,13 @@ class _MyProductsState extends State<MyProducts> {
     100000,
     1000000,
   ];
+  // Map<int,int>_accountType=<int,int>[
+
+  // ];
+
   bool filter = false;
    List<product> productss = [];
-    final List<String> entries = <String>['A', 'B', 'C'];
-              final List<int> colorCodes = <int>[600, 500, 100];
+  
   @override
   /*void initState(){
   getNamePreference().then(updateName);
