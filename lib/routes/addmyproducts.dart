@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
-import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/Products_screen.dart';
@@ -9,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
 import 'dart:io';
+
+
 
 class addmyproducts extends StatefulWidget {
   static String id ='addproduct';
@@ -22,7 +23,7 @@ class _addmyproductsState extends State<addmyproducts> {
   final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   String title;
   String description;
-  String price;
+   int price;
   String contact_phone;
   String _photo;
 
@@ -55,7 +56,7 @@ Future uploadImage() async {
   Widget _buildTitle(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
-      maxLength: 10,
+      //maxLength: 10,
       validator: (String value){
         if(value.isEmpty){
           return 'Title is required';
@@ -97,7 +98,7 @@ Future uploadImage() async {
         return null;
       },
       onSaved: (String value){
-       price =value;
+       price =int.parse(value);
       },
     );
   }
@@ -105,7 +106,7 @@ Future uploadImage() async {
   Widget _buildContact_Phone(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Contact us by Phone'),
-      maxLength: 10,
+     // maxLength: 10,
       cursorColor: KMainColor,
       validator: (String value){
         if(value.isEmpty){
@@ -115,16 +116,17 @@ Future uploadImage() async {
       onSaved: (String value){
         contact_phone=value;
       },
-    );;
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Product'),backgroundColor: KMainColor,),
       body: Container(
-        margin: EdgeInsets.all(24),
+        margin: EdgeInsets.all(25),
         child: Form(
           key: _formkey,
           child: Column(
@@ -133,7 +135,7 @@ Future uploadImage() async {
               Flexible(child:
           Container(
           width:MediaQuery.of(context).size.width ,
-          height: 100,
+          height: 35,
           child: Center(
             child: _image == null ? Text('No selected images') :Image.file(_image),
           ),
@@ -144,77 +146,106 @@ Future uploadImage() async {
         children: <Widget>[
           FloatingActionButton(
             heroTag: null,
-            backgroundColor: Colors.red[300],
+            backgroundColor: KMainColor,
             mini: true,
             onPressed: getImageFromCam,
             child: Icon(Icons.add_a_photo),
             ),
              FloatingActionButton(
                heroTag: null,
-               backgroundColor: Colors.red[300],
+               backgroundColor: KMainColor,
                mini: true,
                onPressed: getImageFromGallery,
                child: Icon(Icons.wallpaper),
             ),
         ],
       ),
+         
               _buildTitle(),
               _buildDescription(),
               _buildPrice(),
               _buildContact_Phone(),
               SizedBox(height: 50),
-              RaisedButton(
-                onPressed: () {
-                  if(_formkey.currentState.validate()){
-                    _formkey.currentState.save();
-                    _store.addproducts(product(
-                      pTitle:  title,
-                      pDescription:  description,
-                      pPrice:  price,
-                      pContact_phone:  contact_phone,
-                      pImage: _photo,
-                    )
-                    );
-                  }
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      if(_formkey.currentState.validate()){
+                        _formkey.currentState.save();
+                        _store.addproducts(product(
+                          pTitle:  title,
+                          pDescription:  description,
+                          pPrice:  price,
+                          pContact_phone:  contact_phone,
+                          pImage: _photo,
+                        )
+                        );
+                      }
 
-                  Navigator.pushNamed(context, MyProducts.id);
-                  _formkey.currentState.save();
-                  print(title);
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
-                padding: const EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: const BoxDecoration(
-                    gradient: purpleGradient,
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  child: Container(
-                    constraints: const BoxConstraints(
-                        minWidth: 88.0,
-                        minHeight: 36.0), // min sizes for Material buttons
-                    alignment: Alignment.center,
-                    child:const Text(
-                      'add product',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 13,
-                          color: Colors.white),
+                      Navigator.pushNamed(context, MyProducts.id);
+                      _formkey.currentState.save();
+                      print(title);
+                    },
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                            padding: EdgeInsets.all(0.0),
+                            child: Ink(
+                            decoration: BoxDecoration(
+                           gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+                           begin: Alignment.centerLeft,
+                           end: Alignment.centerRight,
+                           ),
+                           borderRadius: BorderRadius.circular(30.0)
+                           ),
+                         child: Container(
+                         constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+                        alignment: Alignment.center,
+                        child: const Text(
+                        "Add Product",
+                        textAlign: TextAlign.center,
+                       style: TextStyle(
+                         color: Colors.white
+                   ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              RaisedButton(
-               color: Colors.white60,
+                   ),
+             ),
+                 SizedBox(width: 20),
+               
+                   RaisedButton(
+                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+               padding: EdgeInsets.all(0.0),
+               child: Ink(
+              decoration: BoxDecoration(
+               gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+             borderRadius: BorderRadius.circular(30.0)
+          ),
+           child: Container(
+            constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+              alignment: Alignment.center,
+             child: Text(
+          "Upload Image",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: Colors.white
+            ),
+        ),
+      ),
+    ),
+               /*color: Colors.white60,
               shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),*/
               onPressed: (){
                 uploadImage();
               },
-              child: Text('Upload Image'),
              ),
-
-            ],
+              ],
+                    
+              )
+            ]
           ),
         ),
       ),

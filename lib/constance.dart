@@ -11,6 +11,11 @@ const midColor = Color(0xFF522349);
 const lightColor = Color(0xFFAB47BC);
 const darkRedColor = Color(0xFFFA695C);
 const lightRedColor = Color(0xFFFD685A);
+const Kusername ='name';
+const Kuserphone='phone';
+const Kuseraddress='adress';
+const Kusertype='type';
+const Kuseremail='email';
 const kServicesCollection = 'Services';
 const KServiceTitle = 'ServiceTitle';
 const KServiceDescription = 'ServiceDescription';
@@ -27,7 +32,14 @@ const KProductDescription = 'ProductDescription';
 const KProductPrice = 'ProductPrice';
 const KProductcontact_Phone = 'Productcontact_Phone';
 const KProductImage = 'ProductImage';
-const KProductUserID = 'UserID';
+const KProductQuantity = 'ProductQuantity';
+
+const kRateCollection = 'Rates';
+const KRate = 'Rate';
+const KRateAverage = 'Average';
+const KRateProductID = 'ProductID';
+const KRateUserID = 'UserID';
+
 
 const kJobCollection = 'jobs';
 const KJobTitle = 'jobTitle';
@@ -36,6 +48,14 @@ const KJobcontact_Email = 'jobcontact_Email';
 const KJobcontact_Phone = 'jobcontact_Phone';
 const KJobImage ='jobImage';
 const KJobUserID='UserID';
+
+const kOrders ='Orders';
+const kOrderDetails ='OrderDetails';
+const kTotallPrice = 'TotallPrice';
+const kAddress ='Address';
+const kProductQuantity ='Quantity';
+const KProductUserID ='UserID';
+
 
 const redGradient = LinearGradient(
   colors: <Color>[darkRedColor, lightRedColor],

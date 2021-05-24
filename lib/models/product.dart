@@ -1,10 +1,11 @@
 class product {
   String pTitle;
   String pDescription;
-  String pPrice;
+   int pPrice;
   String pContact_phone;
   String pId;
   String pImage;
+  int pQuantity;
 
   product(
   {     this.pId,
@@ -12,6 +13,7 @@ class product {
         this.pDescription,
         this.pPrice,
         this.pContact_phone,
-        this.pImage
+        this.pImage,
+        this.pQuantity,
         });
 }

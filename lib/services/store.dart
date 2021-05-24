@@ -4,13 +4,29 @@ import 'package:gp_project/constance.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/models/services.dart';
+import 'package:gp_project/models/user.dart';
+import 'package:gp_project/models/rate.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
+import 'package:gp_project/routes/Editprofile.dart';
 
 class store
 {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  //final CollectionReference _usercollectionrefrence= _firestore.instance.collection("users");
+  create_user(user user ){
+    try{
+      _firestore.collection("users").doc(user.uid).set({
+        'name':user.name,
+        'phone':user.phone,
+        'address':user.address,
+        'email':user.email,
+        'type':user.type
+
+      });
+    }catch(e){print(e);}
+  }
   addservice(service service)
   {
     
@@ -36,6 +52,17 @@ class store
       KProductcontact_Phone:product.pContact_phone,
       KProductImage : product.pImage,
       KProductUserID : auth.currentUser.uid,
+    });
+  }
+
+  addrate(rates rate,product product)
+  {
+
+    _firestore.collection(kRateCollection).add({
+      KRate:rate.myrate,
+      KRateAverage:rate.avg,
+      KRateProductID:product.pId,
+      KRateUserID:auth.currentUser.uid,
     });
   }
 
@@ -89,6 +116,25 @@ class store
     }
     return services;
   }*/
+
+  /*Stream<QuerySnapshot> loaduserinfo(documentId) {
+    return _firestore
+        .collection("users")
+        .doc(documentId).collection("userinfo").snapshots();
+
+  }
+  Stream<QuerySnapshot> loadusers(){
+    return _firestore.collection("users").snapshots();
+  }*/
+  Stream<QuerySnapshot> loaduserdata(documentId) {
+    return _firestore
+        .collection("users")
+        .doc(documentId).collection("usersdata").snapshots();
+
+  }
+  Stream<QuerySnapshot> loadusers(){
+    return _firestore.collection("users").snapshots();
+  }
   Stream<QuerySnapshot> loadServiceDetails(documentId) {
     return _firestore
         .collection(kServicesCollection)
@@ -106,6 +152,12 @@ class store
   Stream<QuerySnapshot> loadjobs(){
     return _firestore.collection(kJobCollection).snapshots();
   }
+  Editprofile(data, documentId) {
+    _firestore
+        .collection("users")
+        .doc(documentId)
+        .update(data);
+  }
 
   Editmyproducts(data, documentId) {
           _firestore
@@ -119,6 +171,7 @@ class store
         .doc(documentId)
         .update(data);
   }
+  
 Stream<QuerySnapshot> loadMyProduct()
 //Future <List<product>>loadMyProduct() async
   {
@@ -141,7 +194,38 @@ Stream<QuerySnapshot> loadMyProduct()
       );
     }}
     return MyProductByID; */
+  
+
+storeOrders(data , List<product> products){
+  var documentRef =_firestore.collection(kOrders).document();
+  documentRef.setData(data);
+  for(var pro in products){
+    documentRef.collection(kOrderDetails).document().setData(
+      {
+        KProductTitle : pro.pTitle,
+        KProductPrice : pro.pPrice,
+        KProductQuantity : pro.pQuantity,
+        KProductImage : pro.pImage,
+      });
   }
+}
+   Future<user> getuser(String uid) async {
+    user retval = user();
+    try{
+      DocumentSnapshot _docSnapshot = await _firestore.collection("users").doc(uid).get();
+      retval.uid=uid;
+      retval.name=_docSnapshot.data()['name'];
+      retval.phone=_docSnapshot.data()["phone"];
+      retval.address=_docSnapshot.data()["address"];
+      retval.email=_docSnapshot.data()["email"];
+      retval.type=_docSnapshot.data()["type"];
+
+    }catch(e){
+      return e;
+    }
+    return retval;
+   }
 
 
+}
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/models/product.dart';
 import 'package:gp_project/models/services.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,11 +25,84 @@ class _servicedetailsState extends State<servicedetails> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
-
-      appBar: AppBar(title: Text('service details'),backgroundColor: KMainColor,),
-
-
-      body:Stack(
+     
+      body: 
+       Column(
+         children: [
+           Stack(
+            children: <Widget>[
+            
+              Container(
+                //height: MediaQuery.of(context).size.height,
+                //width: MediaQuery.of(context).size.width,
+                height :450,
+                width: 500,
+                child: Image(
+                 fit: BoxFit.fill,
+                  image : NetworkImage(serv.servImage),
+                ),
+              ),
+  
+             Padding(
+                padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+            
+           ),
+            Padding(
+             padding: const EdgeInsets.all(5.0),
+             child: Column(children: <Widget>[
+                Opacity(
+                  child: Container(
+                    color: Colors.white,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height*0.32 ,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                            Text(
+                              serv.servtitle,
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                            ),  
+                            Text(
+                            serv.servdescription,
+                            style: TextStyle(
+                                fontSize: 16,),
+                          ),
+                          ],
+                      ),
+                      ),
+                  ),
+                  opacity: 0.9,
+                )
+             ]
+             )
+            ),
+         ]
+       ),
+     
+       );
+  
+  }
+                    
+}
+      /*body:Stack(
         children: <Widget>[
              Column(
               children: <Widget>[
@@ -50,7 +124,7 @@ class _servicedetailsState extends State<servicedetails> {
                           SizedBox(
                             height: 20,
                           ),
-                         /* Row(
+                         Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(FontAwesomeIcons.service,
@@ -120,7 +194,7 @@ class _servicedetailsState extends State<servicedetails> {
                             ),
 
                             ),
-                            */
+                            
 
                           SizedBox(
                             height: 20,
@@ -167,7 +241,7 @@ class _servicedetailsState extends State<servicedetails> {
       
         ],
       )
-    );
+    );*/
       
 
 
@@ -267,9 +341,6 @@ class _servicedetailsState extends State<servicedetails> {
             }
           }
 
-      ),*/
+      ),
+      */
     
-                            }
-  }
-
-

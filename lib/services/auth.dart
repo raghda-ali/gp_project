@@ -13,5 +13,21 @@ class auth {
     await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
     return "login successfully";
+/*import 'package:gp_project/models/user.dart';
+
+class auth {
+  //auth(){}
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+ Stream<String> get onAuthStateChanged => _firebaseAuth.authStateChanges().map(
+        (User user)  => user?.uid,
+  );
+
+  String getCurrentUID() {
+    return _firebaseAuth.currentUser.uid;
+  }
+  Future getCurrentUser() async {
+    return _firebaseAuth.currentUser;
+  }
+}*/
   }
 }

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import "package:get/get.dart";
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/constance.dart';
 
@@ -12,9 +12,19 @@ class DataController extends GetxController {
   }
 
   Future<QuerySnapshot> queryData(String queryString) async {
+    
     return FirebaseFirestore.instance
         .collection('Products')
         .where('ProductTitle', isEqualTo: queryString)
+        .get();
+  }
+
+  Future<QuerySnapshot> filterData(int filterData) async {
+    return FirebaseFirestore.instance
+        .collection('Products')
+        .where('ProductPrice', isLessThanOrEqualTo : filterData)
+       // .where('ProductTitle',isEqualTo: filterData) 
+        //isGreaterthan: filterData)
         .get();
   }
 
@@ -29,6 +39,15 @@ Future getServicesData(String collection) async {
     return FirebaseFirestore.instance
         .collection('Services')
         .where('ServiceTitle', isEqualTo: queryString)
+        .get();
+  }
+
+    Future<QuerySnapshot> filterServiceData(int filterData) async {
+    return FirebaseFirestore.instance
+        .collection('Services')
+        .where('ServiceCategory', isEqualTo : filterData)
+       // .where('ProductTitle',isEqualTo: filterData) 
+        //isGreaterthan: filterData)
         .get();
   }
   

@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/routes/TestCategory.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/services.dart';
@@ -20,6 +23,7 @@ class addmyservice extends StatefulWidget {
 class _addmyserviceState extends State<addmyservice> {
   final _store = store();
   File _image;
+  var selectedCurrency;
  final GlobalKey<FormState>_globalkey = GlobalKey<FormState>();
   String title;
   String category;
@@ -27,6 +31,12 @@ class _addmyserviceState extends State<addmyservice> {
   String contact_phone;
   String contact_email;
   String _photo;
+  var selectedType;
+  List<String> _accountType = <String>[
+    'special needs',
+    'Rehabilitation center',
+    'General',
+  ];
 
 Future getImageFromCam() async{
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -44,7 +54,7 @@ Future getImageFromCam() async{
   }
 
 Future uploadImage() async {    
-  Reference storageReference = FirebaseStorage.instance.ref().child('Images/image4');        
+  Reference storageReference = FirebaseStorage.instance.ref().child('Images/image7');        
   UploadTask uploadTask = storageReference.putFile(_image);   
    var  imageUrl= await (await uploadTask).ref.getDownloadURL();
    print(imageUrl);
@@ -71,7 +81,7 @@ Future uploadImage() async {
     );
   }
 
-  Widget _buildCategory(){
+/*  Widget _buildCategory(){
     return  TextFormField(
       decoration: InputDecoration(labelText: 'Category'),
       //maxLength: 10,
@@ -84,8 +94,8 @@ Future uploadImage() async {
       onSaved: (String value){
         category=value;
       },
-    );;
-  }
+    );
+  }*/
 
   Widget _buildDescription(){
     return TextFormField(
@@ -116,7 +126,7 @@ Future uploadImage() async {
       onSaved: (String value){
         contact_phone=value;
       },
-    );;
+    );
   }
 
   Widget _buildContact_Email(){
@@ -135,16 +145,17 @@ Future uploadImage() async {
       onSaved: (String value){
         contact_email=value;
       },
-    );;
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text('My Service'),backgroundColor: KMainColor,),
       body: Container(
-        margin: EdgeInsets.all(24),
+        margin: EdgeInsets.all(25),
         child: Form(
           key: _formkey,
           child: Column(
@@ -153,7 +164,7 @@ Future uploadImage() async {
               Flexible(child:
           Container(
           width:MediaQuery.of(context).size.width ,
-          height: 100,
+          height: 30,
           child: Center(
             child: _image == null ? Text('No selected images') :Image.file(_image),
           ),
@@ -164,88 +175,270 @@ Future uploadImage() async {
         children: <Widget>[
           FloatingActionButton(
             heroTag: null,
-            backgroundColor: Colors.red[300],
+            backgroundColor: Colors.purple[400],
             mini: true,
             onPressed: getImageFromCam,
             child: Icon(Icons.add_a_photo),
             ),
              FloatingActionButton(
                heroTag: null,
-               backgroundColor: Colors.red[300],
+               backgroundColor: Colors.purple[400],
                mini: true,
                onPressed: getImageFromGallery,
                child: Icon(Icons.wallpaper),
             ),
         ],
       ),
+      /* SizedBox(height: 20,),
+         SingleChildScrollView(
+           child: Row(
+             mainAxisAlignment:  MainAxisAlignment.center,
+             children: <Widget>[
+               Icon(FontAwesomeIcons.moneyBill,
+               size: 25.0,),
+               SizedBox(width: 50.0,),
+               DropdownButton(
+                 items: _accounttype.map((value)=> DropdownMenuItem(
+                   child: Text(
+                     value,
+                     style: TextStyle(color: Colors.white)),
+                   value: value,)).toList()
+                 ),
+      
+             ],
+
+           ),
+         ),*/
               _buildTitle(),
-              _buildCategory(),
+              /*_buildCategory(),*/
               _buildDescription(),
               _buildContact_Phone(),
               _buildContact_Email(),
-              SizedBox(height: 50),
-              RaisedButton(
-                    onPressed: () {
-                      if(_formkey.currentState.validate()){
-                        _formkey.currentState.save();
-                        _store.addservice(service(
-                           servtitle: title,
-                           servcategory: category,
-                           servcontact_email: contact_email,
-                           servcontact_phone: contact_phone,
-                           servdescription: description,
-                           servImage: _photo,
-
-                        )
-                        );
-                      }
-                     /* if(_formkey.currentState.validate()){
-                        Scaffold
-                          .of(context)
-                          .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  }*/
-                  Navigator.pushNamed(context, myservices.id);
-                  _formkey.currentState.save();
-                  print(title);
-                    },
-                    shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(20.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 88.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child:const Text(
-                          'Add Service',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 13,
-                              color: Colors.white),
-                        ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.account_box_sharp,
+                    size: 25.0,
+                    color: KMainColor,
+                  ),
+                  SizedBox(width: 50.0),
+                  new Theme(
+                    data: Theme.of(context).copyWith(
+                      canvasColor: Colors.white
+                    ),
+                    child: DropdownButton(
+                      items: _accountType
+                          .map((value) => DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                value: value,
+                              ))
+                          .toList(),
+                      onChanged: (selectedCategoryType) {
+                        print('$selectedCategoryType');
+                        setState(() {
+                          selectedType = selectedCategoryType;
+                        });
+                      },
+                      value: selectedType,
+                      isExpanded: false,
+                      hint: Text(
+                        'Choose Category Type',
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
+                ],
+              ),
+              /*StreamBuilder<QuerySnapshot>(
+                   stream: FirebaseFirestore.instance.collection("Products").orderBy('ProductTitle').snapshots(),
+                      builder: (context, snapshot){
+                        if (!snapshot.hasData)
+                           Text("No Data");
+                        else {
+                          List<DropdownMenuItem> categoryItems = [];
+                          List<String> categorydata=[];
+                          for (int i = 0; i < snapshot.data.docs.length; i++) {
+                            // DocumentSnapshot snap = snapshot.data.docs[i].get('ProductTitle');
+                            String test = snapshot.data.docs[i].get('ProductTitle').toString();
+                            print('ProductTitle test : $test');
+                           // List<String> categorydata=[];
+                            categorydata.add(test);
+                            categoryItems.add(
+                               DropdownMenuItem(
+                                //  snap.get('ProductTitle')
+                                  child: Text(test,
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  // "${snap.get('ProductTitle')}"
+                                value: test,
+                                ),
+                              );
+                            
+                            
+                          }
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(FontAwesomeIcons.coins,
+                                  size: 25.0, color: Colors.purple[200]),
+                              SizedBox(width: 50.0),
+                              DropdownButton(
+                                items: categoryItems,
+                                onChanged: (categoryValue) {
+                                  final snackBar = SnackBar(
+                                    content: Text(
+                                      'Selected Category is $categoryValue',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  );
+                                  Scaffold.of(context).showSnackBar(snackBar);
+                                  setState(() {
+                                    selectedCurrency = categoryValue;
+                                  });
+                                },
+                                value: selectedCurrency,
+                                isExpanded: false,
+                                hint: new Text(
+                                  "Choose Category Type",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ],
+                          );
+                        
+                        }
+                        return Text("Loading....");
+                      }),*/
+
+                   SizedBox(height: 20,),
+                    
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                        onPressed: () {
+                          if(_formkey.currentState.validate()){
+                            _formkey.currentState.save();
+                            _store.addservice(service(
+                               servtitle: title,
+                              /* servcategory: category,*/
+                               servcontact_email: contact_email,
+                               servcontact_phone: contact_phone,
+                               servdescription: description,
+                               servImage: _photo,
+                               servcategory: selectedType,
+
+                            )
+                            );
+                          }
+                         /* if(_formkey.currentState.validate()){
+                            Scaffold
+                              .of(context)
+                              .showSnackBar(SnackBar(content: Text('Processing Data')));
+                      }*/
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushNamed(context, myservices.id);
+                      });
+                      _formkey.currentState.save();
+                      print(title);
+                        },
+                       /* shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(20.0)),
+                        padding: const EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: const BoxDecoration(
+                            gradient: purpleGradient,
+                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          ),
+                          child: Container(
+                            constraints: const BoxConstraints(
+                                minWidth: 88.0,
+                                minHeight: 36.0), // min sizes for Material buttons
+                            alignment: Alignment.center,
+                            child:const Text(
+                              'Add Service',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 13,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),*/
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                        decoration: BoxDecoration(
+                       gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+                       begin: Alignment.centerLeft,
+                       end: Alignment.centerRight,
+                       ),
+                       borderRadius: BorderRadius.circular(30.0)
+                       ),
+                     child: Container(
+                     constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+                    alignment: Alignment.center,
+                    child: const Text(
+                    "Add Service",
+                    textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white
+               ),
+                  ),
+                ),
+               ),
+                      ),
+                
+              SizedBox(width: 20),
+               
                    RaisedButton(
-               color: Colors.white60,
+                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+               padding: EdgeInsets.all(0.0),
+               child: Ink(
+              decoration: BoxDecoration(
+               gradient: LinearGradient(colors: [KMainColor, Colors.deepPurple[200]],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+             borderRadius: BorderRadius.circular(30.0)
+          ),
+           child: Container(
+            constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+              alignment: Alignment.center,
+             child: Text(
+          "Upload Image",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: Colors.white
+            ),
+        ),
+      ),
+    ),
+               /*color: Colors.white60,
               shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),*/
               onPressed: (){
                 uploadImage();
               },
-              child: Text('Upload Image'),
              ),
+                         ],
+                       ),     
+                       
+                      /* RaisedButton(onPressed:(){
+                          Navigator.pushNamed(context,Test.id);
+
+                          } ,)*/
+               
               /*RaisedButton(
               child: Text('Add',
                 style: TextStyle(
                       fontWeight: FontWeight.w300,
                       fontSize: 13,
-                    color: Colors.white),
+                    color: Colors.black),
                     ),
                 onPressed: (){
                   if(!_formkey.currentState.validate()){

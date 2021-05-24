@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:gp_project/constance.dart';
-import 'package:gp_project/routes/Editmyproducts.dart';
-import 'package:gp_project/routes/Home.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/routes/HomePage.dart';
 import 'package:gp_project/routes/MyProductsByID.dart'as pro;
@@ -14,30 +17,55 @@ import 'package:gp_project/routes/Products_screen.dart' as pro;
 import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' as jo;
 import 'package:gp_project/routes/product_details.dart' as de;
+import 'package:gp_project/routes/productlist.dart';
+import 'package:gp_project/routes/resultDropDown.dart';
+import 'package:gp_project/services/DataController.dart';
 import 'package:gp_project/services/store.dart';
 import 'HomePageAfterLogin.dart';
 import 'MyJobByID.dart';
-import 'MyProductsByID.dart';
 import 'MyServicesByID.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'Rating.dart'; 
+
 //import 'dart:html';
 
-class MyProducts extends StatelessWidget {
-  static String id = 'MyProducts';
-  // @override
-  //_MyProducts createState() => _MyProducts();
-  //}
+class MyProducts extends StatefulWidget {
+   static String id = 'MyProducts';
 
-
-  //class _MyProducts extends State<MyProducts> {
-    final _auth = FirebaseAuth.instance;
-    final store _store = store();
-   // int _currentIndex=0;
-    /*final List<Widget>_pages=[
-      MyHomePage(),
-      Search(),
-    ];*/
   @override
+  _MyProductsState createState() => _MyProductsState();
+}
+
+
+class _MyProductsState extends State<MyProducts> {
+    final _auth = FirebaseAuth.instance;
+
+    final store _store = store();
+   // double rating = 4.0;
+     double _rating;
+     double _rate;
+    QuerySnapshot snapshotData;
+    var  selectedType;
+    List<DropdownMenuItem> categoryItems;
+    List<int> _accountType = <int>[
+    0,
+    500,
+    1000,
+    10000,
+    100000,
+    1000000,
+  ];
+  bool filter = false;
+   List<product> productss = [];
+    final List<String> entries = <String>['A', 'B', 'C'];
+              final List<int> colorCodes = <int>[600, 500, 100];
+  @override
+  /*void initState(){
+  getNamePreference().then(updateName);
+  super.initState();
+}*/
   Widget build(BuildContext context) {
+    
     Container _backBgCover() {
       return Container(
         //height:0.0,
@@ -140,18 +168,6 @@ class MyProducts extends StatelessWidget {
                         builder: (context) => new MyJobByID()));
               },
             ),
-            /*ListTile(
-              leading: Icon(Icons.local_offer_sharp),
-              title: Text('Offers'),
-            ),
-            ListTile(
-              leading: Icon(Icons.chat_bubble),
-              title: Text('My Personal Experience'),
-            ),
-            ListTile(
-              leading: Icon(Icons.chat),
-              title: Text('Chating'),
-            ),*/
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Log out'),
@@ -163,316 +179,84 @@ class MyProducts extends StatelessWidget {
           ],
         ),
       ),
-      body: /*Column(
+      
+      body: Column(
          children :<Widget>[
-           Expanded(child: ListView(children :<Widget>[
-          _pages[_currentIndex],
-        BottomNavigationBar(
-        //showSelectedLabels: false,
-       // showUnselectedLabels: false,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home,
-                size: 30.0,
-              ),
-              title: Text('Home'),
-              backgroundColor: Colors.purple.shade500),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search,
-                size: 30.0,
-              ),
-              title: Text('Search'),
-              backgroundColor: Colors.purple.shade500),
-        ],
-        onTap:(index) {
-          setState((){
-            _currentIndex = index;
-          });
-        },
-      ),*/
-       StreamBuilder<QuerySnapshot>(
-          stream: _store.loadproducts(),
-          builder: (context, Snapshot) {
-            if (!Snapshot.hasData) {
-              return Center(
-                child: Text('My products list is empty'),
-              );
-            } else {
-              List<product> products = [];
-              for (var doc in Snapshot.data.docs) {
-                //var data=doc.data();
-                products.add(product(
-                    pId: doc.id,
-                    pTitle: doc.data()[KProductTitle],
-                    pDescription: doc.data()[KProductDescription],
-                    pPrice: doc.data()[KProductPrice],
-                    pContact_phone: doc.data()[KProductcontact_Phone],
-                    pImage: doc.data()[KProductImage]
-                    ));
-              }
-              return ListView.builder(
-                itemCount: products.length,
-                itemBuilder: (context, index) => SingleChildScrollView(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, de.productdetails.id,
-                          arguments: products[index]);
-                    },
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Stack(
-                          alignment: AlignmentDirectional.topCenter,
-                          overflow: Overflow.visible,
-                          children: <Widget>[
-                          _backBgCover(),
-                              // _greetings(),
-                              // _moodsHolder(),
-                          ],
-                          ),
-                  SizedBox(
-                  height: 7.0,
-                 ),
-                  SingleChildScrollView(
-                 scrollDirection: Axis.vertical,
-                 child: Padding(
-                 padding: EdgeInsets.all(15),
-                 child: Column(
-                 mainAxisAlignment: MainAxisAlignment.start, 
-                 children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 14.0, horizontal: 18.0),
-                                    margin: EdgeInsets.only(
-                                      bottom: 20.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            spreadRadius: 1.0,
-                                            blurRadius: 6.0,
-                                          ),
-                                        ]),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Color(0xFFD9D9D9),
-                                       backgroundImage: NetworkImage('${products[index].pImage}'),
-                                              radius: 36.0,
-                                            ),
-                                            SizedBox(
-                                              width: 10.0,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                RichText(
-                                                  text: TextSpan(
-                                                    text: 'In Cairo\n',
-                                                    style: TextStyle(
-                                                      color: Colors.purple,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      height: 1.3,
-                                                    ),
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                        text:
-                                                            '${products[index].pTitle}',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            '\n ${products[index].pDescription}',
-                                                        style: TextStyle(
-                                                          color: Colors.black38,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              /*  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        height: 6.0,
-                                                      ),
-                                                      RaisedButton(
-                                                        onPressed: () {
-                                                          /* Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Editmyproducts()));*/
-                                                          Navigator.pushNamed(
-                                                              context,
-                                                              Editmyproducts.id,
-                                                              arguments:
-                                                                  products[
-                                                                      index]);
-                                                        },
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        80.0)),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(0.0),
-                                                        child: Ink(
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            gradient:
-                                                                purpleGradient,
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        80.0)),
-                                                          ),
-                                                          child: Container(
-                                                            constraints:
-                                                                const BoxConstraints(
-                                                                    minWidth:
-                                                                        88.0,
-                                                                    minHeight:
-                                                                        36.0), // min sizes for Material buttons
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: const Text(
-                                                              'Edit',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  fontSize: 13,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 6.0,
-                                                      ),
-                                                      RaisedButton(
-                                                        onPressed: () {
-                                                          Scaffold.of(context)
-                                                              .showSnackBar(
-                                                                  SnackBar(
-                                                            backgroundColor:
-                                                                KMainColor,
-                                                            content: Text(
-                                                                'Sure you want to delete this Product?!'),
-                                                            action:
-                                                                SnackBarAction(
-                                                              label: 'Delete',
-                                                              textColor:
-                                                                  Colors.white,
-                                                              onPressed: () {
-                                                                _store.deleteproduct(
-                                                                    products[
-                                                                            index]
-                                                                        .pId);
-                                                                // Some code to undo the change.
-                                                              },
-                                                            ),
-                                                          ));
-                                                        },
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        80.0)),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(0.0),
-                                                        child: Ink(
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            gradient:
-                                                                purpleGradient,
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        80.0)),
-                                                          ),
-                                                          child: Container(
-                                                            constraints:
-                                                                const BoxConstraints(
-                                                                    minWidth:
-                                                                        88.0,
-                                                                    minHeight:
-                                                                        36.0), // min sizes for Material buttons
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: const Text(
-                                                              'Delete',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  fontSize: 13,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ]), */
-                                              ],
-                                            ),
-                                          ],
+     
+                 Flexible(
+                   flex: 1,
+                   child: Row(
+                     children: <Widget>[
+                       DropdownButton(
+                              items: _accountType.map((value) => DropdownMenuItem(
+                                        child: Text(
+                                          value.toString(),
+                                          style: TextStyle(color: Colors.black),
                                         ),
-                                      //  Icon(
-                                        //  Icons.favorite,
-                                          //color: lightColor,
-                                          //size: 36,
-                                        //),
-                                      ],
-                                    ),
-                                  ),
-                                  //_specialistsCardInfo(),
-                                ],
+                                        value: value,
+                                      )
+                                      ).toList(),
+                              onChanged: (selectedCategoryType) async {
+                                print('$selectedCategoryType');
+                                selectedType=selectedCategoryType;
+                                DataController dd = DataController();
+                                  await dd.filterData(selectedCategoryType).then((value)  {
+                                               setState(() {
+                                                
+                                                 snapshotData = value;
+                                                 snapshotData.docs.length != 0 ? filter = true: filter = false;
+                                                  productss.clear();
+                                              print('snap is : ${snapshotData.docs.length}');
+                                            print('value is : ${value.docs[0].data()}');
+                        for (var doc in snapshotData.docs) {
+
+                        //var data=doc.data();
+                        productss.add(product(
+                            pId: doc.id,
+                            pTitle: doc.data()[KProductTitle],
+                            pDescription: doc.data()[KProductDescription],
+                            pPrice: doc.data()[KProductPrice],
+                            pContact_phone: doc.data()[KProductcontact_Phone],
+                            pImage: doc.data()[KProductImage]
+                            ));
+                            print('loop data : ${productss[0].pTitle}');
+                }
+                                  
+                                });
+                                              
+
+                                              });
+                               
+
+
+                               
+                              },//onchanged
+                              value: selectedType,
+                              isExpanded: false,
+                              hint: Text(
+                                'Choose Price Value',
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
-                          ),
-                        ]),
-                  ),
-                ),
-              );
-            }
-          }),
-      floatingActionButton: FloatingActionButton(
+                     ],
+                   ),
+                 ),
+
+    
+                filter ?  Flexible(
+                  flex: 5,
+                   child:   ResultDropDown(productsss: productss,)): Flexible(flex:5 ,child: ProductList()),
+            // Flexible(child: ResultDropDown(productsss:productss,))
+                   
+                 //),
+                 
+
+          
+   
+     
+         ]
+         ),
+        floatingActionButton:  FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => addmyproducts()));
@@ -480,12 +264,34 @@ class MyProducts extends StatelessWidget {
         tooltip: 'Increment',
         child: Icon(Icons.add),
         backgroundColor: KMainColor,
-      ),
+      )
+         );
+            
      
-      );
-      //)
-      //]
-      //)
-      //);
+   
   }
+  @override
+     initState() {
+      super.initState();
+       init();
+    }
+
+     void init() async{
+      prefs = await SharedPreferences.getInstance();
+     _rating = prefs.getDouble('_rating') ?? 0.0 ;
+     setState(() {
+            _rating = _rating;
+          });
+
+    }
+
+        SharedPreferences prefs;
+        void rate(value) {
+          setState(() {
+          _rating =value;                                                                                                            
+         });
+         prefs.setDouble('_rating', _rating);
+        }
+
 }
+

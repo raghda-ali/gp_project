@@ -1,12 +1,16 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/routes/login_screen.dart';
 import 'package:gp_project/routes/Products_screen.dart' as pro;
 import 'package:gp_project/routes/Services_screen.dart' as serv;
 import 'package:gp_project/routes/Jobs_screen.dart' as jo;
+import 'package:gp_project/routes/myproducts_screen.dart' as pro;
+import 'package:gp_project/routes/profile.dart' ;
+import 'package:gp_project/routes/myservices_screen.dart' as serv;
 import 'package:firebase_auth/firebase_auth.dart';
 import '../constance.dart';
+import 'package:gp_project/routes/profile.dart';
 final _auth=FirebaseAuth.instance;
 class Home extends StatefulWidget{
           // int _currentIndex = 0,
@@ -30,8 +34,7 @@ class Home extends StatefulWidget{
   @override
   _HomeState createState() =>_HomeState();
    // getcurrentUser();
-
-} 
+}
 class _HomeState extends State<Home>{
   Widget build(BuildContext context){
         var _currentIndex = 0;
@@ -80,6 +83,13 @@ class _HomeState extends State<Home>{
                           ListTile(
                             leading: Icon(Icons.person),
                             title: Text('Profile'),
+                            onTap: ()
+                            {
+                              Navigator.pop(context);
+                              Navigator.pushNamed(context, profile.id);
+                              //Navigator.push(context, new MaterialPageRoute(builder: (context)=>new profile()));
+                              //Navigator.pushNamed(context,profile.id,arguments: _auth.currentUser.uid);
+                            },
                           ),
                           ListTile(
                             leading: Icon(Icons.attach_money_outlined),
@@ -342,4 +352,4 @@ class _HomeState extends State<Home>{
     // TODO: implement createState
     throw UnimplementedError();
   }
-}
+}*/

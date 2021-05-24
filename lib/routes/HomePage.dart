@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_project/routes/MyHomePageJob.dart';
+import 'package:gp_project/routes/productlist.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -501,7 +502,7 @@ MainAxisAlignment.spaceEvenly,
                final user = _auth.signInWithEmailAndPassword;
                    //    (email: email, password: password);
               if(user !=null){
-                        Navigator.pushNamed(context, MyProducts.id);
+                        Navigator.pushNamed(context, ProductList.id);
                       }
             },
             child:Text(
@@ -770,6 +771,7 @@ MainAxisAlignment.spaceEvenly,
                    //    (email: email, password: password);
                         if(user !=null){
                         Navigator.pushNamed(context, MyJobs.id);
+                         //Navigator.pushNamed(context, ProductList.id);
                       }
                         },
                          child:CircleAvatar(
@@ -942,6 +944,7 @@ MainAxisAlignment.spaceEvenly,
                    //    (email: email, password: password);
                         if(user !=null){
                         Navigator.pushNamed(context, MyProducts.id);
+                       // Navigator.pushNamed(context, ProductList.id);//myproduct
                       }
                           },
                           child:CircleAvatar(
