@@ -55,11 +55,15 @@ class _MyProductsState extends State<MyProducts> {
     100000,
     1000000,
   ];
-  // Map<int,int>_accountType=<int,int>[
-
-  // ];
+  List<String> _accountTypee = <String>[
+    'special needs',
+    'Rehabilitation center',
+    'General',
+  ];
+  //var _accountType={};
 
   bool filter = false;
+    bool filter2 = false;
    List<product> productss = [];
   
   @override
@@ -235,6 +239,52 @@ class _MyProductsState extends State<MyProducts> {
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
+
+                //             DropdownButton(
+                //               items: _accountTypee.map((value) => DropdownMenuItem(
+                //                         child: Text(
+                //                           value.toString(),
+                //                           style: TextStyle(color: Colors.black),
+                //                         ),
+                //                         value: value,
+                //                       )
+                //                       ).toList(),
+                //               onChanged: (selectedCategoryType) async {
+                //                 print('$selectedCategoryType');
+                //                 selectedType=selectedCategoryType;
+                //                 DataController dd = DataController();
+                //                   await dd.filterData2(selectedCategoryType).then((value)  {
+                //                                setState(() {
+                                                
+                //                                  snapshotData = value;
+                //                                  //snapshotData.docs.length != 0 ? filter2 = true: filter2 = false;
+                //                                   productss.clear();
+                //                               print('snap is : ${snapshotData.docs.length}');
+                //                             print('value is : ${value.docs[0].data()}');
+                //         for (var doc in snapshotData.docs) {
+
+                //         //var data=doc.data();
+                //         productss.add(product(
+                //             pId: doc.id,
+                //             pTitle: doc.data()[KProductTitle],
+                //             pDescription: doc.data()[KProductDescription],
+                //             pPrice: doc.data()[KProductPrice],
+                //             pContact_phone: doc.data()[KProductcontact_Phone],
+                //             pImage: doc.data()[KProductImage]
+                //             ));
+                //             print('loop data : ${productss[0].pTitle}');
+                // }
+                                  
+                //                 });
+                //                 });                               
+                //               },//onchanged
+                //               value: selectedType,
+                //               isExpanded: false,
+                //               hint: Text(
+                //                 'Choose Category Value',
+                //                 style: TextStyle(color: Colors.black),
+                //               ),
+                //             ),
                      ],
                    ),
                  ),
@@ -242,10 +292,13 @@ class _MyProductsState extends State<MyProducts> {
     
                 filter ?  Flexible(
                   flex: 5,
+                  // childern<Widget>[   ResultDropDown(productsss: productss,)): Flexible(flex:5 ,child: ProductList()),
                    child:   ResultDropDown(productsss: productss,)): Flexible(flex:5 ,child: ProductList()),
-            // Flexible(child: ResultDropDown(productsss:productss,))
-                   
-                 //),
+                  //  filter2 ? Flexible(
+                  // flex: 5,
+                  // // childern<Widget>[   ResultDropDown(productsss: productss,)): Flexible(flex:5 ,child: ProductList()),
+                  //  child:   ResultDropDown(productsss: productss,)),
+            
                  
 
           

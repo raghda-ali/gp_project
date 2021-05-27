@@ -27,6 +27,14 @@ class DataController extends GetxController {
         //isGreaterthan: filterData)
         .get();
   }
+  
+  Future<QuerySnapshot> filterData2(String queryString) async {
+    
+    return FirebaseFirestore.instance
+        .collection('Products')
+        .where('ProductCategory', isEqualTo: queryString)
+        .get();
+  }
 
 Future getServicesData(String collection) async {
     final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
