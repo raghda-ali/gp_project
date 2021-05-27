@@ -228,5 +228,21 @@ storeOrders(data , List<product> products){
    }
 
 
+   Future<rates> getratedata(String uid) async{
+     rates retval = rates();
+     try{
+      DocumentSnapshot _docSnapshot = await _firestore.collection("users").doc(uid).get();
+      retval.userID = _docSnapshot.data()['userID'];
+      retval.productId = _docSnapshot.data()['productId'];
+      retval.myrate =_docSnapshot.data()['myrate'];
+      
+     }catch(e){
+       return e;
+     }
+     return retval;
+
+   }
+
+
 }
 
