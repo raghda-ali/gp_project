@@ -124,6 +124,7 @@ _Rating createState()=> _Rating();
 
 class _Rating extends State<Rating> {
 int _currentRating =0;
+rates ratee; 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final store _store = store();
 final GlobalKey<FormState>_favorite = GlobalKey<FormState>(debugLabel: '_ProductListState');
@@ -146,17 +147,21 @@ Widget _buildBody(){
             child:  _buildRatingStar(index),
             onTap: (){
               setState(() {
+               
                         _currentRating =index+1;
                         //StreamBuilder<QuerySnapshot>(
                       // stream:FirebaseFirestore.instance.collection("Rates").orderBy('Rate').snapshots(),
-                        FutureBuilder(
+                       /* FutureBuilder(
                           future: _store.getratedata(auth.currentUser.uid),
                         builder: (_, snapshot){
                        if (snapshot.connectionState == ConnectionState.done) {
                          
                          return Text('Loading');
-                         //addRates();
-                        /*if(_favorite.currentState.validate()){
+                         //addRates();*/
+                         if(ratee.userID!=auth.currentUser.uid&&ratee.productId!=docId){
+                          // updateRates();
+                         
+                        if(_favorite.currentState.validate()){
                          _favorite.currentState.save();
                         _store.addrate(rates(
                         myrate: _currentRating,
@@ -167,23 +172,21 @@ Widget _buildBody(){
                         pId: docId ,
                         ));
                         
-                        }*/
+                        
                         }else{
-                          addRates();
-                      ///  updateRates();
+                          //addRates();
+                       updateRates();
                           //return rate.doc().update({'Rate':_currentRating});
                         }
-                      
-                        
                          return null;
-                          });
-                        
+                          }});
+                 this.widget.onRatingSelected(_currentRating);
+  
               });
-                    this.widget.onRatingSelected(_currentRating);
                   
-            },
+  
           
-        );
+        
 
   });
   return SingleChildScrollView(
