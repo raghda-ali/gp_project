@@ -88,7 +88,8 @@ class _ProductListState extends State<ProductList> {
                       pPrice: doc.data()[KProductPrice],
                       pContact_phone: doc.data()[KProductcontact_Phone],
                       pImage: doc.data()[KProductImage],
-                      prodID: doc.id
+                      prodID: doc.id,
+                      average: doc.data()[KProductRateAverage]
                       ));
                 }
                 return ListView.builder(
