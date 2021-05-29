@@ -34,6 +34,10 @@ const KProductcontact_Phone = 'Productcontact_Phone';
 const KProductImage = 'ProductImage';
 const KProductQuantity = 'ProductQuantity';
 const KProductCategory ='ProductCategory';
+const KProductRate ='ProductRate';
+const KProductRateAverage ='AverageRate';
+const KProductID ='ProductID';
+const KProductpersonNum = 'PersonNum';
 
 const kRateCollection = 'Rates';
 const KRate = 'Rate';

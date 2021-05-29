@@ -13,8 +13,11 @@ class store
 {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-
+  //DocumentReference docRef = await feedbackCollection.document();
+ //DocumentReference docRef =FirebaseFirestore.instance.collection(kProductCollection).doc();
   //final CollectionReference _usercollectionrefrence= _firestore.instance.collection("users");
+  DocumentReference ref =  FirebaseFirestore.instance.collection(kProductCollection).doc();
+  
   create_user(user user ){
     try{
       _firestore.collection("users").doc(user.uid).set({
@@ -45,7 +48,8 @@ class store
   addproducts(product product)
   {
 
-    _firestore.collection(kProductCollection).add({
+    //_firestore.collection(kProductCollection).add({
+      ref.setData({
       KProductTitle:product.pTitle,
       KProductDescription:product.pDescription,
       KProductPrice:product.pPrice,
@@ -53,19 +57,27 @@ class store
       KProductImage : product.pImage,
       KProductCategory : product.proCategory,
       KProductUserID : auth.currentUser.uid,
+      KProductRate:0,
+      KProductRateAverage:0.0,
+      KProductpersonNum:0,
+    KProductID: ref.documentID,
+    // ... add more fields here
+//})
+    //  KProductID : docRef.id
+
     });
   }
 
-  addrate(rates rate,product product)
-  {
+  // addrate(rates rate,product product)
+  // {
 
-    _firestore.collection(kRateCollection).add({
-      KRate:rate.myrate,
-      KRateAverage:rate.avg,
-      KRateProductID:product.pId,
-      KRateUserID:auth.currentUser.uid,
-    });
-  }
+  //   _firestore.collection(kRateCollection).add({
+  //     KRate:rate.myrate,
+  //     KRateAverage:rate.avg,
+  //     KRateProductID:product.pId,
+  //     KRateUserID:auth.currentUser.uid,
+  //   });
+  // }
 
   addjobs(job job)
   {

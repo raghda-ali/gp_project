@@ -38,6 +38,7 @@ class _ProductListState extends State<ProductList> {
      double _rate;
      double avg;
      double sum;
+     
     final GlobalKey<FormState>_favorite = GlobalKey<FormState>(debugLabel: '_ProductListState');
     String docId = FirebaseFirestore.instance.collection('product').doc().documentID;
 
@@ -65,114 +66,7 @@ class _ProductListState extends State<ProductList> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: mainBgColor,
-      // appBar: AppBar(
-      //     elevation: 0,
-      //     title: Text('Products',
-      //         style: TextStyle(
-      //           fontSize: 25,
-      //         )),
-      //     actions: [IconButton(icon: Icon(Icons.search),iconSize:30, onPressed:(){
-      //        Navigator.pop(context);
-      //           Navigator.push(
-      //               context,
-      //               new MaterialPageRoute(
-      //                   builder: (context) => new Search()));
-      //     })],
-      //     backgroundColor: KMainColor),
-      // drawer: Drawer(
-      //   child: ListView(
-      //     padding: EdgeInsets.zero,
-      //     children: <Widget>[
-      //       DrawerHeader(
-      //           decoration: BoxDecoration(color: KMainColor),
-      //           child: Column(children: <Widget>[
-      //             Icon(
-      //               Icons.account_circle,
-      //               size: 100,
-      //               color: Colors.white,
-      //             ),
-      //             Text(
-      //              // '${_auth.currentUser.email}',
-      //               'User Name',
-      //               style: TextStyle(
-      //                 color: Colors.white,
-      //                 fontSize: 24,
-      //               ),
-      //             ),
-      //           ])),
-      //       ListTile(
-      //         leading: Icon(Icons.home),
-      //         title: Text('Home page'),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context,
-      //               new MaterialPageRoute(builder: (context) => new MyHomePage()));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.person),
-      //         title: Text('Profile'),
-      //       ),
-      //       /*ListTile(
-      //         leading: Icon(Icons.attach_money_outlined),
-      //         title: Text('My Donation'),
-      //       ),*/
-      //       ListTile(
-      //         leading: Icon(Icons.support),
-      //         title: Text('My Services'),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(
-      //               context,
-      //               new MaterialPageRoute(
-      //                   builder: (context) => new MyServicesByID()));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.shopping_cart),
-      //         title: Text('My Product'),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(
-      //               context,
-      //               new MaterialPageRoute(
-      //                   builder: (context) => new pro.MyProductsByID()));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.work),
-      //         title: Text('My Jobs'),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(
-      //               context,
-      //               new MaterialPageRoute(
-      //                   builder: (context) => new MyJobByID()));
-      //         },
-      //       ),
-      //       /*ListTile(
-      //         leading: Icon(Icons.local_offer_sharp),
-      //         title: Text('Offers'),
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.chat_bubble),
-      //         title: Text('My Personal Experience'),
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.chat),
-      //         title: Text('Chating'),
-      //       ),*/
-      //       ListTile(
-      //         leading: Icon(Icons.exit_to_app),
-      //         title: Text('Log out'),
-      //         onTap: () {
-      //           _auth.signOut();
-      //           Navigator.pushNamed(context, LoginScreen.id);
-      //         },
-      //       )
-      //     ],
-      //   ),
-      // ),
+ 
       body: 
        Form(
          key: _favorite,
@@ -193,7 +87,8 @@ class _ProductListState extends State<ProductList> {
                       pDescription: doc.data()[KProductDescription],
                       pPrice: doc.data()[KProductPrice],
                       pContact_phone: doc.data()[KProductcontact_Phone],
-                      pImage: doc.data()[KProductImage]
+                      pImage: doc.data()[KProductImage],
+                      prodID: doc.id
                       ));
                 }
                 return ListView.builder(
@@ -322,6 +217,7 @@ class _ProductListState extends State<ProductList> {
                                                                                         
                                                             Column(
                                                                children: [
+                                                                //  Rating(onRatingSelected: rating ,)
                                                                  Rating((rating){
                                                                    setState(() {
                                                                      _rating = rating;
@@ -340,7 +236,7 @@ class _ProductListState extends State<ProductList> {
                                                                     // sum = sum + _rating;
                                                                      //avg = sum/5;
                                                                  },
-                                                                 5),
+                                                                  products[index] , 5),
                                                       ],
                                                           ),
                                                   
@@ -385,6 +281,7 @@ class _ProductListState extends State<ProductList> {
                                                         ],
                                                            ),
                                                           SizedBox(width: 20,),
+                                                          
                                                         /*  SmoothStarRating(
                                                               rating: rating,
                                                               size: 45,

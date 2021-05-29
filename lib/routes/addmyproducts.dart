@@ -26,6 +26,7 @@ class _addmyproductsState extends State<addmyproducts> {
    int price;
   String contact_phone;
   String _photo;
+  String prooID;
   var selectedType;
   List<String> _accountType = <String>[
     'special needs',
@@ -226,6 +227,7 @@ Future uploadImage() async {
                           pContact_phone:  contact_phone,
                           pImage: _photo,
                           proCategory: selectedType,
+                         
                         )
                         );
                       }

@@ -118,6 +118,13 @@ class _productdetailsState extends State<productdetails> {
                           SizedBox(
                             height: 10,
                           ),
+                           Text('Product Rate: ${pro.average.toString()}',
+                            style: TextStyle(
+                                fontSize: 16,),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,

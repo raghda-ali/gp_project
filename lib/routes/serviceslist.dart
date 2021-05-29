@@ -431,28 +431,28 @@ class _serviceslistState extends State<serviceslist> {
                           ),*/
                                                          Column(
                                                          children: [
-                                                           Rating((rating){
-                                                             setState(() {
-                                                               _rating = rating;
-                                                               /*if(_formkey.currentState.validate()){
-                                                                 _formkey.currentState.save();
-                                                                 _store.addrate(rates(
-                                                                 myrate: _rating,
-                                                                 userID: 
-                                                                 ),
+                                                          //  Rating((rating){
+                                                          //    setState(() {
+                                                          //      _rating = rating;
+                                                          //      /*if(_formkey.currentState.validate()){
+                                                          //        _formkey.currentState.save();
+                                                          //        _store.addrate(rates(
+                                                          //        myrate: _rating,
+                                                          //        userID: 
+                                                          //        ),
                                                                  
-                                                                  product(
-                                                                   pId: 
+                                                          //         product(
+                                                          //          pId: 
                                                                   
                                                                    
 
-                                                                 ));
+                                                          //        ));
                                                                
-                                                               }*/
-                                                               });
+                                                          //      }*/
+                                                          //      });
 
-                                                           },
-                                                           5),
+                                                          //  },
+                                                          //  5),
                                                            
 
                                                            

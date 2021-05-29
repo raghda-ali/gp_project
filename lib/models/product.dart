@@ -7,6 +7,10 @@ class product {
   String pImage;
   int pQuantity;
   String proCategory;
+  int currentRate;
+  double average;
+  String prodID ;
+  int personnom;
 
   product(
   {     this.pId,
@@ -17,5 +21,9 @@ class product {
         this.pImage,
         this.pQuantity,
         this.proCategory,
+        this.average,
+        this.currentRate,
+        this.prodID,
+        this.personnom
         });
 }
