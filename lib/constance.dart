@@ -53,6 +53,15 @@ const KJobcontact_Email = 'jobcontact_Email';
 const KJobcontact_Phone = 'jobcontact_Phone';
 const KJobImage ='jobImage';
 const KJobUserID='UserID';
+const KJobId = 'jobID';
+const KJobowner ='jobOwner';
+
+
+const kNotificationCollection = 'notification';
+const KJobID = 'JobID';
+const KOwnerID = 'OwnerID';
+const KUsersID = 'UsersID';
+
 
 const kOrders ='Orders';
 const kOrderDetails ='OrderDetails';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gp_project/constance.dart';
 import 'package:gp_project/services/store.dart';
 import 'package:gp_project/models/Jobs.dart';
+import 'package:gp_project/models/notification.dart';
 import 'package:gp_project/routes/Jobs_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -23,7 +24,9 @@ class _addmyjobsState extends State<addmyjobs> {
   String contact_Email;
   String contact_phone;
   String _photo;
-
+  String id;
+  String owner;
+  List<String>userss;
 Future getImageFromCam() async{
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
@@ -176,6 +179,11 @@ Future uploadImage() async {
                       jImage: _photo,
                     )
                     );
+                    _store.addnotification(notification(
+                      // jId: id,
+                      usersID :userss,
+                      //ownerId:owner,
+                    ));
                   }
 
                   Navigator.pushNamed(context,MyJobs.id);

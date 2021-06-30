@@ -23,6 +23,7 @@ import 'package:gp_project/services/store.dart' ;
 import 'HomePageAfterLogin.dart';
 import 'JobSearch.dart';
 import 'MyJobByID.dart';
+import 'chating.dart';
 
 
 
@@ -30,8 +31,11 @@ class MyJobs extends StatelessWidget {
   static String id = 'MyJobs';
   final store _store = store();
   final _auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  
   @override
   Widget build(BuildContext context) {
+    var idd = auth.currentUser.uid;
     Container _backBgCover() {
       return Container(
         //height:0.0,
@@ -129,6 +133,17 @@ class MyJobs extends StatelessWidget {
                             {
                               Navigator.pop(context);
                               Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyJobByID()));
+                            },
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.chat),
+                            title: Text('Chating'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new chating()));
                             },
                           ),
             /*ListTile(
@@ -273,7 +288,7 @@ class MyJobs extends StatelessWidget {
                                                             ],
                                                           ),
                                                         ),
-                                                      /*  Row(
+                                                       Row(
                                                             mainAxisAlignment:
                                                             MainAxisAlignment.spaceBetween,
                                                             children: <Widget>[
@@ -283,7 +298,8 @@ class MyJobs extends StatelessWidget {
                                                               ),
                                                               RaisedButton(
                                                                 onPressed: () {
-                                                                  Navigator.pushNamed(context,Editmyjob.id,arguments: jobs[index]);
+                                                                  //Navigator.pushNamed(context,Editmyjob.id,arguments: jobs[index]);
+                 FirebaseFirestore.instance.collection(kNotificationCollection).document('aHQ5kWyLlPsFZOi8gqi2').updateData({'UsersID' : FieldValue.arrayUnion([idd],)});
                                                                 },
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:
@@ -302,7 +318,7 @@ class MyJobs extends StatelessWidget {
                                                                         36.0), // min sizes for Material buttons
                                                                     alignment: Alignment.center,
                                                                     child: const Text(
-                                                                      'Edit',
+                                                                      'Submit',
                                                                       style: TextStyle(
                                                                           fontWeight: FontWeight.w300,
                                                                           fontSize: 13,
@@ -353,53 +369,53 @@ class MyJobs extends StatelessWidget {
                                                               ),
                                                               //.................................................
 ,                                                            */
-                                                              SizedBox(
-                                                                height: 6.0,
-                                                                  width: 5.0                                                              ),
-                                                              RaisedButton(
-                                                                onPressed: () {
-                                                                  Scaffold.of(context)
-                                                                      .showSnackBar(SnackBar(backgroundColor: KMainColor,
-                                                                    content: Text(
-                                                                        'Sure you want to delete this job?!'),
-                                                                    action: SnackBarAction(
-                                                                      label: 'Delete',
-                                                                      textColor: Colors.white,
-                                                                      onPressed: () {
-                                                                        _store.deletejob(
-                                                                            jobs[index].jId);
-                                                                        // Some code to undo the change.
-                                                                      },
-                                                                    ),
-                                                                  ));
-                                                                },
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                    BorderRadius.circular(80.0)),
-                                                                padding: const EdgeInsets.all(0.0),
-                                                                child: Ink(
-                                                                  decoration: const BoxDecoration(
-                                                                    gradient: purpleGradient,
-                                                                    borderRadius: BorderRadius.all(
-                                                                        Radius.circular(80.0)),
-                                                                  ),
-                                                                  child: Container(
-                                                                    constraints: const BoxConstraints(
-                                                                        minWidth: 88.0,
-                                                                        minHeight:
-                                                                        36.0), // min sizes for Material buttons
-                                                                    alignment: Alignment.center,
-                                                                    child: const Text(
-                                                                      'Delete',
-                                                                      style: TextStyle(
-                                                                          fontWeight: FontWeight.w300,
-                                                                          fontSize: 13,
-                                                                          color: Colors.white),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ]),*/
+                                                              // SizedBox(
+                                                              //   height: 6.0,
+                                                              //     width: 5.0                                                              ),
+                                                              // RaisedButton(
+                                                              //   onPressed: () {
+                                                              //     Scaffold.of(context)
+                                                              //         .showSnackBar(SnackBar(backgroundColor: KMainColor,
+                                                              //       content: Text(
+                                                              //           'Sure you want to delete this job?!'),
+                                                              //       action: SnackBarAction(
+                                                              //         label: 'Delete',
+                                                              //         textColor: Colors.white,
+                                                              //         onPressed: () {
+                                                              //           _store.deletejob(
+                                                              //               jobs[index].jId);
+                                                              //           // Some code to undo the change.
+                                                              //         },
+                                                              //       ),
+                                                              //     ));
+                                                              //   },
+                                                              //   shape: RoundedRectangleBorder(
+                                                              //       borderRadius:
+                                                              //       BorderRadius.circular(80.0)),
+                                                              //   padding: const EdgeInsets.all(0.0),
+                                                              //   child: Ink(
+                                                              //     decoration: const BoxDecoration(
+                                                              //       gradient: purpleGradient,
+                                                              //       borderRadius: BorderRadius.all(
+                                                              //           Radius.circular(80.0)),
+                                                              //     ),
+                                                              //     child: Container(
+                                                              //       constraints: const BoxConstraints(
+                                                              //           minWidth: 88.0,
+                                                              //           minHeight:
+                                                              //           36.0), // min sizes for Material buttons
+                                                              //       alignment: Alignment.center,
+                                                              //       child: const Text(
+                                                              //         'Delete',
+                                                              //         style: TextStyle(
+                                                              //             fontWeight: FontWeight.w300,
+                                                              //             fontSize: 13,
+                                                              //             color: Colors.white),
+                                                              //       ),
+                                                              //     ),
+                                                              //   ),
+                                                              // ),
+                                                            ]),
                                                       ],
                                                     ),
                                                   ],
@@ -435,3 +451,134 @@ class MyJobs extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//   Row(
+//                                                             mainAxisAlignment:
+//                                                             MainAxisAlignment.spaceBetween,
+//                                                             children: <Widget>[
+//                                                               SizedBox(
+//                                                                 height: 6.0,
+//                                                                 width: 5.0
+//                                                               ),
+//                                                               RaisedButton(
+//                                                                 onPressed: () {
+//                                                                   Navigator.pushNamed(context,Editmyjob.id,arguments: jobs[index]);
+//                                                                 },
+//                                                                 shape: RoundedRectangleBorder(
+//                                                                     borderRadius:
+//                                                                     BorderRadius.circular(80.0)),
+//                                                                 padding: const EdgeInsets.all(0.0),
+//                                                                 child: Ink(
+//                                                                   decoration: const BoxDecoration(
+//                                                                     gradient: purpleGradient,
+//                                                                     borderRadius: BorderRadius.all(
+//                                                                         Radius.circular(80.0)),
+//                                                                   ),
+//                                                                   child: Container(
+//                                                                     constraints: const BoxConstraints(
+//                                                                         minWidth: 88.0,
+//                                                                         minHeight:
+//                                                                         36.0), // min sizes for Material buttons
+//                                                                     alignment: Alignment.center,
+//                                                                     child: const Text(
+//                                                                       'Edit',
+//                                                                       style: TextStyle(
+//                                                                           fontWeight: FontWeight.w300,
+//                                                                           fontSize: 13,
+//                                                                           color: Colors.white),
+//                                                                     ),
+//                                                                   ),
+//                                                                 ),
+//                                                               ),
+
+//                                                       // testing...................
+//                                                             /*  SizedBox(
+//                                                                 height: 6.0,
+//                                                               ),
+//                                                               RaisedButton(
+//                                                                 onPressed: () {
+//                                                                   Navigator.push(
+//                                                                       context,
+//                                                                       MaterialPageRoute(
+
+//                                                                       )
+//                                                                   );
+//                                                                 },
+//                                                                 shape: RoundedRectangleBorder(
+//                                                                     borderRadius:
+//                                                                     BorderRadius.circular(80.0)),
+//                                                                 padding: const EdgeInsets.all(0.0),
+//                                                                 child: Ink(
+//                                                                   decoration: const BoxDecoration(
+//                                                                     gradient: purpleGradient,
+//                                                                     borderRadius: BorderRadius.all(
+//                                                                         Radius.circular(80.0)),
+//                                                                   ),
+//                                                                   child: Container(
+//                                                                     constraints: const BoxConstraints(
+//                                                                         minWidth: 88.0,
+//                                                                         minHeight:
+//                                                                         36.0), // min sizes for Material buttons
+//                                                                     alignment: Alignment.center,
+//                                                                     child: const Text(
+//                                                                       'Post',
+//                                                                       style: TextStyle(
+//                                                                           fontWeight: FontWeight.w300,
+//                                                                           fontSize: 13,
+//                                                                           color: Colors.white),
+//                                                                     ),
+//                                                                   ),
+//                                                                 ),
+//                                                               ),
+//                                                               //.................................................
+// ,                                                            */
+//                                                               // SizedBox(
+//                                                               //   height: 6.0,
+//                                                               //     width: 5.0                                                              ),
+//                                                               // RaisedButton(
+//                                                               //   onPressed: () {
+//                                                               //     Scaffold.of(context)
+//                                                               //         .showSnackBar(SnackBar(backgroundColor: KMainColor,
+//                                                               //       content: Text(
+//                                                               //           'Sure you want to delete this job?!'),
+//                                                               //       action: SnackBarAction(
+//                                                               //         label: 'Delete',
+//                                                               //         textColor: Colors.white,
+//                                                               //         onPressed: () {
+//                                                               //           _store.deletejob(
+//                                                               //               jobs[index].jId);
+//                                                               //           // Some code to undo the change.
+//                                                               //         },
+//                                                               //       ),
+//                                                               //     ));
+//                                                               //   },
+//                                                               //   shape: RoundedRectangleBorder(
+//                                                               //       borderRadius:
+//                                                               //       BorderRadius.circular(80.0)),
+//                                                               //   padding: const EdgeInsets.all(0.0),
+//                                                               //   child: Ink(
+//                                                               //     decoration: const BoxDecoration(
+//                                                               //       gradient: purpleGradient,
+//                                                               //       borderRadius: BorderRadius.all(
+//                                                               //           Radius.circular(80.0)),
+//                                                               //     ),
+//                                                               //     child: Container(
+//                                                               //       constraints: const BoxConstraints(
+//                                                               //           minWidth: 88.0,
+//                                                               //           minHeight:
+//                                                               //           36.0), // min sizes for Material buttons
+//                                                               //       alignment: Alignment.center,
+//                                                               //       child: const Text(
+//                                                               //         'Delete',
+//                                                               //         style: TextStyle(
+//                                                               //             fontWeight: FontWeight.w300,
+//                                                               //             fontSize: 13,
+//                                                               //             color: Colors.white),
+//                                                               //       ),
+//                                                               //     ),
+//                                                               //   ),
+//                                                               // ),
+//                                                             ]),

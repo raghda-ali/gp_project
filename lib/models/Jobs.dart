@@ -5,6 +5,7 @@ class job {
   String jContact_Email;
   String jContact_phone;
   String jImage;
+  String owneremail;
 
 
   job(
@@ -13,6 +14,8 @@ class job {
         this.jDescription,
         this.jContact_Email,
         this.jContact_phone,
-        this.jImage
+        this.jImage,
+        this.owneremail
+
         });
 }

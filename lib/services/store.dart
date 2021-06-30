@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gp_project/constance.dart';
+import 'package:gp_project/models/notification.dart';
 import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/models/product.dart';
 import 'package:gp_project/models/services.dart';
@@ -17,6 +18,7 @@ class store
  //DocumentReference docRef =FirebaseFirestore.instance.collection(kProductCollection).doc();
   //final CollectionReference _usercollectionrefrence= _firestore.instance.collection("users");
   DocumentReference ref =  FirebaseFirestore.instance.collection(kProductCollection).doc();
+  DocumentReference reef =  FirebaseFirestore.instance.collection(kJobCollection).doc();
   
   create_user(user user ){
     try{
@@ -60,7 +62,7 @@ class store
       KProductRate:0,
       KProductRateAverage:0.0,
       KProductpersonNum:0,
-    KProductID: ref.documentID,
+      KProductID: ref.documentID,
     // ... add more fields here
 //})
     //  KProductID : docRef.id
@@ -81,14 +83,26 @@ class store
 
   addjobs(job job)
   {
-
-    _firestore.collection(kJobCollection).add({
+    reef.setData({
+  //  _firestore.collection(kJobCollection).add({
       KJobTitle : job.jTitle,
       KJobDescription : job.jDescription,
       KJobcontact_Email :job.jContact_Email,
       KJobcontact_Phone : job.jContact_phone,
       KJobImage:job.jImage,
       KJobUserID : auth.currentUser.uid,
+      KJobId : reef.documentID,
+      KJobowner:auth.currentUser.email,
+    });
+  }
+
+  addnotification(notification notification)
+  {
+
+    _firestore.collection(kNotificationCollection).add({
+      KOwnerID : auth.currentUser.uid,
+      KJobId : reef.documentID,
+      KUsersID : notification.usersID 
     });
   }
 

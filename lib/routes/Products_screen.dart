@@ -25,7 +25,8 @@ import 'HomePageAfterLogin.dart';
 import 'MyJobByID.dart';
 import 'MyServicesByID.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Rating.dart'; 
+import 'Rating.dart';
+import 'chating.dart'; 
 
 //import 'dart:html';
 
@@ -175,6 +176,17 @@ class _MyProductsState extends State<MyProducts> {
                         builder: (context) => new MyJobByID()));
               },
             ),
+            ListTile(
+                            leading: Icon(Icons.chat),
+                            title: Text('Chating'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new chating()));
+                            },
+                          ),
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Log out'),

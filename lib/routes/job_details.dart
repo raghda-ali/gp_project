@@ -6,6 +6,8 @@ import 'package:gp_project/models/Jobs.dart';
 import 'package:gp_project/widgets/Custom_TextField.dart';
 import 'package:gp_project/services/store.dart';
 
+import 'ChatsPage.dart';
+
 
 
 class jobdetails extends StatelessWidget {
@@ -77,6 +79,43 @@ class jobdetails extends StatelessWidget {
                           //'\$${product.pPrice}',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) => new Chat()));
+                            //Navigator.pushNamed(context,Chat.id);//MaterialPageRoute(builder: (context)=>Chat(user:user)));
+
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          padding: const EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: const BoxDecoration(
+                              gradient: purpleGradient,
+                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                            ),
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                  minWidth: 88.0,
+                                  minHeight: 36.0), // min sizes for Material buttons
+                              alignment: Alignment.center,
+                              child:const Text(
+                                'Apply',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 13,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+
                         ),
 
 

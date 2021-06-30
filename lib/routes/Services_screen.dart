@@ -23,6 +23,7 @@ import 'package:gp_project/services/store.dart';
 import 'HomePageAfterLogin.dart';
 import 'Rating.dart';
 import 'ServicesSearch.dart';
+import 'chating.dart';
 
 class myservices extends StatefulWidget {
   static String id = 'Myservices';
@@ -168,6 +169,17 @@ class _myservicesState extends State<myservices> {
                         builder: (context) => new MyJobByID()));
               },
             ),
+            ListTile(
+                            leading: Icon(Icons.chat),
+                            title: Text('Chating'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new chating()));
+                            },
+                          ),
             /* ListTile(
                             leading: Icon(Icons.local_offer_sharp),
                             title: Text('Offers'),

@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:gp_project/constance.dart';
 import 'package:gp_project/routes/CartScreen.dart';
 import 'package:gp_project/routes/Editmyjob.dart';
 import 'package:gp_project/routes/Editmyproducts.dart';
@@ -25,9 +27,14 @@ import 'provider/cartItem.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
-
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//  print(message.data.toString());
+//  print('zzzz: $message');
+//  Fluttertoast.showToast(msg: 'on Background Message',toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.BOTTOM,backgroundColor:Colors.blue);
+// }
 /*void main() {
   runApp(MyApp());
    Firebase.initializeApp();
@@ -36,6 +43,18 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseApp app = await Firebase.initializeApp();
+  // var token = await FirebaseMessaging.instance.getToken();
+  // print('xxxx: $token');
+  // FirebaseMessaging.onMessage.listen((event)//lazm app ykon mfto7 f background 34an ast2bl notific.
+  // {
+  //   print(event.data.toString());
+  // });
+  //  FirebaseMessaging.onMessageOpenedApp.listen((event) //data hna btzhr lma ados 3ala notification w lazm app ykon mfto7 f background
+  // {
+  //   print(event.data.toString());
+  // });
+  //  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
  /* await GetStorage.init();
   Get.put(RatingController());*/
   runApp(MyApp());
